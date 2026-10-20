@@ -11,11 +11,11 @@ All games run in a phone browser (portrait, touch) and on desktop (mouse/keyboar
 | | Game | What it is | Reference game analysed | Play |
 |---|---|---|---|---|
 | <img src="media/deep-contract.jpg" width="160" alt="Deep Contract"> | **Deep Contract** | Mining management and tower defence roguelite: mine by day, defend the platform at night, choose when to evacuate. Own repo: [deep-contract](https://github.com/CondrusArsen/deep-contract) | *Drill Core* (PC) · [teardown](teardowns/drill-core.html) | [Play](https://condrusarsen.github.io/deep-contract/) |
-| <img src="media/sugar-siege.png" width="120" alt="Sugar Siege"> | **Sugar Siege** | 3D runner: grow a jelly worm, carry TNT to a candy castle gate, then fund and rebuild a city behind it. | *Gummy Worm Go!* | [Play](https://condrusarsen.github.io/ai-game-lab/games/sugar-siege/) |
-| <img src="media/mishmash-run.png" width="120" alt="Mishmash Run"> | **Mishmash Run** | Crowd runner into a merge auto-battler: steer hybrid creatures through gates, fuse twins on a 5×3 board, fight. Bosses, challenge mode, collection index. | *Brainrot Run: Merge Battle* | [Play](https://condrusarsen.github.io/ai-game-lab/games/mishmash-run/) |
-| <img src="media/digit-dash.png" width="120" alt="Digit Dash"> | **Digit Dash** | 3D number runner: swallow smaller numbers, avoid bigger ones, ram the wall staircase for cash, buy upgrades. 40 authored layouts plus endless remixes. | *Number Master: Run and merge* | [Play](https://condrusarsen.github.io/ai-game-lab/games/digit-dash/) |
-| <img src="media/sticky-blob-descent.png" width="120" alt="Sticky Blob Descent"> | **Sticky Blob Descent** | Physics merge puzzle: launch numbered jelly blobs that stick where they land, fuse equals, open floor locks and descend. | *Blob Merge 3D* | [Play](https://condrusarsen.github.io/ai-game-lab/games/sticky-blob-descent/) |
-| <img src="media/brambleforge.png" width="120" alt="Brambleforge"> | **Brambleforge** | Merge auto-battler with spinning forest guardians, a 13-step tutorial and a camp meta-game between fights. | *Spinner Merge* | [Play](https://condrusarsen.github.io/ai-game-lab/games/brambleforge/) |
+| <img src="media/sugar-siege.png" width="120" alt="Sugar Siege"> | **Sugar Siege** | 3D runner: grow a jelly worm, carry TNT to a candy castle gate, then fund and rebuild a city behind it. | *Gummy Worm Go!* · [teardown](teardowns/sugar-siege-reference.html) | [Play](https://condrusarsen.github.io/ai-game-lab/games/sugar-siege/) |
+| <img src="media/mishmash-run.png" width="120" alt="Mishmash Run"> | **Mishmash Run** | Crowd runner into a merge auto-battler: steer hybrid creatures through gates, fuse twins on a 5×3 board, fight. Bosses, challenge mode, collection index. | *Brainrot Run: Merge Battle* · [teardown](teardowns/mishmash-run-reference.html) | [Play](https://condrusarsen.github.io/ai-game-lab/games/mishmash-run/) |
+| <img src="media/digit-dash.png" width="120" alt="Digit Dash"> | **Digit Dash** | 3D number runner: swallow smaller numbers, avoid bigger ones, ram the wall staircase for cash, buy upgrades. 40 authored layouts plus endless remixes. | *Number Master: Run and merge* · [teardown](teardowns/digit-dash-reference.html) | [Play](https://condrusarsen.github.io/ai-game-lab/games/digit-dash/) |
+| <img src="media/sticky-blob-descent.png" width="120" alt="Sticky Blob Descent"> | **Sticky Blob Descent** | Physics merge puzzle: launch numbered jelly blobs that stick where they land, fuse equals, open floor locks and descend. | *Blob Merge 3D* · [teardown](teardowns/sticky-blob-descent-reference.html) | [Play](https://condrusarsen.github.io/ai-game-lab/games/sticky-blob-descent/) |
+| <img src="media/brambleforge.png" width="120" alt="Brambleforge"> | **Brambleforge** | Merge auto-battler with spinning forest guardians, a 13-step tutorial and a camp meta-game between fights. | *Spinner Merge* · [teardown](teardowns/brambleforge-reference.html) | [Play](https://condrusarsen.github.io/ai-game-lab/games/brambleforge/) |
 | <img src="media/hot-glass.png" width="120" alt="Hot Glass"> | **Hot Glass** | Original concept. A glassblower's day: blow, spin and reheat a physically simulated glass bubble to match five orders. WebGL2, all art and sound generated in code. UI in Russian. | Original (research → 10 concepts → one picked) | [Play](https://condrusarsen.github.io/ai-game-lab/games/hot-glass/) |
 | <img src="media/silk-until-dawn.png" width="120" alt="Silk Until Dawn"> | **Silk Until Dawn** | Original concept. One night as a garden spider: string silk with Verlet physics, catch moths at the lantern, eat before dawn. Procedural art, synthesized audio. UI in Russian. | Original (research → 10 concepts → one picked) | [Play](https://condrusarsen.github.io/ai-game-lab/games/silk-until-dawn/) |
 
@@ -46,10 +46,15 @@ The projects' verification notes also list what is *not* verified yet: real iOS 
 
 ## Teardowns
 
-Long-form HTML reports with embedded evidence frames (5–10 MB each):
+Long-form HTML reports with embedded evidence frames (3–18 MB each):
 
 - [Drill Core](teardowns/drill-core.html): mining management and tower defence roguelite (Hungry Couch Games / tinyBuild). Basis for Deep Contract.
 - [Shogun Showdown](teardowns/shogun-showdown.html): single-lane, turn-based tactical roguelite (Roboatino). Basis for a mobile design adaptation that is specified but not yet built.
+- [Gummy Worm Go!](teardowns/sugar-siege-reference.html): 3D jelly-worm runner with a city-building meta. Basis for Sugar Siege.
+- [Brainrot Run: Merge Battle](teardowns/mishmash-run-reference.html): Crowd runner feeding a merge auto-battle. Basis for Mishmash Run.
+- [Number Master: Run and merge](teardowns/digit-dash-reference.html): Number runner with a wall-staircase payout. Basis for Digit Dash.
+- [Blob Merge 3D](teardowns/sticky-blob-descent-reference.html): Physics merge drop puzzle. Basis for Sticky Blob Descent.
+- [Spinner Merge](teardowns/brambleforge-reference.html): Spinning-top merge auto-battler. Basis for Brambleforge.
 
 ## Repository layout
 
