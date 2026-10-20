@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<title>Шёлк до рассвета</title>
+<link rel="stylesheet" href="style.css">
+<script type="module">
+  // bug.games / bloomplay: fetch the SDK early when embedded on the platform (see src/platform.js)
+  if (window.parent !== window && !/[?&]standalone/.test(location.search))
+    window.__bp = import('/sdk/bloomplay.js').then((m) => m.bloomplay).catch(() => null);
+</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="hud" class="hidden">
+  <div class="meters">
+    <div class="meter belly" aria-label="Сытость"><i></i><span>сытость</span></div>
+    <div class="meter silk" aria-label="Шёлк"><i></i><span>шёлк</span></div>
+  </div>
+  <div class="clock" aria-label="Время до рассвета"><svg viewBox="0 0 100 52"><path class="arc" d="M6 48 A44 44 0 0 1 94 48"/><circle class="moon" r="6" cx="6" cy="48"/></svg><b class="score">0</b></div>
+  <div class="buttons">
+    <button id="btnSound" class="round" aria-label="Звук"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="cross" d="M16 9l5 6M21 9l-5 6"/></svg></button>
+    <button id="btnPause" class="round" aria-label="Пауза"><svg viewBox="0 0 24 24"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg></button>
+  </div>
+</div>
+<div id="hint" class="hint hidden"></div>
+<div id="toast" class="toast"></div>
+
+<section id="title" class="screen">
+  <h1>Шёлк<br><small>до рассвета</small></h1>
+  <p class="lede">Ночь у крыльца. Плети паутину, лови мотыльков, наешься до рассвета.</p>
+  <button id="btnStart" class="big">Начать ночь</button>
+  <p class="best" id="bestLine"></p>
+</section>
+
+<section id="pause" class="screen hidden">
+  <h2>Пауза</h2>
+  <button id="btnResume" class="big">Продолжить</button>
+  <button id="btnRestart" class="ghost">Начать ночь заново</button>
+</section>
+
+<section id="result" class="screen hidden">
+  <h2 id="resTitle">Рассвет</h2>
+  <p id="resLine" class="lede"></p>
+  <ul id="resStats" class="stats"></ul>
+  <button id="btnAgain" class="big">Ещё одна ночь</button>
+</section>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>

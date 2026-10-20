@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Game Lab · Arseni Atrokhov</title>
+<meta name="description" content="Playable mobile web game prototypes by Arseni Atrokhov, built through an AI-assisted pipeline: gameplay video, teardown, design spec, prototype, QA.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efede7; --text:#16151a; --muted:#5d5a66;
+  --line:#dcd9d0; --accent:#e4572e; --accent-ink:#ffffff; --chip:#ece9e1; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111014; --surface:#1b1a20; --surface-2:#232229; --text:#f1eff5; --muted:#a8a4b3;
+    --line:#2f2d36; --accent:#ff7a50; --accent-ink:#1a0d07; --chip:#2a2830; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111014; --surface:#1b1a20; --surface-2:#232229; --text:#f1eff5; --muted:#a8a4b3;
+  --line:#2f2d36; --accent:#ff7a50; --accent-ink:#1a0d07; --chip:#2a2830; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:12px}
+.brand{font:700 15px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.02em;text-decoration:none}
+.brand span{color:var(--accent)}
+nav.links{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+nav.links a{text-decoration:none;color:var(--muted)}
+nav.links a:hover{color:var(--text)}
+.hero{padding:40px 0 28px}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
+h1{font:700 clamp(32px,6vw,56px)/1.05 "Space Grotesk",Inter,sans-serif;margin:0 0 18px;letter-spacing:-.02em;max-width:18ch}
+.lede{font-size:clamp(17px,2.2vw,19px);color:var(--muted);max-width:62ch;margin:0 0 24px}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn:hover{filter:brightness(1.05)}
+section{padding:36px 0}
+h2{font:700 clamp(24px,3.5vw,32px)/1.15 "Space Grotesk",Inter,sans-serif;margin:0 0 8px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 24px;max-width:70ch}
+.featured{display:grid;grid-template-columns:1.4fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:22px}
+.featured img{width:100%;height:100%;object-fit:cover;display:block;min-height:220px}
+.featured .body{padding:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+.shot{aspect-ratio:390/500;overflow:hidden;background:var(--surface-2)}
+.shot img{width:100%;display:block}
+.card .body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3,.featured h3{font:700 20px/1.2 "Space Grotesk",Inter,sans-serif;margin:0}
+.pitch{margin:0;font-size:15px}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
+.chip{font-size:12px;font-weight:500;padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.ref{font-size:13px;color:var(--muted);margin:0}
+.actions{display:flex;gap:8px;margin-top:auto;padding-top:6px;flex-wrap:wrap}
+.actions a{font-size:14px;padding:8px 14px}
+.actions .disabled{font-size:13px;color:var(--muted);padding:8px 4px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;counter-reset:s}
+.steps li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;counter-increment:s}
+.steps li::before{content:counter(s,decimal-leading-zero);font:700 13px/1 "Space Grotesk",Inter,sans-serif;color:var(--accent);display:block;margin-bottom:10px}
+.steps h3{font:700 17px/1.25 "Space Grotesk",Inter,sans-serif;margin:0 0 8px}
+.steps p{margin:0 0 8px;font-size:14px;color:var(--muted)}
+.steps .me{color:var(--text)}
+.steps .me b{color:var(--accent);font-weight:600}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.panel h3{font:700 17px/1.25 "Space Grotesk",Inter,sans-serif;margin:0 0 10px}
+.panel ul{margin:0;padding-left:18px;font-size:15px}
+.panel li{margin:4px 0}
+.tlist{display:grid;gap:12px}
+.trow{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;flex-wrap:wrap}
+.trow p{margin:2px 0 0;color:var(--muted);font-size:14px}
+footer{border-top:1px solid var(--line);margin-top:24px;padding:28px 0 40px;color:var(--muted);font-size:14px}
+footer a{color:var(--text)}
+@media (max-width:760px){
+  .featured{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  nav.links{display:none}
+  .hero{padding-top:20px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./">Arseni Atrokhov <span>/</span> AI Game Lab</a>
+    <nav class="links">
+      <a href="#games">Games</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#teardowns">Teardowns</a>
+      <a href="https://github.com/CondrusArsen/ai-game-lab">Source</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <p class="eyebrow">AI-assisted game developer</p>
+    <h1>From a gameplay video to a playable prototype.</h1>
+    <p class="lede">I study a reference game from public footage, write a structured teardown and a design spec, then build a playable mobile web prototype with AI coding agents. I make the design calls, review what the agents produce, and playtest and QA every build. Everything below runs in a phone browser.</p>
+    <div class="cta">
+      <a class="btn primary" href="#games">Play the prototypes</a>
+      <a class="btn" href="#pipeline">How I work</a>
+      <a class="btn" href="https://www.linkedin.com/in/arseni-atrokhov/">LinkedIn</a>
+    </div>
+  </div>
+
+  <section id="games">
+    <h2>Games</h2>
+    <p class="sub">Portrait, touch-first, single-page web builds. Six are adaptations of a reference mobile or PC game I analysed; two are original concepts. No art, audio or text from the reference games is used.</p>
+
+    <article class="featured">
+      <img src="media/deep-contract.jpg" alt="Deep Contract: a mining platform above a cross-section of a drilled shaft" loading="lazy">
+      <div class="body">
+        <h3>Deep Contract</h3>
+        <p class="pitch">Mine and grow your crew by day, defend the platform at night, and decide when to evacuate with the rewards.</p>
+        <div class="meta"><span class="chip">Mining management</span><span class="chip">Tower defence</span><span class="chip">Roguelite</span></div>
+        <p class="ref">Reference analysed: <i>Drill Core</i> (PC)</p>
+        <div class="actions">
+          <a class="btn primary" href="https://condrusarsen.github.io/deep-contract/">Play</a>
+          <a class="btn" href="teardowns/drill-core.html">Teardown</a>
+          <a class="btn" href="https://github.com/CondrusArsen/deep-contract">Source</a>
+        </div>
+      </div>
+    </article>
+
+    <div class="grid">
+      <article class="card">
+        <div class="shot"><img src="media/sugar-siege.png" alt="Sugar Siege: a jelly worm runs down a sky track toward LENGTH and WIDTH boards" loading="lazy"></div>
+        <div class="body">
+          <h3>Sugar Siege</h3>
+          <p class="pitch">Grow a jelly worm on a sky runway, carry TNT to a candy castle gate, then rebuild the city behind it.</p>
+          <div class="meta"><span class="chip">Runner</span><span class="chip">City builder</span><span class="chip">3D</span></div>
+          <p class="ref">Reference analysed: <i>Gummy Worm Go!</i></p>
+          <div class="actions"><a class="btn primary" href="games/sugar-siege/">Play</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><img src="media/mishmash-run.png" alt="Mishmash Run: title screen over the desert run track with side doors" loading="lazy"></div>
+        <div class="body">
+          <h3>Mishmash Run</h3>
+          <p class="pitch">Steer a crowd of odd hybrid creatures through gates, fuse twins on a 5×3 board, and send the formation into a brawl.</p>
+          <div class="meta"><span class="chip">Crowd runner</span><span class="chip">Merge</span><span class="chip">Auto-battler</span></div>
+          <p class="ref">Reference analysed: <i>Brainrot Run: Merge Battle</i></p>
+          <div class="actions"><a class="btn primary" href="games/mishmash-run/">Play</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><img src="media/digit-dash.png" alt="Digit Dash: a blue number 2 on a white track with rows of numbers ahead" loading="lazy"></div>
+        <div class="body">
+          <h3>Digit Dash</h3>
+          <p class="pitch">You are the number: swallow smaller numbers, avoid bigger ones, then ram the wall staircase for cash.</p>
+          <div class="meta"><span class="chip">Number runner</span><span class="chip">Upgrades</span><span class="chip">3D</span></div>
+          <p class="ref">Reference analysed: <i>Number Master: Run and merge</i></p>
+          <div class="actions"><a class="btn primary" href="games/digit-dash/">Play</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><img src="media/sticky-blob-descent.png" alt="Sticky Blob Descent: numbered jelly blobs stuck in a wooden chamber above a floor lock" loading="lazy"></div>
+        <div class="body">
+          <h3>Sticky Blob Descent</h3>
+          <p class="pitch">Launch numbered jelly blobs that stick where they land; fuse equals to open the floor locks and drop deeper.</p>
+          <div class="meta"><span class="chip">Physics merge</span><span class="chip">Puzzle</span><span class="chip">WebGL</span></div>
+          <p class="ref">Reference analysed: <i>Blob Merge 3D</i></p>
+          <div class="actions"><a class="btn primary" href="games/sticky-blob-descent/">Play</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><img src="media/brambleforge.png" alt="Brambleforge: two spinning guardians clash in a round arena" loading="lazy"></div>
+        <div class="body">
+          <h3>Brambleforge</h3>
+          <p class="pitch">Hatch spinning forest guardians, merge identical pairs, launch them into auto-battles and grow a camp between fights.</p>
+          <div class="meta"><span class="chip">Merge</span><span class="chip">Auto-battler</span><span class="chip">Meta camp</span></div>
+          <p class="ref">Reference analysed: <i>Spinner Merge</i></p>
+          <div class="actions"><a class="btn primary" href="games/brambleforge/">Play</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><img src="media/hot-glass.png" alt="Hot Glass: a glowing glass bubble on a blowpipe next to a furnace" loading="lazy"></div>
+        <div class="body">
+          <h3>Hot Glass</h3>
+          <p class="pitch">A glassblower's working day: blow, spin and reheat living glass to match five customer orders before it cools or bursts.</p>
+          <div class="meta"><span class="chip">Original concept</span><span class="chip">Physics toy</span><span class="chip">UI in Russian</span></div>
+          <p class="ref">Original game: research, 10 concepts, one picked and built</p>
+          <div class="actions"><a class="btn primary" href="games/hot-glass/">Play</a></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="shot"><img src="media/silk-until-dawn.png" alt="Silk Until Dawn: a spider web strung under a porch lantern with a trapped moth" loading="lazy"></div>
+        <div class="body">
+          <h3>Silk Until Dawn</h3>
+          <p class="pitch">One night as a garden spider: string silk between supports, catch moths drawn to the lantern, eat your fill before dawn.</p>
+          <div class="meta"><span class="chip">Original concept</span><span class="chip">String physics</span><span class="chip">UI in Russian</span></div>
+          <p class="ref">Original game: research, 10 concepts, one picked and built</p>
+          <div class="actions"><a class="btn primary" href="games/silk-until-dawn/">Play</a></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="pipeline">
+    <h2>Pipeline</h2>
+    <p class="sub">Each prototype goes through the same five steps. AI agents do much of the analysis drafting and the coding. I set the direction, make the design decisions and check the result at every step.</p>
+    <ol class="steps">
+      <li>
+        <h3>Gameplay video</h3>
+        <p>Public recordings of the reference game, store pages and reviews are collected; key frames are extracted as evidence.</p>
+        <p class="me"><b>My part:</b> choose the reference game and the recordings worth studying, and decide what question the analysis must answer.</p>
+      </li>
+      <li>
+        <h3>Teardown report</h3>
+        <p>An agent drafts a structured HTML teardown: core loop, rules, economy, first-session flow, each claim tagged as observed, inferred or unknown and linked to a frame.</p>
+        <p class="me"><b>My part:</b> check claims against the footage, flag guesses, and judge what makes the game work and what to fix in a remake.</p>
+      </li>
+      <li>
+        <h3>Design spec</h3>
+        <p>A DESIGN document maps every rule of the adaptation to the teardown: kept as observed, adapted, or newly designed. Acceptance cases are written up front.</p>
+        <p class="me"><b>My part:</b> theme and art direction, onboarding, economy and pacing choices, scope, and what not to copy.</p>
+      </li>
+      <li>
+        <h3>Prototype</h3>
+        <p>Coding agents (Codex, Claude) implement the game in TypeScript / JavaScript with Canvas, WebGL or three.js and ship a single self-contained HTML file. Assets are sourced under CC0, CC BY or OFL licences.</p>
+        <p class="me"><b>My part:</b> break work into tasks, review builds, reject what doesn't feel right and iterate on feel and readability.</p>
+      </li>
+      <li>
+        <h3>Playtest &amp; QA</h3>
+        <p>Rule tests, headless balance bots, end-to-end runs on the release file with touch input, long-session runs and layout checks across screen sizes.</p>
+        <p class="me"><b>My part:</b> play the builds on phone and desktop, write bug reports and checklists, and decide when a build is ready.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="split">
+      <div class="panel">
+        <h3>What I decide</h3>
+        <ul>
+          <li>Which reference game to study and why</li>
+          <li>The design of the adaptation: theme, loop changes, onboarding, economy</li>
+          <li>Scope and priorities for each iteration</li>
+          <li>Whether a build feels right and is ready to show</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>What the agents generate</h3>
+        <ul>
+          <li>First drafts of teardown reports from footage and public sources</li>
+          <li>Game code, build scripts and automated tests</li>
+          <li>Asset sourcing with licence evidence and credits screens</li>
+          <li>Test harnesses: balance bots, end-to-end and session runs</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="teardowns">
+    <h2>Teardowns</h2>
+    <p class="sub">Long-form HTML reports with embedded evidence frames. Large files (5–10 MB), best read on desktop.</p>
+    <div class="tlist">
+      <div class="trow">
+        <div><b>Drill Core</b> (Hungry Couch Games / tinyBuild)<p>Mining management and tower defence roguelite. Basis for Deep Contract.</p></div>
+        <a class="btn" href="teardowns/drill-core.html">Read teardown</a>
+      </div>
+      <div class="trow">
+        <div><b>Shogun Showdown</b> (Roboatino)<p>Single-lane, turn-based tactical roguelite. Basis for a mobile design adaptation, not yet built.</p></div>
+        <a class="btn" href="teardowns/shogun-showdown.html">Read teardown</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Arseni Atrokhov · game designer and developer (Roblox, web games) · <a href="https://www.linkedin.com/in/arseni-atrokhov/">LinkedIn</a> · <a href="https://github.com/CondrusArsen">GitHub</a></p>
+    <p>Built July–October 2026. Reference games belong to their owners; they were analysed, not copied. Third-party assets in each game are credited in its in-game Credits screen.</p>
+  </footer>
+</div>
+</body>
+</html>
