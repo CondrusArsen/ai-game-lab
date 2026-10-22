@@ -511,14 +511,14 @@ function buildWorld() {
     units.forEach((u, i) => bookShelf(lav, d + Math.floor(i / 2) * 4.2, i % 2 ? -1 : 1, u, DISTRICT.library.color));
     d += Math.ceil(units.length / 2) * 4.2 + 0.8;
   }
-  finishAvenue(lav, d - PLAZA + 2, DISTRICT.library.color, '600+ GAMES ANALYSED', `${TEARDOWNS.length} of them are on these shelves`);
+  finishAvenue(lav, d - PLAZA + 2, DISTRICT.library.color, '600+ GAMES ANALYSED', `${TEARDOWNS.length} are on these shelves · the rest stay in private libraries`);
 
   // WORKSHOP avenue: Roblox, UI/UX, Tools
   const wav = AV.workshop; d = PLAZA + 2.5;
   const wz = [...new Set(PROJECTS.map(p => p.zone))];
   for (const z of wz) {
     const items = PROJECTS.filter(p => p.zone === z);
-    sectionArch(wav, d, z.toUpperCase(), DISTRICT.workshop.color, z === 'UI/UX' ? 'paid client work' : z === 'Roblox' ? 'Luau · Rojo · CI' : 'apps & bots');
+    sectionArch(wav, d, z.toUpperCase(), DISTRICT.workshop.color, z === 'UI/UX' ? 'paid client work' : z === 'Roblox' ? 'Luau · Rojo · CI' : z === 'Game design' ? 'docs & case studies' : 'apps & bots');
     d += 2.6;
     items.forEach((it, i) => stall(wav, d + Math.floor(i / 2) * ROW, i % 2 ? -1 : 1, it, DISTRICT.workshop.color, 'project'));
     d += Math.ceil(items.length / 2) * ROW + 1.2;
@@ -548,7 +548,7 @@ function buildWorld() {
 
   districtGate(gav, DISTRICT.games.color, 'GAMES', `${GAMES.length} playable in your browser`);
   districtGate(lav, DISTRICT.library.color, 'TEARDOWNS', `${TEARDOWNS.length} game analyses`);
-  districtGate(wav, DISTRICT.workshop.color, 'WORKSHOP · VAULT', `Roblox · UI/UX · Tools · ${VAULT.length} prototypes`);
+  districtGate(wav, DISTRICT.workshop.color, 'WORKSHOP · VAULT', `${[...new Set(PROJECTS.map(p => p.zone))].join(' · ')} · ${VAULT.length} prototypes`);
 
   // string lights across avenues
   for (const [av, color, len] of [[gav, C.magenta, gLen], [lav, C.amber, d], [wav, C.cyan, wLen], [hav, C.green, hLen]]) {
@@ -618,11 +618,14 @@ function buildKiosk() {
   });
 }
 
+// One honest line about how the games were made, reused across the site.
+const CREDIT = 'Most of these games were made from July to October 2026 in a small studio that builds games with AI agents: many I built solo, some together with a teammate.';
 const HOW = [
   { kicker: '01 · REFERENCE', title: 'Pick a game worth learning from', text: 'I choose the reference game and the gameplay recordings to study: what makes it fun, and what the market already proved.' },
   { kicker: '02 · TEARDOWN', title: 'Take it apart', text: 'AI agents draft a teardown from the footage: core loop, rules, numbers, economy, FTUE. Every claim is tagged observed, inferred or unknown, and I review it.' },
   { kicker: '03 · DESIGN SPEC', title: 'Decide what changes', text: 'I write the design: theme, which rules stay, which change, what is new. Every rule maps back to the teardown.' },
   { kicker: '04 · BUILD & QA', title: 'Ship a playable build', text: 'AI coding agents write the code from my spec. I playtest on phone and desktop, run bots and rule tests, and send the fixes back.' },
+  { kicker: '05 · WHO MADE THESE', title: 'Solo and in a small team', text: CREDIT },
 ];
 const START = new THREE.Vector3();
 
@@ -939,19 +942,19 @@ function action(ex, a) {
 
 const ABOUT_HTML = `<p class="lead">AI-assisted game developer and designer: Roblox (Luau) and HTML5. I take a game from teardown to a playable, tested build, directing AI coding agents and owning the design and the final quality.</p>
 <div class="stats">${STATS.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>
-<p>Everything in this market was made that way, including the market itself: I designed it, AI agents wrote the code, I tested it on desktop and phones.</p>
+<p>${CREDIT} The market itself is my own project: I designed it, AI agents wrote the code, I tested it on desktop and phones.</p>
+<p>The ${TEARDOWNS.length} teardowns here are a public sample: I have analysed 600+ games, and most of those analyses stay private.</p>
 <p>Looking for remote roles: AI game designer / prototyper, Roblox developer, HTML5 game developer.</p>
 <div class="m-btns"><a class="main" href="${LINKS.linkedin}" target="_blank" rel="noopener">Message me on LinkedIn ↗</a><a href="${LINKS.github}" target="_blank" rel="noopener">GitHub ↗</a><a href="list/">All projects as a list</a></div>`;
 const PIPELINE_HTML = `<p class="lead">Gameplay video → teardown → design spec → playable build → playtest and QA. AI agents draft the analysis and write most of the code. I direct the work and own the decisions.</p>
 <h4>What I decide</h4><ul><li>Which reference game to study and which recordings to use.</li><li>What the adaptation is: theme, art direction, which rules stay, change or are new (onboarding, economy, pacing, meta-game).</li><li>Scope and priorities for each iteration, and what gets cut.</li><li>Whether a build feels right and is ready to show.</li></ul>
 <h4>What the agents generate</h4><ul><li>Teardown drafts with evidence frames; each claim tagged observed, inferred or unknown.</li><li>A design document per game that maps every rule back to the teardown.</li><li>Game code (JavaScript/TypeScript, Canvas 2D, WebGL, three.js; Luau for Roblox) and test harnesses.</li><li>Asset sourcing with saved licence evidence and a generated credits screen.</li></ul>
-<h4>How builds are checked</h4><ul><li>Rule tests on the simulation, save/restore and economy.</li><li>Headless balance bots, e.g. route bots that play all 40 Digit Dash layouts.</li><li>End-to-end runs in Chrome with touch input and layout checks at several screen sizes.</li><li>My own playtests on phone and desktop, with bug lists and fixes per iteration.</li></ul>`;
+<h4>Where these games come from</h4><p>${CREDIT}</p><h4>How builds are checked</h4><ul><li>Rule tests on the simulation, save/restore and economy.</li><li>Headless balance bots, e.g. route bots that play all 40 Digit Dash layouts.</li><li>End-to-end runs in Chrome with touch input and layout checks at several screen sizes.</li><li>My own playtests on phone and desktop, with bug lists and fixes per iteration.</li></ul>`;
 
 // modal: game/teardown frame or info panel
 const modal = $('#modal'), mBody = $('#m-body'), mTitle = $('#m-title'), mOpen = $('#m-open');
 function modalOpen() { return !modal.hidden; }
 function openFrame(title, src, meta = {}) {
-  if (FILM && meta.kind === 'game') { const g = GAMES.find(x => x.id === meta.id); if (g && g.video) { openFilmVideo(title, g.video); return; } }
   mTitle.textContent = title; mOpen.href = src; mOpen.hidden = false;
   if (REMOTE && /^https?:/.test(src)) { // preview build: only new items are bundled, the rest is on the live site
     const missing = (window.ARCADE_MISSING || []).some(m => src.includes(m));
@@ -1241,13 +1244,14 @@ function filmScript() {
     let cap = '';
     if (t < 3.2) { intro_t = t; state.pos.copy(START); introCamera(t); cap = 'My GitHub is a game you can walk in'; }
     else if (t < 12) {
-      const k = (t - 3.2) / 8.8; const path = [START, avPoint(AV.how, PLAZA + 2, 0), new THREE.Vector3(0, 0, -8), nox.padWorld];
-      const seg = Math.min(2, Math.floor(k * 3)); const kk = k * 3 - seg;
+      const k = (t - 3.2) / 8.8; const path = [START, avPoint(AV.how, PLAZA + 2, 0), new THREE.Vector3(5.5, 0, 4), new THREE.Vector3(5.5, 0, -5), new THREE.Vector3(0, 0, -PLAZA - 1), nox.padWorld];
+      const segs = path.length - 1, seg = Math.min(segs - 1, Math.floor(k * segs)); const kk = k * segs - seg;
       state.pos.copy(lerp(path[seg], path[seg + 1], kk)); const d = path[seg + 1].clone().sub(path[seg]); state.yaw = Math.atan2(d.x, d.z);
       state.camYaw = lerpAngle(state.camYaw, state.yaw + Math.PI, 0.08);
       if (t > 11.2) { const f = nox.facing.clone().sub(state.pos); state.yaw = Math.atan2(f.x, f.z); }
+      state.pitch = 0.3; state.dist = 7.5;
       updatePlayer(0.001); updateCamera(1 / 30); updateActive(); updateVideos();
-      cap = t < 7.5 ? `${GAMES.length + VAULT.length} games I built with AI` : 'Every stall is playable';
+      cap = t < 7.5 ? `${GAMES.length + VAULT.length} games made with AI` : 'Every stall is playable';
     } else if (t < 19) {
       if (!modalOpen()) action(nox, 'play');
       cap = 'Press Play. It runs right here.';
@@ -1256,6 +1260,7 @@ function filmScript() {
       const k = (t - 19) / 8; const a = new THREE.Vector3(0, 0, -6), b = book.padWorld;
       state.pos.copy(k < 0.4 ? lerp(nox.padWorld, a, k / 0.4) : lerp(a, b, (k - 0.4) / 0.6));
       const target = k < 0.4 ? a : b; const d = target.clone().sub(state.pos); if (d.length() > 0.05) state.yaw = Math.atan2(d.x, d.z);
+      state.pitch = 0.3; state.dist = 7.5;
       state.camYaw = lerpAngle(state.camYaw, state.yaw + Math.PI, 0.1);
       updatePlayer(0.001); updateCamera(1 / 30); updateActive();
       cap = t < 23 ? `${TEARDOWNS.length} teardowns behind them` : 'Reference → teardown → spec → build';

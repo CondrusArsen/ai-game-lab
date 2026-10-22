@@ -334,23 +334,6 @@ export const GAMES=[
   "platforms": "Phone · Desktop"
  },
  {
-  "id": "neon-slice",
-  "title": "Neon Slice",
-  "section": "Arcade & runners",
-  "blurb": "Knife-flip slicer rebuilt as a neon night market with new districts and content.",
-  "how": "Designed by me, built with AI coding agents (Claude, Codex) from my spec; I playtested and directed every iteration.",
-  "orient": "land",
-  "play": "games/neon-slice/",
-  "teardown": null,
-  "video": null,
-  "earlier": null,
-  "tags": [
-   "One thumb"
-  ],
-  "cover": "arcade/covers/neon-slice.jpg",
-  "platforms": "Phone · Desktop"
- },
- {
   "id": "serpent-clash",
   "title": "Serpent Clash",
   "section": "Arcade & runners",
@@ -366,23 +349,6 @@ export const GAMES=[
    "12 bosses"
   ],
   "cover": "arcade/covers/serpent-clash.jpg",
-  "platforms": "Phone · Desktop"
- },
- {
-  "id": "deepbite",
-  "title": "Deepbite",
-  "section": "Arcade & runners",
-  "blurb": "Serpent Clash moved to the deep sea: twelve depths, each with its own leviathan.",
-  "how": "Designed by me, built with AI coding agents (Claude, Codex) from my spec; I playtested and directed every iteration.",
-  "orient": "port",
-  "play": "games/deepbite/",
-  "teardown": null,
-  "video": null,
-  "earlier": null,
-  "tags": [
-   "Arcade"
-  ],
-  "cover": "arcade/covers/deepbite.jpg",
   "platforms": "Phone · Desktop"
  },
  {
@@ -404,23 +370,6 @@ export const GAMES=[
   "platforms": "Phone · Desktop"
  },
  {
-  "id": "shogun-lane",
-  "title": "Shogun Lane",
-  "section": "Strategy & roguelite",
-  "blurb": "Single-lane, turn-based samurai roguelite for phones: queue attack tiles, read enemy intent, make committed strikes land.",
-  "how": "Built from my teardown alone (no source access): rules, intents and pacing re-derived from footage.",
-  "orient": "port",
-  "play": "games/shogun-lane/",
-  "teardown": "teardowns/shogun-showdown.html",
-  "video": null,
-  "earlier": null,
-  "tags": [
-   "Turn-based"
-  ],
-  "cover": "arcade/covers/shogun-lane.jpg",
-  "platforms": "Phone · Desktop"
- },
- {
   "id": "brambleforge",
   "title": "Brambleforge",
   "section": "Strategy & roguelite",
@@ -436,24 +385,6 @@ export const GAMES=[
    "Auto-battler"
   ],
   "cover": "arcade/covers/brambleforge.jpg",
-  "platforms": "Phone · Desktop"
- },
- {
-  "id": "anomaly",
-  "title": "I Am the Anomaly",
-  "section": "Stealth, story & physics",
-  "blurb": "Stealth prank in 3D: you are a living ink blot haunting a dollhouse. Scare the plush night inspectors out.",
-  "how": "Designed by me, built with AI coding agents (Claude, Codex) from my spec; I playtested and directed every iteration.",
-  "orient": "land",
-  "play": "games/anomaly/",
-  "teardown": null,
-  "video": null,
-  "earlier": null,
-  "tags": [
-   "3D",
-   "Stealth"
-  ],
-  "cover": "arcade/covers/anomaly.jpg",
   "platforms": "Phone · Desktop"
  },
  {
@@ -553,7 +484,7 @@ export const PROJECTS=[
   "blurb": "Co-op Roblox magic RPG: 7 spells, server-authoritative shop and economy, data-driven enemy AI, Rojo + CI toolchain.",
   "how": "AI-assisted refactor under my direction; the NPC system is my hand-written code.",
   "img": "arcane",
-  "video": "arcane",
+  "video": "arcade/loops/arcane.mp4",
   "links": [
    [
     "Code on GitHub",
@@ -590,7 +521,7 @@ export const PROJECTS=[
   "blurb": "Roblox fundamentals test: pressure plate, GUI clicker with saves, kill parts and checkpoints, tweening. Strict Luau, unit tests, CI.",
   "how": "The original 2025 submission is Luau I wrote by hand in Studio (tag original-2025); later refactored with AI.",
   "img": "feature-pack",
-  "video": "feature-pack",
+  "video": "arcade/loops/feature-pack.mp4",
   "links": [
    [
     "Code on GitHub",
@@ -626,6 +557,98 @@ export const PROJECTS=[
     "src": "arcade/proj/g/feature-pack/04.mp4",
     "cap": "Task 4: tweening",
     "type": "video"
+   }
+  ]
+ },
+ {
+  "id": "match3",
+  "zone": "Game design",
+  "title": "Match-3 Design Case Study",
+  "blurb": "Three design documents for a casual F2P match-3: the first 200 levels of two hit games compared, a 2×2 ten-layer obstacle with booster rules, and a collection event concept.",
+  "how": "Analysis and design by me; visuals explored with AI. Documents in Russian.",
+  "img": "match3",
+  "orient": "port",
+  "links": [
+   [
+    "Case study on GitHub",
+    "https://github.com/CondrusArsen/match3-game-design-case-study"
+   ]
+  ],
+  "gallery": [
+   {
+    "src": "arcade/proj/g/match3/00.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 1/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/01.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 2/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/02.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 3/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/03.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 4/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/04.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 5/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/05.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 6/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/06.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 7/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/07.jpg",
+    "cap": "Early game: Royal Match vs Homescapes · page 8/8",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/08.jpg",
+    "cap": "2×2 ten-layer element · page 1/3",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/09.jpg",
+    "cap": "2×2 ten-layer element · page 2/3",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/10.jpg",
+    "cap": "2×2 ten-layer element · page 3/3",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/11.jpg",
+    "cap": "Collection event: Atmospheric Evenings · page 1/4",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/12.jpg",
+    "cap": "Collection event: Atmospheric Evenings · page 2/4",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/13.jpg",
+    "cap": "Collection event: Atmospheric Evenings · page 3/4",
+    "type": "img"
+   },
+   {
+    "src": "arcade/proj/g/match3/14.jpg",
+    "cap": "Collection event: Atmospheric Evenings · page 4/4",
+    "type": "img"
    }
   ]
  },
@@ -751,7 +774,7 @@ export const PROJECTS=[
   "app": "apps/movies/"
  }
 ];
-export const TEARDOWNS=[{"id": "drill-core", "cat": "Reference games", "title": "Drill Core", "sub": "A mining platform that faces two ways. By day you spend worker time and worker lives digging down for coal, iron and swarmlit; by night the same platform becomes a turret-lined bottleneck against a swarm coming down the ", "url": "teardowns/drill-core.html", "thumb": "arcade/td/drill-core.jpg"}, {"id": "shogun-showdown", "cat": "Reference games", "title": "Shogun Showdown", "sub": "A turn-based roguelite fought on a single row of cells. Moving, turning around, waiting and loading an attack tile into a queue each cost one turn, and enemies announce their next action in the same tile language. The de", "url": "teardowns/shogun-showdown.html", "thumb": "arcade/td/shogun-showdown.jpg"}, {"id": "sugar-siege-reference", "cat": "Reference games", "title": "Gummy Worm Go!", "sub": "A soft body becomes a hard-earned route into a candy city.", "url": "teardowns/sugar-siege-reference.html", "thumb": "arcade/td/sugar-siege-reference.jpg"}, {"id": "mishmash-run-reference", "cat": "Reference games", "title": "Brainrot Run: Merge Battle", "sub": "A ten-second crowd run decides how many free Tier-1 brawlers arrive at a 5×3 board. The game is what happens next: compressing that crowd into fewer, stronger meme units before one tap on FIGHT, then spending the reward ", "url": "teardowns/mishmash-run-reference.html", "thumb": "arcade/td/mishmash-run-reference.jpg"}, {"id": "digit-dash-reference", "cat": "Reference games", "title": "Number Master: Run and merge", "sub": "You are the number. Everything on the road is a number too — blue if you can swallow it, red if it can swallow you — and every swallow, every gate and every upgrade moves that line.", "url": "teardowns/digit-dash-reference.html", "thumb": "arcade/td/digit-dash-reference.jpg"}, {"id": "sticky-blob-descent-reference", "cat": "Reference games", "title": "Blob Merge 3D", "sub": "Every shot leaves a sticky body behind. You aim numbered jelly blobs from a fixed launcher, they cling where they land, equal neighbours fuse into double value — and the number you build is the key to the chamber floor.", "url": "teardowns/sticky-blob-descent-reference.html", "thumb": "arcade/td/sticky-blob-descent-reference.jpg"}, {"id": "brambleforge-reference", "cat": "Reference games", "title": "Spinner Merge", "sub": "A merge board that is also a team sheet. The player buys cheap spinners at a price that climbs ×1.5 with every tap, fuses identical pairs into fewer, stronger tops on a 5×3 grid, then presses FIGHT and watches physics de", "url": "teardowns/brambleforge-reference.html", "thumb": "arcade/td/brambleforge-reference.jpg"}, {"id": "speed-keyboard-escape", "cat": "Roblox", "title": "+1 Speed Keyboard Escape", "sub": "A satisfaction-driven incremental runner: you sprint across a world built from giant candy-and-chocolate keyboard keys, and every step adds +1 to your speed. Speed is the single master stat — the higher it is, the faster", "url": "teardowns/roblox/speed-keyboard-escape.html", "thumb": "arcade/td/speed-keyboard-escape.jpg"}, {"id": "survive-zombie-arena", "cat": "Roblox", "title": "Survive Zombie Arena", "sub": "A co-op wave-survival arena: up to 25 players drop from a spaceship onto one shared arena, fight escalating waves of zombies, and between waves spend earned Credits on weapons, upgrades and defensive builds. This is the ", "url": "teardowns/roblox/survive-zombie-arena.html", "thumb": "arcade/td/survive-zombie-arena.jpg"}, {"id": "apex-run-highway-race", "cat": "Action & shooters", "title": "Apex Run: Highway Race", "sub": "An observed, text-first reconstruction of the playable loop and its connected systems.", "url": "teardowns/web/apex-run-highway-race.html", "thumb": "arcade/td/apex-run-highway-race.jpg"}, {"id": "car-soccer", "cat": "Action & shooters", "title": "Car Soccer", "sub": "A browser-native car-ball physics toy that wins through immediate freeplay, then branches into ranked bot challenges, car handling presets, training maps, deep settings, and a creator-funded arena-ad marketplace.", "url": "teardowns/web/car-soccer.html", "thumb": "arcade/td/car-soccer.jpg"}, {"id": "claude-of-tanks", "cat": "Action & shooters", "title": "Claude of Tanks", "sub": "A feature-rich browser armored-combat simulator that pairs a massive vehicle library with unusually explicit ballistic, armor, module and crew feedback. Its differentiator is not merely “tanks in a browser”; it is a lear", "url": "teardowns/web/claude-of-tanks.html", "thumb": "arcade/td/claude-of-tanks.jpg"}, {"id": "coro-solto-treta-suprema", "cat": "Action & shooters", "title": "CORO SOLTO: Treta Suprema", "sub": "A zero-install Counter-Strike-shaped arena FPS that replaces military seriousness with Brazilian faction satire, a huge character roster, loud local flavor, and unusually explicit creator infrastructure.", "url": "teardowns/web/coro-solto-treta-suprema.html", "thumb": "arcade/td/coro-solto-treta-suprema.jpg"}, {"id": "mecha-royale", "cat": "Action & shooters", "title": "Mecha Royale", "sub": "A browser battle royale where the durable body is a configurable mech, the vulnerable second life is its pilot, and the social promise is several friends operating one war machine.", "url": "teardowns/web/mecha-royale.html", "thumb": "arcade/td/mecha-royale.jpg"}, {"id": "mini-racer", "cat": "Action & shooters", "title": "Mini Racer", "sub": "A Reddit-native, top-down time-attack racer that turns a few seconds of driving into a precise competitive conversation: beat the medal, beat your ghost, move up the board, challenge another player, retry.", "url": "teardowns/web/mini-racer.html", "thumb": "arcade/td/mini-racer.jpg"}, {"id": "neon-mayhem", "cat": "Action & shooters", "title": "Neon Mayhem", "sub": "A compact 1980s crime-sandbox fantasy whose strongest trick is not scale alone, but the way one readable city supports driving, police heat, jobs, races, aviation, failure, recovery and persistent progress without leavin", "url": "teardowns/web/neon-mayhem.html", "thumb": "arcade/td/neon-mayhem.jpg"}, {"id": "ringbreaker", "cat": "Action & shooters", "title": "Ringbreaker", "sub": "A compact survival-action game built around one charged dash: use impact physics and loose balls to break concentric rings before they collapse inward.", "url": "teardowns/web/ringbreaker.html", "thumb": "arcade/td/ringbreaker.jpg"}, {"id": "wind-and-tanks", "cat": "Action & shooters", "title": "Wind & Tanks", "sub": "A browser artillery sandbox with an excellent “read the wind, commit the shot, watch the terrain change” core—and a beta reliability failure that prevents the recorded CPU match from reaching its promised payoff.", "url": "teardowns/web/wind-and-tanks.html", "thumb": "arcade/td/wind-and-tanks.jpg"}, {"id": "afterhours", "cat": "Action & shooters", "title": "AFTERHOURS", "sub": "An observed, text-first reconstruction of the playable loop and its connected systems.", "url": "teardowns/web/afterhours.html", "thumb": "arcade/td/afterhours.jpg"}, {"id": "ashfall-sector", "cat": "Strategy & sim", "title": "Ashfall Sector", "sub": "A compact browser RTS with a second identity: the same economy, fog-of-war and counter system can be operated by humans or exposed to AI agents, while public match records turn each battle into inspectable evaluation dat", "url": "teardowns/web/ashfall-sector.html", "thumb": "arcade/td/ashfall-sector.jpg"}, {"id": "divinestead", "cat": "Strategy & sim", "title": "Divinestead", "sub": "A chill, day-based incremental strategy game that turns an Age-of-Mythology-style settlement into a readable chain of adjacent buildings, passive income, job assignments, automatic expeditions, offerings, and permanent b", "url": "teardowns/web/divinestead.html", "thumb": "arcade/td/divinestead.jpg"}, {"id": "eurasia-hauler-crossroads-trucking", "cat": "Strategy & sim", "title": "Eurasia Hauler: Crossroads Trucking", "sub": "A map-first logistics tycoon where profitability depends on chaining loaded and empty legs, truck class, fuel, tolls, deadlines, wear, depots, financing, and simulated time.", "url": "teardowns/web/eurasia-hauler-crossroads-trucking.html", "thumb": "arcade/td/eurasia-hauler-crossroads-trucking.jpg"}, {"id": "grid-town", "cat": "Strategy & sim", "title": "Grid Town", "sub": "A real-time power-grid strategy simulation where generation timing, spatial reach, operating economics, town growth, reliability, and pollution all compete on the same map.", "url": "teardowns/web/grid-town.html", "thumb": "arcade/td/grid-town.jpg"}, {"id": "ringhold", "cat": "Strategy & sim", "title": "Ringhold", "sub": "A compact node-control RTS where every line is both a supply chain and an invasion route. The build is strategically legible, unusually complete for a browser release, and held back chiefly by a first-minute interaction ", "url": "teardowns/web/ringhold.html", "thumb": "arcade/td/ringhold.jpg"}, {"id": "mini-moto", "cat": "Strategy & sim", "title": "Mini Moto", "sub": "A miniature motocross management sandbox whose best trick is changing the player’s role without changing the world: watch eight autonomous riders, tune their behavior, shape the circuit, follow a favorite, then seize the", "url": "teardowns/web/mini-moto.html", "thumb": "arcade/td/mini-moto.jpg"}, {"id": "for-the-fame", "cat": "Strategy & sim", "title": "For The Fame", "sub": "A preparation-first autobattler: the player constructs a 3×3 item machine, then reads the automated fight as a test of placement, timing, and synergy.", "url": "teardowns/web/for-the-fame.html", "thumb": "arcade/td/for-the-fame.jpg"}, {"id": "ribat", "cat": "Strategy & sim", "title": "Ribat", "sub": "A reconstruction-grade analysis of a pre-alpha browser MMO that compresses character building, equipment mastery, territorial politics, and material risk into a click-driven isometric world.", "url": "teardowns/web/ribat.html", "thumb": "arcade/td/ribat.jpg"}, {"id": "atom-by-atom", "cat": "Puzzle & word", "title": "Atom By Atom", "sub": "An observed, text-first reconstruction of the playable loop and its connected systems.", "url": "teardowns/web/atom-by-atom.html", "thumb": "arcade/td/atom-by-atom.jpg"}, {"id": "block-burner", "cat": "Puzzle & word", "title": "Block Burner", "sub": "A browser-first competitive stacker with unusually legible tactical pressure—and a first-session teaching gap around matching, attacks and powerup causality.", "url": "teardowns/web/block-burner.html", "thumb": "arcade/td/block-burner.jpg"}, {"id": "endless-barkery", "cat": "Puzzle & word", "title": "Endless Barkery", "sub": "A one-minute polyomino score attack in which spatial efficiency is complicated by valuable regions, penalty cells, rotation, and a limited piece swap.", "url": "teardowns/web/endless-barkery.html", "thumb": "arcade/td/endless-barkery.jpg"}, {"id": "enprise-gg", "cat": "Puzzle & word", "title": "Enprise.gg", "sub": "A chess-puzzle roguelike where every capture steals a movement rule, every move changes the next move-set, and losing becomes a legible lesson rather than a dead end.", "url": "teardowns/web/enprise-gg.html", "thumb": "arcade/td/enprise-gg.jpg"}, {"id": "expandagram", "cat": "Puzzle & word", "title": "Expandagram", "sub": "A one-minute word hunt built around ordered-letter constraints—remarkably teachable, instantly replayable, and one dictionary dispute away from losing trust.", "url": "teardowns/web/expandagram.html", "thumb": "arcade/td/expandagram.jpg"}, {"id": "induction", "cat": "Puzzle & word", "title": "Induction", "sub": "An elegant Black Box deduction system wrapped in a tactile Victorian notebook—rich enough for long-term mastery, but currently asking a first-time player to learn the entire instrument before hearing a clean note.", "url": "teardowns/web/induction.html", "thumb": "arcade/td/induction.jpg"}, {"id": "noomo", "cat": "Puzzle & word", "title": "Noomo", "sub": "A minimalist reverse-prediction word game: give a language model a prompt, then infer the ten continuations it produced from lengths, prefixes, and your own model of language.", "url": "teardowns/web/noomo.html", "thumb": "arcade/td/noomo.jpg"}, {"id": "save-the-toys", "cat": "Puzzle & word", "title": "Save The Toys", "sub": "A portrait-first rescue puzzler where drag-matching three identical toys turns a descending shelf into a deadline—and every short run feeds a toy-castle construction meta.", "url": "teardowns/web/save-the-toys.html", "thumb": "arcade/td/save-the-toys.jpg"}, {"id": "the-urinal-game", "cat": "Puzzle & word", "title": "The Urinal Game", "sub": "A 36-scenario social-choice quiz where one click selects a urinal, immediate poll bars reveal what other players chose, a punchline interprets the decision, and the full pattern resolves into a shareable behavioural arch", "url": "teardowns/web/the-urinal-game.html", "thumb": "arcade/td/the-urinal-game.jpg"}, {"id": "read-the-terms", "cat": "Puzzle & word", "title": "Read the Terms", "sub": "A hostile Terms of Service document disguised as a Windows XP installer: scrolling is policed, comprehension is tested, and the boring legal text becomes the obstacle course.", "url": "teardowns/web/read-the-terms.html", "thumb": "arcade/td/read-the-terms.jpg"}, {"id": "90to90", "cat": "Idle & casual", "title": "90to90", "sub": "A habit contract turns one honest daily check-in into a visible shield layer—then converts that earned identity into power inside a compact wave-survival arena.", "url": "teardowns/web/90to90.html", "thumb": "arcade/td/90to90.jpg"}, {"id": "breakaway", "cat": "Idle & casual", "title": "BREAKAWAY", "sub": "A cycling incremental that turns familiar idle numbers into a moving road: manual pedalling bootstraps automation, training cycles reset short-term gains for multipliers, and the rider visibly advances through terrain.", "url": "teardowns/web/breakaway.html", "thumb": "arcade/td/breakaway.jpg"}, {"id": "what-a-wish", "cat": "Idle & casual", "title": "What A Wish", "sub": "An active incremental game where stamina-limited bubble popping earns Faith, Faith expands a constellation of upgrades, and a parallel wish list tries to turn optimisation into human-scale generosity.", "url": "teardowns/web/what-a-wish.html", "thumb": "arcade/td/what-a-wish.jpg"}, {"id": "paperroute", "cat": "Idle & casual", "title": "PaperRoute", "sub": "An auto-forward newspaper-delivery score run that combines left/right targeting, sprint/brake timing, route reading, streaks, hazards, lives, subscriber retention, and a seven-day campaign.", "url": "teardowns/web/paperroute.html", "thumb": "arcade/td/paperroute.jpg"}, {"id": "falcon-hunt", "cat": "Idle & casual", "title": "Falcon Hunt", "sub": "A forty-second side-scrolling hunt that turns real falconry knowledge into an approachable score chase: catch species-appropriate quarry, avoid predators and human infrastructure, preserve lives, and return to the glove.", "url": "teardowns/web/falcon-hunt.html", "thumb": "arcade/td/falcon-hunt.jpg"}, {"id": "beat-the-couch", "cat": "Idle & casual", "title": "Beat the Couch", "sub": "A text-first reconstruction of recorded play, a dated game card, and official rules where cited.", "url": "teardowns/web/beat-the-couch.html", "thumb": "arcade/td/beat-the-couch.jpg"}, {"id": "quip", "cat": "Idle & casual", "title": "Quip", "sub": "A high-energy promise of skill duels and real stakes whose observed browser funnel stops at a coming-soon gate—while token acquisition routes are already live.", "url": "teardowns/web/quip.html", "thumb": "arcade/td/quip.jpg"}, {"id": "h-o-l-e", "cat": "Idle & casual", "title": "H.O.L.E.", "sub": "A persistent multiplayer voxel excavation world where a simple dig–sell–upgrade loop gains meaning because tunnels, graves, objects, profiles, and the planetary total remain after each shift.", "url": "teardowns/web/h-o-l-e.html", "thumb": "arcade/td/h-o-l-e.jpg"}, {"id": "blister-online", "cat": "RPG, roguelike & adventure", "title": "Blister Online", "sub": "A persistent browser survival RPG where low-poly wilderness, hostile absurdism, skill grinding, summon collecting, construction, towns, factories, quests, factions, and completion tracking compete to become the next reas", "url": "teardowns/web/blister-online.html", "thumb": "arcade/td/blister-online.jpg"}, {"id": "cook-the-dungeon", "cat": "RPG, roguelike & adventure", "title": "Cook the Dungeon", "sub": "A first-person roguelike deckbuilder whose unique economy links exact lethal damage to monster ingredients, cooking, limited portions, and later combat choices.", "url": "teardowns/web/cook-the-dungeon.html", "thumb": "arcade/td/cook-the-dungeon.jpg"}, {"id": "overworld", "cat": "RPG, roguelike & adventure", "title": "Overworld", "sub": "A traditional roguelike compressed into a touch-first, portrait browser game: readable one-tap turns, tiny stories, environmental rules, and a large discovery meta.", "url": "teardowns/web/overworld.html", "thumb": "arcade/td/overworld.jpg"}, {"id": "no-name-squish-game", "cat": "RPG, roguelike & adventure", "title": "No Name Squish Game", "sub": "A cozy third-person village adventure where tiny errands, eccentric neighbors and a suspicious former resident turn domestic play into a linked mystery.", "url": "teardowns/web/no-name-squish-game.html", "thumb": "arcade/td/no-name-squish-game.jpg"}, {"id": "robot-wants-kitty-html5-remaster", "cat": "RPG, roguelike & adventure", "title": "Robot Wants Kitty — HTML5 Remaster", "sub": "An authorised HTML5 reconstruction of the compact 2010 Flash metroidvania: the robot begins deliberately obsolete, and every power-up rewrites which parts of one dense hazard map are traversable.", "url": "teardowns/web/robot-wants-kitty-html5-remaster.html", "thumb": "arcade/td/robot-wants-kitty-html5-remaster.jpg"}, {"id": "grid", "cat": "RPG, roguelike & adventure", "title": "GRID", "sub": "A terminal-native multiplayer hacking fantasy whose systemic promise is unusually legible—and whose first-run credential gate currently stands between the player and every meaningful payoff.", "url": "teardowns/web/grid.html", "thumb": "arcade/td/grid.jpg"}, {"id": "cenit", "cat": "Experiments & spaces", "title": "Cenit", "sub": "A playable patch of Río de la Plata sky where time itself is the camera control, patience is the difficulty curve, and every saved view can become a field-note collectible.", "url": "teardowns/web/cenit.html", "thumb": "arcade/td/cenit.jpg"}, {"id": "museum-of-cc0", "cat": "Experiments & spaces", "title": "Museum of CC0", "sub": "A walkable web gallery that converts public-domain art into spatial browsing: enter a central hall, choose an artist doorway, approach a work, read its interpretation, and continue to the museum source.", "url": "teardowns/web/museum-of-cc0.html", "thumb": "arcade/td/museum-of-cc0.jpg"}, {"id": "the-endless-museum", "cat": "Experiments & spaces", "title": "The Endless Museum", "sub": "A navigable 3D interpretation of Wikipedia in which an article becomes a room, its outgoing links become labelled doorways, selected facts become exhibits, and the encyclopaedia's graph becomes both a free-exploration sp", "url": "teardowns/web/the-endless-museum.html", "thumb": "arcade/td/the-endless-museum.jpg"}];
+export const TEARDOWNS=[{"id": "99-nights-in-the-forest", "cat": "Roblox", "title": "99 Nights in the Forest", "sub": "The survival leader of its genre and one of Roblox's biggest hits (28.9B visits, ~293K online). A co-op survival-craft with a 'based on a true story' hook: four children went missing and you have 99 nights to unravel ", "url": "teardowns/roblox/99-nights-in-the-forest.html", "thumb": "arcade/td/99-nights-in-the-forest.jpg"}, {"id": "doors", "cat": "Roblox", "title": "DOORS", "sub": "A co-op horror walker — the genre benchmark on Roblox (7.58B visits). The loop: advance door by door through a procedural hotel, search rooms (gold, keys, items) and react to monsters — hide in a closet / under a bed, ru", "url": "teardowns/roblox/doors.html", "thumb": "arcade/td/doors.jpg"}, {"id": "dead-rails", "cat": "Roblox", "title": "Dead Rails", "sub": "Co-op survival on rails: stoke the steam engine and get as far as you can across the zombie Wild West. A party starts at a train station; players loot western towns for gold ($50 a bar) and items, sell them, buy coal and", "url": "teardowns/roblox/dead-rails.html", "thumb": "arcade/td/dead-rails.jpg"}, {"id": "catch-a-brainrot", "cat": "Roblox", "title": "Catch a Brainrot", "sub": "An open-world creature-collection RPG: choose a starter at the Rot Lab, explore World One, enter turn-based battles, lower a wild brainrot's HP and throw a Rotbox with a visible catch chance. Captured creatures fill Team", "url": "teardowns/roblox/catch-a-brainrot.html", "thumb": "arcade/td/catch-a-brainrot.jpg"}, {"id": "anime-card-farm", "cat": "Roblox", "title": "Anime Card Farm", "sub": "An anime-card gacha collector wearing a cozy \"card factory\" mask. You buy packs off a conveyor, wait out a timer, open a card, place it on your plot where it drips $/sec, then sell the box and buy a better pack. Undernea", "url": "teardowns/roblox/anime-card-farm.html", "thumb": "arcade/td/anime-card-farm.jpg"}, {"id": "natural-disaster-survival", "cat": "Roblox", "title": "Natural Disaster Survival", "sub": "A Roblox legend and the benchmark round-based survival game: built in 2008 and still live (4.4B visits, updated in 2026). One rule: every round is a random map and a random disaster. You are teleported onto an arena, the", "url": "teardowns/roblox/natural-disaster-survival.html", "thumb": "arcade/td/natural-disaster-survival.jpg"}, {"id": "creatures-of-sonaria", "cat": "Roblox", "title": "Creatures of Sonaria", "sub": "A huge creature-survival MMO live since 2020 (2.16B visits, ~36K online). You play as a creature (kaiju/beast): pick a starter, customize its coat and survive by managing stats — Health / Stamina / Food / Water / Oxygen ", "url": "teardowns/roblox/creatures-of-sonaria.html", "thumb": "arcade/td/creatures-of-sonaria.jpg"}, {"id": "final-swarm-skills", "cat": "Roblox", "title": "Final Swarm", "sub": "A survivors-roguelite (bullet-heaven) on Roblox: stand in the crowd, auto-fire, survive escalating waves and level up mid-run. Enter a world, mow down hundreds of enemies, each kill drops XP -> level-up with a 1-of-3 pic", "url": "teardowns/roblox/final-swarm-skills.html", "thumb": "arcade/td/final-swarm-skills.jpg"}, {"id": "those-who-remain", "cat": "Roblox", "title": "Those Who Remain", "sub": "Co-op round survival against waves of the infected: shoot to survive, and survive to earn what you survive with next. Up to 8 players per server hold off escalating infected waves on maps (Ranch / District / Skyscraper).", "url": "teardowns/roblox/those-who-remain.html", "thumb": "arcade/td/those-who-remain.jpg"}, {"id": "riot-city-prison-escape", "cat": "Roblox", "title": "Riot City Prison Escape", "sub": "A two-sided crime sandbox: the prisoner escapes prison, robs houses and the bank, works toward 30+ vehicles and 18 guns, tunes vehicles, and evades pursuit; the police role hunts criminals and interrupts robberies. The c", "url": "teardowns/roblox/riot-city-prison-escape.html", "thumb": "arcade/td/riot-city-prison-escape.jpg"}, {"id": "airport-tycoon", "cat": "Roblox", "title": "Airport Tycoon", "sub": "The first 52 minutes of a fast-rising tycoon: purchase order, prices, upgrade tree, rebirth, HUD and feedback for every interaction, plus what to take into development.", "url": "teardowns/roblox/airport-tycoon.html", "thumb": "arcade/td/airport-tycoon.jpg"}, {"id": "mega-mansion-tycoon", "cat": "Roblox", "title": "Mega Mansion Tycoon", "sub": "The first 24 minutes of a 1.4B-visit tycoon: player path, exact purchase order, economy, vehicles, retention, menus and an implementation spec.", "url": "teardowns/roblox/mega-mansion-tycoon.html", "thumb": "arcade/td/mega-mansion-tycoon.jpg"}, {"id": "garden-cleaner-evolution", "cat": "Roblox", "title": "Garden Cleaner Evolution", "sub": "A leaf-sweeping cleaner with progression through tool evolution. You collect leaves (by clicking leaves), dump them at the Sell Bin for cash, clear each area to 100% — and earn a key + reward and the next, bigger area (E", "url": "teardowns/roblox/garden-cleaner-evolution.html", "thumb": "arcade/td/garden-cleaner-evolution.jpg"}, {"id": "speed-monkey-escape", "cat": "Roblox", "title": "Monkey Escape", "sub": "An incremental runner in the “+1 speed per step” mold. The active loop is clearing obby stages for wins (Wins) and levels; speed (WalkSpeed) meanwhile builds mostly passively — treadmills accelerate it on their own and e", "url": "teardowns/roblox/speed-monkey-escape.html", "thumb": "arcade/td/speed-monkey-escape.jpg"}, {"id": "backrooms", "cat": "Roblox", "title": "Backrooms", "sub": "The game is branded as the Backrooms (liminal horror — yellow halls, monsters), but mechanically it is an RNG collector / progression shooter. The loop, straight from its own update log: 'survive, explore, escape the lev", "url": "teardowns/roblox/backrooms.html", "thumb": "arcade/td/backrooms.jpg"}, {"id": "speed-keyboard-escape", "cat": "Roblox", "title": "+1 Speed Keyboard Escape", "sub": "A satisfaction-driven incremental runner: you sprint across a world built from giant candy-and-chocolate keyboard keys, and every step adds +1 to your speed. Speed is the single master stat — the higher it is, the faster", "url": "teardowns/roblox/speed-keyboard-escape.html", "thumb": "arcade/td/speed-keyboard-escape.jpg"}, {"id": "survive-zombie-arena", "cat": "Roblox", "title": "Survive Zombie Arena", "sub": "A co-op wave-survival arena: up to 25 players drop from a spaceship onto one shared arena, fight escalating waves of zombies, and between waves spend earned Credits on weapons, upgrades and defensive builds. This is the ", "url": "teardowns/roblox/survive-zombie-arena.html", "thumb": "arcade/td/survive-zombie-arena.jpg"}, {"id": "drill-core", "cat": "Reference games", "title": "Drill Core", "sub": "A mining platform that faces two ways. By day you spend worker time and worker lives digging down for coal, iron and swarmlit; by night the same platform becomes a turret-lined bottleneck against a swarm coming down the ", "url": "teardowns/drill-core.html", "thumb": "arcade/td/drill-core.jpg"}, {"id": "shogun-showdown", "cat": "Reference games", "title": "Shogun Showdown", "sub": "A turn-based roguelite fought on a single row of cells. Moving, turning around, waiting and loading an attack tile into a queue each cost one turn, and enemies announce their next action in the same tile language. The de", "url": "teardowns/shogun-showdown.html", "thumb": "arcade/td/shogun-showdown.jpg"}, {"id": "sugar-siege-reference", "cat": "Reference games", "title": "Gummy Worm Go!", "sub": "A soft body becomes a hard-earned route into a candy city.", "url": "teardowns/sugar-siege-reference.html", "thumb": "arcade/td/sugar-siege-reference.jpg"}, {"id": "mishmash-run-reference", "cat": "Reference games", "title": "Brainrot Run: Merge Battle", "sub": "A ten-second crowd run decides how many free Tier-1 brawlers arrive at a 5×3 board. The game is what happens next: compressing that crowd into fewer, stronger meme units before one tap on FIGHT, then spending the reward ", "url": "teardowns/mishmash-run-reference.html", "thumb": "arcade/td/mishmash-run-reference.jpg"}, {"id": "digit-dash-reference", "cat": "Reference games", "title": "Number Master: Run and merge", "sub": "You are the number. Everything on the road is a number too — blue if you can swallow it, red if it can swallow you — and every swallow, every gate and every upgrade moves that line.", "url": "teardowns/digit-dash-reference.html", "thumb": "arcade/td/digit-dash-reference.jpg"}, {"id": "sticky-blob-descent-reference", "cat": "Reference games", "title": "Blob Merge 3D", "sub": "Every shot leaves a sticky body behind. You aim numbered jelly blobs from a fixed launcher, they cling where they land, equal neighbours fuse into double value — and the number you build is the key to the chamber floor.", "url": "teardowns/sticky-blob-descent-reference.html", "thumb": "arcade/td/sticky-blob-descent-reference.jpg"}, {"id": "brambleforge-reference", "cat": "Reference games", "title": "Spinner Merge", "sub": "A merge board that is also a team sheet. The player buys cheap spinners at a price that climbs ×1.5 with every tap, fuses identical pairs into fewer, stronger tops on a 5×3 grid, then presses FIGHT and watches physics de", "url": "teardowns/brambleforge-reference.html", "thumb": "arcade/td/brambleforge-reference.jpg"}, {"id": "apex-run-highway-race", "cat": "Action & shooters", "title": "Apex Run: Highway Race", "sub": "An observed, text-first reconstruction of the playable loop and its connected systems.", "url": "teardowns/web/apex-run-highway-race.html", "thumb": "arcade/td/apex-run-highway-race.jpg"}, {"id": "car-soccer", "cat": "Action & shooters", "title": "Car Soccer", "sub": "A browser-native car-ball physics toy that wins through immediate freeplay, then branches into ranked bot challenges, car handling presets, training maps, deep settings, and a creator-funded arena-ad marketplace.", "url": "teardowns/web/car-soccer.html", "thumb": "arcade/td/car-soccer.jpg"}, {"id": "claude-of-tanks", "cat": "Action & shooters", "title": "Claude of Tanks", "sub": "A feature-rich browser armored-combat simulator that pairs a massive vehicle library with unusually explicit ballistic, armor, module and crew feedback. Its differentiator is not merely “tanks in a browser”; it is a lear", "url": "teardowns/web/claude-of-tanks.html", "thumb": "arcade/td/claude-of-tanks.jpg"}, {"id": "coro-solto-treta-suprema", "cat": "Action & shooters", "title": "CORO SOLTO: Treta Suprema", "sub": "A zero-install Counter-Strike-shaped arena FPS that replaces military seriousness with Brazilian faction satire, a huge character roster, loud local flavor, and unusually explicit creator infrastructure.", "url": "teardowns/web/coro-solto-treta-suprema.html", "thumb": "arcade/td/coro-solto-treta-suprema.jpg"}, {"id": "mecha-royale", "cat": "Action & shooters", "title": "Mecha Royale", "sub": "A browser battle royale where the durable body is a configurable mech, the vulnerable second life is its pilot, and the social promise is several friends operating one war machine.", "url": "teardowns/web/mecha-royale.html", "thumb": "arcade/td/mecha-royale.jpg"}, {"id": "mini-racer", "cat": "Action & shooters", "title": "Mini Racer", "sub": "A Reddit-native, top-down time-attack racer that turns a few seconds of driving into a precise competitive conversation: beat the medal, beat your ghost, move up the board, challenge another player, retry.", "url": "teardowns/web/mini-racer.html", "thumb": "arcade/td/mini-racer.jpg"}, {"id": "neon-mayhem", "cat": "Action & shooters", "title": "Neon Mayhem", "sub": "A compact 1980s crime-sandbox fantasy whose strongest trick is not scale alone, but the way one readable city supports driving, police heat, jobs, races, aviation, failure, recovery and persistent progress without leavin", "url": "teardowns/web/neon-mayhem.html", "thumb": "arcade/td/neon-mayhem.jpg"}, {"id": "ringbreaker", "cat": "Action & shooters", "title": "Ringbreaker", "sub": "A compact survival-action game built around one charged dash: use impact physics and loose balls to break concentric rings before they collapse inward.", "url": "teardowns/web/ringbreaker.html", "thumb": "arcade/td/ringbreaker.jpg"}, {"id": "wind-and-tanks", "cat": "Action & shooters", "title": "Wind & Tanks", "sub": "A browser artillery sandbox with an excellent “read the wind, commit the shot, watch the terrain change” core—and a beta reliability failure that prevents the recorded CPU match from reaching its promised payoff.", "url": "teardowns/web/wind-and-tanks.html", "thumb": "arcade/td/wind-and-tanks.jpg"}, {"id": "afterhours", "cat": "Action & shooters", "title": "AFTERHOURS", "sub": "An observed, text-first reconstruction of the playable loop and its connected systems.", "url": "teardowns/web/afterhours.html", "thumb": "arcade/td/afterhours.jpg"}, {"id": "ashfall-sector", "cat": "Strategy & sim", "title": "Ashfall Sector", "sub": "A compact browser RTS with a second identity: the same economy, fog-of-war and counter system can be operated by humans or exposed to AI agents, while public match records turn each battle into inspectable evaluation dat", "url": "teardowns/web/ashfall-sector.html", "thumb": "arcade/td/ashfall-sector.jpg"}, {"id": "divinestead", "cat": "Strategy & sim", "title": "Divinestead", "sub": "A chill, day-based incremental strategy game that turns an Age-of-Mythology-style settlement into a readable chain of adjacent buildings, passive income, job assignments, automatic expeditions, offerings, and permanent b", "url": "teardowns/web/divinestead.html", "thumb": "arcade/td/divinestead.jpg"}, {"id": "eurasia-hauler-crossroads-trucking", "cat": "Strategy & sim", "title": "Eurasia Hauler: Crossroads Trucking", "sub": "A map-first logistics tycoon where profitability depends on chaining loaded and empty legs, truck class, fuel, tolls, deadlines, wear, depots, financing, and simulated time.", "url": "teardowns/web/eurasia-hauler-crossroads-trucking.html", "thumb": "arcade/td/eurasia-hauler-crossroads-trucking.jpg"}, {"id": "grid-town", "cat": "Strategy & sim", "title": "Grid Town", "sub": "A real-time power-grid strategy simulation where generation timing, spatial reach, operating economics, town growth, reliability, and pollution all compete on the same map.", "url": "teardowns/web/grid-town.html", "thumb": "arcade/td/grid-town.jpg"}, {"id": "ringhold", "cat": "Strategy & sim", "title": "Ringhold", "sub": "A compact node-control RTS where every line is both a supply chain and an invasion route. The build is strategically legible, unusually complete for a browser release, and held back chiefly by a first-minute interaction ", "url": "teardowns/web/ringhold.html", "thumb": "arcade/td/ringhold.jpg"}, {"id": "mini-moto", "cat": "Strategy & sim", "title": "Mini Moto", "sub": "A miniature motocross management sandbox whose best trick is changing the player’s role without changing the world: watch eight autonomous riders, tune their behavior, shape the circuit, follow a favorite, then seize the", "url": "teardowns/web/mini-moto.html", "thumb": "arcade/td/mini-moto.jpg"}, {"id": "for-the-fame", "cat": "Strategy & sim", "title": "For The Fame", "sub": "A preparation-first autobattler: the player constructs a 3×3 item machine, then reads the automated fight as a test of placement, timing, and synergy.", "url": "teardowns/web/for-the-fame.html", "thumb": "arcade/td/for-the-fame.jpg"}, {"id": "ribat", "cat": "Strategy & sim", "title": "Ribat", "sub": "A reconstruction-grade analysis of a pre-alpha browser MMO that compresses character building, equipment mastery, territorial politics, and material risk into a click-driven isometric world.", "url": "teardowns/web/ribat.html", "thumb": "arcade/td/ribat.jpg"}, {"id": "atom-by-atom", "cat": "Puzzle & word", "title": "Atom By Atom", "sub": "An observed, text-first reconstruction of the playable loop and its connected systems.", "url": "teardowns/web/atom-by-atom.html", "thumb": "arcade/td/atom-by-atom.jpg"}, {"id": "block-burner", "cat": "Puzzle & word", "title": "Block Burner", "sub": "A browser-first competitive stacker with unusually legible tactical pressure—and a first-session teaching gap around matching, attacks and powerup causality.", "url": "teardowns/web/block-burner.html", "thumb": "arcade/td/block-burner.jpg"}, {"id": "endless-barkery", "cat": "Puzzle & word", "title": "Endless Barkery", "sub": "A one-minute polyomino score attack in which spatial efficiency is complicated by valuable regions, penalty cells, rotation, and a limited piece swap.", "url": "teardowns/web/endless-barkery.html", "thumb": "arcade/td/endless-barkery.jpg"}, {"id": "enprise-gg", "cat": "Puzzle & word", "title": "Enprise.gg", "sub": "A chess-puzzle roguelike where every capture steals a movement rule, every move changes the next move-set, and losing becomes a legible lesson rather than a dead end.", "url": "teardowns/web/enprise-gg.html", "thumb": "arcade/td/enprise-gg.jpg"}, {"id": "expandagram", "cat": "Puzzle & word", "title": "Expandagram", "sub": "A one-minute word hunt built around ordered-letter constraints—remarkably teachable, instantly replayable, and one dictionary dispute away from losing trust.", "url": "teardowns/web/expandagram.html", "thumb": "arcade/td/expandagram.jpg"}, {"id": "induction", "cat": "Puzzle & word", "title": "Induction", "sub": "An elegant Black Box deduction system wrapped in a tactile Victorian notebook—rich enough for long-term mastery, but currently asking a first-time player to learn the entire instrument before hearing a clean note.", "url": "teardowns/web/induction.html", "thumb": "arcade/td/induction.jpg"}, {"id": "noomo", "cat": "Puzzle & word", "title": "Noomo", "sub": "A minimalist reverse-prediction word game: give a language model a prompt, then infer the ten continuations it produced from lengths, prefixes, and your own model of language.", "url": "teardowns/web/noomo.html", "thumb": "arcade/td/noomo.jpg"}, {"id": "save-the-toys", "cat": "Puzzle & word", "title": "Save The Toys", "sub": "A portrait-first rescue puzzler where drag-matching three identical toys turns a descending shelf into a deadline—and every short run feeds a toy-castle construction meta.", "url": "teardowns/web/save-the-toys.html", "thumb": "arcade/td/save-the-toys.jpg"}, {"id": "the-urinal-game", "cat": "Puzzle & word", "title": "The Urinal Game", "sub": "A 36-scenario social-choice quiz where one click selects a urinal, immediate poll bars reveal what other players chose, a punchline interprets the decision, and the full pattern resolves into a shareable behavioural arch", "url": "teardowns/web/the-urinal-game.html", "thumb": "arcade/td/the-urinal-game.jpg"}, {"id": "read-the-terms", "cat": "Puzzle & word", "title": "Read the Terms", "sub": "A hostile Terms of Service document disguised as a Windows XP installer: scrolling is policed, comprehension is tested, and the boring legal text becomes the obstacle course.", "url": "teardowns/web/read-the-terms.html", "thumb": "arcade/td/read-the-terms.jpg"}, {"id": "90to90", "cat": "Idle & casual", "title": "90to90", "sub": "A habit contract turns one honest daily check-in into a visible shield layer—then converts that earned identity into power inside a compact wave-survival arena.", "url": "teardowns/web/90to90.html", "thumb": "arcade/td/90to90.jpg"}, {"id": "breakaway", "cat": "Idle & casual", "title": "BREAKAWAY", "sub": "A cycling incremental that turns familiar idle numbers into a moving road: manual pedalling bootstraps automation, training cycles reset short-term gains for multipliers, and the rider visibly advances through terrain.", "url": "teardowns/web/breakaway.html", "thumb": "arcade/td/breakaway.jpg"}, {"id": "what-a-wish", "cat": "Idle & casual", "title": "What A Wish", "sub": "An active incremental game where stamina-limited bubble popping earns Faith, Faith expands a constellation of upgrades, and a parallel wish list tries to turn optimisation into human-scale generosity.", "url": "teardowns/web/what-a-wish.html", "thumb": "arcade/td/what-a-wish.jpg"}, {"id": "paperroute", "cat": "Idle & casual", "title": "PaperRoute", "sub": "An auto-forward newspaper-delivery score run that combines left/right targeting, sprint/brake timing, route reading, streaks, hazards, lives, subscriber retention, and a seven-day campaign.", "url": "teardowns/web/paperroute.html", "thumb": "arcade/td/paperroute.jpg"}, {"id": "falcon-hunt", "cat": "Idle & casual", "title": "Falcon Hunt", "sub": "A forty-second side-scrolling hunt that turns real falconry knowledge into an approachable score chase: catch species-appropriate quarry, avoid predators and human infrastructure, preserve lives, and return to the glove.", "url": "teardowns/web/falcon-hunt.html", "thumb": "arcade/td/falcon-hunt.jpg"}, {"id": "beat-the-couch", "cat": "Idle & casual", "title": "Beat the Couch", "sub": "A text-first reconstruction of recorded play, a dated game card, and official rules where cited.", "url": "teardowns/web/beat-the-couch.html", "thumb": "arcade/td/beat-the-couch.jpg"}, {"id": "quip", "cat": "Idle & casual", "title": "Quip", "sub": "A high-energy promise of skill duels and real stakes whose observed browser funnel stops at a coming-soon gate—while token acquisition routes are already live.", "url": "teardowns/web/quip.html", "thumb": "arcade/td/quip.jpg"}, {"id": "h-o-l-e", "cat": "Idle & casual", "title": "H.O.L.E.", "sub": "A persistent multiplayer voxel excavation world where a simple dig–sell–upgrade loop gains meaning because tunnels, graves, objects, profiles, and the planetary total remain after each shift.", "url": "teardowns/web/h-o-l-e.html", "thumb": "arcade/td/h-o-l-e.jpg"}, {"id": "blister-online", "cat": "RPG, roguelike & adventure", "title": "Blister Online", "sub": "A persistent browser survival RPG where low-poly wilderness, hostile absurdism, skill grinding, summon collecting, construction, towns, factories, quests, factions, and completion tracking compete to become the next reas", "url": "teardowns/web/blister-online.html", "thumb": "arcade/td/blister-online.jpg"}, {"id": "cook-the-dungeon", "cat": "RPG, roguelike & adventure", "title": "Cook the Dungeon", "sub": "A first-person roguelike deckbuilder whose unique economy links exact lethal damage to monster ingredients, cooking, limited portions, and later combat choices.", "url": "teardowns/web/cook-the-dungeon.html", "thumb": "arcade/td/cook-the-dungeon.jpg"}, {"id": "overworld", "cat": "RPG, roguelike & adventure", "title": "Overworld", "sub": "A traditional roguelike compressed into a touch-first, portrait browser game: readable one-tap turns, tiny stories, environmental rules, and a large discovery meta.", "url": "teardowns/web/overworld.html", "thumb": "arcade/td/overworld.jpg"}, {"id": "no-name-squish-game", "cat": "RPG, roguelike & adventure", "title": "No Name Squish Game", "sub": "A cozy third-person village adventure where tiny errands, eccentric neighbors and a suspicious former resident turn domestic play into a linked mystery.", "url": "teardowns/web/no-name-squish-game.html", "thumb": "arcade/td/no-name-squish-game.jpg"}, {"id": "robot-wants-kitty-html5-remaster", "cat": "RPG, roguelike & adventure", "title": "Robot Wants Kitty — HTML5 Remaster", "sub": "An authorised HTML5 reconstruction of the compact 2010 Flash metroidvania: the robot begins deliberately obsolete, and every power-up rewrites which parts of one dense hazard map are traversable.", "url": "teardowns/web/robot-wants-kitty-html5-remaster.html", "thumb": "arcade/td/robot-wants-kitty-html5-remaster.jpg"}, {"id": "grid", "cat": "RPG, roguelike & adventure", "title": "GRID", "sub": "A terminal-native multiplayer hacking fantasy whose systemic promise is unusually legible—and whose first-run credential gate currently stands between the player and every meaningful payoff.", "url": "teardowns/web/grid.html", "thumb": "arcade/td/grid.jpg"}, {"id": "cenit", "cat": "Experiments & spaces", "title": "Cenit", "sub": "A playable patch of Río de la Plata sky where time itself is the camera control, patience is the difficulty curve, and every saved view can become a field-note collectible.", "url": "teardowns/web/cenit.html", "thumb": "arcade/td/cenit.jpg"}, {"id": "museum-of-cc0", "cat": "Experiments & spaces", "title": "Museum of CC0", "sub": "A walkable web gallery that converts public-domain art into spatial browsing: enter a central hall, choose an artist doorway, approach a work, read its interpretation, and continue to the museum source.", "url": "teardowns/web/museum-of-cc0.html", "thumb": "arcade/td/museum-of-cc0.jpg"}, {"id": "the-endless-museum", "cat": "Experiments & spaces", "title": "The Endless Museum", "sub": "A navigable 3D interpretation of Wikipedia in which an article becomes a room, its outgoing links become labelled doorways, selected facts become exhibits, and the encyclopaedia's graph becomes both a free-exploration sp", "url": "teardowns/web/the-endless-museum.html", "thumb": "arcade/td/the-endless-museum.jpg"}];
 export const VAULT_SECTIONS=["Vault · Physics & drawing puzzles", "Vault · Arcade & duels", "Vault · Stunts & sports", "Vault · Story & choice", "Vault · Craft, sim & idle"];
 export const VAULT=[
  {
@@ -1382,6 +1405,44 @@ export const VAULT=[
   "platforms": "Phone · Desktop"
  },
  {
+  "id": "neon-slice",
+  "title": "Neon Slice",
+  "section": "Vault · Arcade & duels",
+  "blurb": "Cube Cutter retold as a neon night market: the same one-thumb knife flip, new districts and obstacles.",
+  "how": "A visual reimagining of my Cube Cutter, built to test how far a new setting can carry the same core.",
+  "genre": "Knife flip",
+  "orient": "land",
+  "play": "games/neon-slice/",
+  "teardown": null,
+  "video": null,
+  "earlier": null,
+  "tags": [
+   "One thumb",
+   "Reskin"
+  ],
+  "cover": "arcade/covers/neon-slice.jpg",
+  "platforms": "Phone · Desktop"
+ },
+ {
+  "id": "deepbite",
+  "title": "Deepbite",
+  "section": "Vault · Arcade & duels",
+  "blurb": "Serpent Clash moved to the deep sea: twelve depths, each guarded by its own leviathan.",
+  "how": "A visual reimagining of my Serpent Clash with new bosses and an underwater palette.",
+  "genre": "Arcade",
+  "orient": "port",
+  "play": "games/deepbite/",
+  "teardown": null,
+  "video": null,
+  "earlier": null,
+  "tags": [
+   "Arcade",
+   "Reskin"
+  ],
+  "cover": "arcade/covers/deepbite.jpg",
+  "platforms": "Phone · Desktop"
+ },
+ {
   "id": "dunk-odyssey",
   "title": "Dunk Odyssey",
   "section": "Vault · Stunts & sports",
@@ -1646,6 +1707,25 @@ export const VAULT=[
   ],
   "cover": "arcade/covers/the-cleaner.jpg",
   "platforms": "Desktop"
+ },
+ {
+  "id": "anomaly",
+  "title": "I Am the Anomaly",
+  "section": "Vault · Story & choice",
+  "blurb": "The first 3D take on the ink-ghost idea: prank plush inspectors in a dollhouse until they flee.",
+  "how": "Early 3D prototype of the idea that later became Blot: The Ink Ghost.",
+  "genre": "Stealth",
+  "orient": "land",
+  "play": "games/anomaly/",
+  "teardown": null,
+  "video": null,
+  "earlier": null,
+  "tags": [
+   "3D",
+   "Stealth"
+  ],
+  "cover": "arcade/covers/anomaly.jpg",
+  "platforms": "Phone · Desktop"
  },
  {
   "id": "bust-stop",

@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Game Lab · Arseni Atrokhov</title>
+<title>AI Game Market · Arseni Atrokhov</title>
 <meta name="description" content="Playable browser games, game teardowns and projects by Arseni Atrokhov, AI-assisted game developer.">
-<meta property="og:title" content="AI Game Lab · Arseni Atrokhov">
+<meta property="og:title" content="AI Game Market · Arseni Atrokhov">
 <meta property="og:image" content="https://condrusarsen.github.io/ai-game-lab/arcade/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,15 +56,16 @@
 </head>
 <body>
 <header>
-  <h1>AI GAME <span>LAB</span></h1>
+  <h1>AI GAME <span>MARKET</span></h1>
   <p class="who">Arseni Atrokhov · AI-assisted game developer · Roblox (Luau) · HTML5</p>
   <p class="lead">I take a game from teardown to a playable, tested build, directing AI coding agents and owning the design and the final quality. Everything below runs in the browser. Most games work on a phone. The Vault holds the rest of my prototypes: smaller, rougher, all playable.</p>
+  <p class="lead">Most of these games were made from July to October 2026 in a small studio that builds games with AI agents: many I built solo, some together with a teammate. The teardowns are a public sample of the 600+ games I have analysed.</p>
   <div class="stats" id="stats"></div>
   <div class="cta"><a class="main" href="../">Walk the 3D market ▶</a><a href="https://www.linkedin.com/in/arseni-atrokhov/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/CondrusArsen" target="_blank" rel="noopener">GitHub ↗</a></div>
 </header>
 <div class="bar"><div class="bar-in" id="bar"><input id="q" type="search" placeholder="Search games, teardowns, projects…"></div></div>
 <main id="main"></main>
-<footer>© 2026 Arseni Atrokhov. All rights reserved. The games are shown for portfolio review; the code is not open-source. Reference games belong to their owners; no art, audio or text from them is used.</footer>
+<footer>© 2026 Arseni Atrokhov and collaborators. All rights reserved. The games are shown for portfolio review; the code is not open-source. Reference games belong to their owners; no art, audio or text from them is used.</footer>
 <script type="module">
 import { SECTIONS, GAMES, PROJECTS, TEARDOWNS, STATS, VAULT_SECTIONS, VAULT } from '../arcade/data.js';
 const REM = window.ARCADE_REMOTE, LOC = window.ARCADE_LOCAL;
@@ -75,9 +76,9 @@ const groups = [
   ...SECTIONS.map(s => ({ key: s, title: s, items: GAMES.filter(g => g.section === s), type: 'game' })),
   ...VAULT_SECTIONS.map(s => ({ key: s, title: s, items: VAULT.filter(g => g.section === s), type: 'vault' })),
   ...[...new Set(PROJECTS.map(p => p.zone))].map(z => ({ key: z, title: z === 'UI/UX' ? 'UI/UX · client work' : z, items: PROJECTS.filter(p => p.zone === z), type: 'project' })),
-  { key: 'Teardowns', title: 'Teardowns', items: TEARDOWNS, type: 'td' },
+  ...[...new Set(TEARDOWNS.map(t => t.cat))].map(c => ({ key: 'Teardowns · ' + c, title: 'Teardowns · ' + c, items: TEARDOWNS.filter(t => t.cat === c), type: 'td' })),
 ];
-const filters = ['All', 'Games', ...SECTIONS, 'Vault', 'Teardowns', 'Roblox', 'UI/UX', 'Tools'];
+const filters = ['All', 'Games', ...SECTIONS, 'Vault', 'Teardowns', 'Roblox', 'Game design', 'UI/UX', 'Tools'];
 const bar = document.getElementById('bar');
 let active = 'All';
 filters.forEach(f => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = f; b.setAttribute('aria-pressed', f === 'All'); b.onclick = () => { active = f; bar.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b)); apply(); }; bar.appendChild(b); });
@@ -99,7 +100,7 @@ const q = document.getElementById('q');
 function apply() {
   const s = q.value.trim().toLowerCase();
   document.querySelectorAll('section').forEach(sec => {
-    const typeOk = active === 'All' || sec.dataset.key === active || (active === 'Games' && sec.dataset.type === 'game') || (active === 'Vault' && sec.dataset.type === 'vault');
+    const typeOk = active === 'All' || sec.dataset.key === active || (active === 'Games' && sec.dataset.type === 'game') || (active === 'Vault' && sec.dataset.type === 'vault') || (active === 'Teardowns' && sec.dataset.type === 'td') || sec.dataset.key === 'Teardowns · ' + active;
     let n = 0; sec.querySelectorAll('[data-s]').forEach(el => { const ok = typeOk && (!s || el.dataset.s.includes(s)); el.classList.toggle('hidden', !ok); n += ok; });
     sec.classList.toggle('hidden', !n);
   });
