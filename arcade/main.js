@@ -937,6 +937,7 @@ function action(ex, a) {
   else if (a.startsWith('link:')) window.open(it.links[+a.slice(5)][1], '_blank', 'noopener');
   else if (a === 'pipeline') openInfo('How I work with AI', PIPELINE_HTML);
   else if (a === 'about') openInfo('Arseni Atrokhov', ABOUT_HTML);
+  else if (a === 'cv') openCV('en');
   else if (a === 'map') openMap();
 }
 
@@ -945,7 +946,7 @@ const ABOUT_HTML = `<p class="lead">AI-assisted game developer and designer: Rob
 <p>${CREDIT} The market itself is my own project: I designed it, AI agents wrote the code, I tested it on desktop and phones.</p>
 <p>The ${TEARDOWNS.length} teardowns here are a public sample: I have analysed 600+ games, and most of those analyses stay private.</p>
 <p>Looking for remote roles: AI game designer / prototyper, Roblox developer, HTML5 game developer.</p>
-<div class="m-btns"><a class="main" href="${LINKS.linkedin}" target="_blank" rel="noopener">Message me on LinkedIn ↗</a><a href="${LINKS.github}" target="_blank" rel="noopener">GitHub ↗</a><a href="list/">All projects as a list</a></div>`;
+<div class="m-btns"><a class="main" href="${LINKS.linkedin}" target="_blank" rel="noopener">Message me on LinkedIn ↗</a><a href="${LINKS.github}" target="_blank" rel="noopener">GitHub ↗</a><button data-cv>CV</button><a href="list/">All projects as a list</a></div>`;
 const PIPELINE_HTML = `<p class="lead">Gameplay video → teardown → design spec → playable build → playtest and QA. AI agents draft the analysis and write most of the code. I direct the work and own the decisions.</p>
 <h4>What I decide</h4><ul><li>Which reference game to study and which recordings to use.</li><li>What the adaptation is: theme, art direction, which rules stay, change or are new (onboarding, economy, pacing, meta-game).</li><li>Scope and priorities for each iteration, and what gets cut.</li><li>Whether a build feels right and is ready to show.</li></ul>
 <h4>What the agents generate</h4><ul><li>Teardown drafts with evidence frames; each claim tagged observed, inferred or unknown.</li><li>A design document per game that maps every rule back to the teardown.</li><li>Game code (JavaScript/TypeScript, Canvas 2D, WebGL, three.js; Luau for Roblox) and test harnesses.</li><li>Asset sourcing with saved licence evidence and a generated credits screen.</li></ul>
@@ -974,8 +975,15 @@ function openFilmVideo(title, src) {
 function openInfo(title, html) {
   mTitle.textContent = title; mOpen.hidden = true; mBody.className = 'info'; mBody.innerHTML = html;
   mBody.querySelectorAll('[data-play]').forEach(b => b.onclick = () => { const g = GAMES.find(x => x.id === b.dataset.play); openFrame(g.title, url(g.play), { kind: 'game', id: g.id }); });
+  mBody.querySelectorAll('[data-cv]').forEach(b => b.onclick = () => openCV(b.dataset.cv || 'en'));
   mBody.querySelectorAll('[data-frame]').forEach(a => a.onclick = e => { e.preventDefault(); openFrame(a.dataset.title, a.dataset.frame); });
   showModal();
+}
+// CV: both pages as images (readable on a phone) plus the PDFs to download.
+function openCV(lang) {
+  const other = lang === 'en' ? 'ru' : 'en', pdf = l => `cv/Arseni_Atrokhov_CV_${l.toUpperCase()}.pdf`;
+  openInfo(lang === 'en' ? 'CV · Arseni Atrokhov' : 'Резюме · Арсений Атрохов', `<div class="m-btns" style="margin:0 0 14px"><a class="main" href="${url(pdf(lang))}" download>⬇ Download PDF</a><button data-cv="${other}">${other === 'ru' ? 'Русская версия' : 'English version'}</button></div>
+    <div class="cv-pages">${[1, 2].map(n => `<img src="${url(`cv/cv-${lang}-${n}.jpg`)}" alt="CV page ${n}">`).join('')}</div>`);
 }
 // Project panel: a gallery of screens and clips you can flip through, plus the story and links.
 function openProject(it, start = 0) {
@@ -1063,6 +1071,7 @@ mapSearch.addEventListener('input', () => renderMapList(mapSearch.value));
 
 $('#btn-help').onclick = () => tutorial.start(true);
 $('#btn-about').onclick = () => action(exhibits.find(e => e.kind === 'about'), 'about');
+$('#btn-cv').onclick = () => openCV('en');
 
 // fade between teleports
 const fadeEl = $('#fade');
