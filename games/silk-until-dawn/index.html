@@ -7,9 +7,9 @@
 <title>Шёлк до рассвета</title>
 <link rel="stylesheet" href="style.css">
 <script type="module">
-  // bug.games / bloomplay: fetch the SDK early when embedded on the platform (see src/platform.js)
+  // the platform / hostsdk: fetch the SDK early when embedded on the platform (see src/platform.js)
   if (window.parent !== window && !/[?&]standalone/.test(location.search))
-    window.__bp = import('/sdk/bloomplay.js').then((m) => m.bloomplay).catch(() => null);
+    window.__bp = import('/sdk/hostsdk.js').then((m) => m.hostsdk).catch(() => null);
 </script>
 </head>
 <body>

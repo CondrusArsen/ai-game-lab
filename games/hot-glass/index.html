@@ -7,9 +7,9 @@
 <title>Горячее стекло</title>
 <link rel="stylesheet" href="style.css">
 <script type="module">
-  // bug.games (bloomplay) SDK, fetched early only when embedded on the platform; see src/platform.js
+  // the platform (hostsdk) SDK, fetched early only when embedded on the platform; see src/platform.js
   if (window.parent !== window && !/[?&]standalone/.test(location.search))
-    window.__bp = import('/sdk/bloomplay.js').then((m) => m.bloomplay).catch(() => null);
+    window.__bp = import('/sdk/hostsdk.js').then((m) => m.hostsdk).catch(() => null);
 </script>
 </head>
 <body>

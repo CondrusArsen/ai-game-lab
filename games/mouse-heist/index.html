@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Мышиное дело</title>
+<script type="module">if (window.parent !== window) window.__bp = import('/sdk/hostsdk.js').then((m) => m.hostsdk).catch(() => null);</script>
+<style>
+@font-face { font-family: "Neucha"; src: url(fonts/neucha-cyr.woff2) format("woff2"); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; font-display: block; }
+@font-face { font-family: "Neucha"; src: url(fonts/neucha-lat.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD, U+2605-2606; font-display: block; }
+:root { --ink: #141012; --paper: #fffbea; --cream: #fdf5d6; --yellow: #fde262; --red: #e8574a; --blue: #94a4fb; --green: #9cc76f; --cork: #c99a64; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #2a1b18; color: var(--ink); font-family: "Neucha", "Comic Sans MS", cursive; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; overscroll-behavior: none; }
+canvas#game { position: fixed; inset: 0; display: block; }
+[hidden] { display: none !important; }
+.tag { background: var(--paper); border: 3px solid var(--ink); border-radius: 14px 10px 16px 9px; box-shadow: 3px 4px 0 rgba(20, 16, 18, 0.85); }
+.btn { font: inherit; font-size: 24px; color: var(--ink); background: var(--yellow); border: 3px solid var(--ink); border-radius: 16px 12px 18px 11px; padding: 7px 22px 9px; box-shadow: 3px 4px 0 var(--ink); cursor: pointer; transition: transform .08s; }
+.btn:active { transform: translate(3px, 4px); box-shadow: 0 0 0 var(--ink); }
+.btn:focus-visible { outline: 4px solid var(--blue); outline-offset: 3px; }
+.btn.ghost { background: var(--paper); font-size: 18px; padding: 5px 14px 7px; }
+.btn.red { background: #ff9b8a; }
+.btn:disabled { opacity: .45; cursor: default; }
+.overlay { position: fixed; inset: 0; display: grid; place-items: center; padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); background: rgba(20, 16, 18, 0.34); }
+.card { width: min(560px, 100%); max-height: calc(100% - 8px); overflow: auto; padding: 20px 24px 22px; transform: rotate(-1deg); display: grid; gap: 12px; }
+.card p { margin: 0; font-size: 19px; line-height: 1.3; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+#loading { position: fixed; inset: 0; display: grid; place-items: center; color: var(--cream); font-size: 28px; }
+
+/* title */
+#title .card { width: min(600px, 100%); }
+.logo { margin: 0; font-weight: 400; font-size: clamp(44px, 8vw, 74px); line-height: .9; color: var(--red); text-shadow: 3px 3px 0 var(--ink); -webkit-text-stroke: 1.6px var(--ink); }
+.logo span { color: var(--yellow); }
+.sub { font-size: 21px; color: #4a55c8; margin: -2px 0 0; }
+#crewRow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+#crewRow figure { margin: 0; display: grid; justify-items: center; gap: 2px; font-size: 15px; text-align: center; line-height: 1.05; }
+#crewRow canvas { width: 100%; max-width: 110px; aspect-ratio: 1; border: 2.5px solid var(--ink); border-radius: 12px 9px 14px 8px; background: #fdf1cf; }
+#crewRow small { color: #4a55c8; font-size: 13px; }
+.keys { display: grid; grid-template-columns: auto 1fr; gap: 3px 10px; font-size: 16px; line-height: 1.2; margin: 0; }
+.keys dt { white-space: nowrap; }
+.keys kbd { font: inherit; display: inline-block; min-width: 24px; text-align: center; padding: 0 5px; border: 2px solid var(--ink); border-radius: 6px; background: #fff; box-shadow: 1px 2px 0 var(--ink); }
+.keys dd { margin: 0; }
+details summary { cursor: pointer; font-size: 17px; color: #4a55c8; }
+
+/* the map, the plan board: full-screen canvases with DOM controls */
+.scene { position: fixed; inset: 0; background: #2a1b18; }
+.scene > canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+#panel canvas { position: static; }
+#panel { position: absolute; right: max(14px, env(safe-area-inset-right)); top: max(12px, env(safe-area-inset-top)); bottom: max(14px, env(safe-area-inset-bottom)); width: min(520px, calc(100% - 28px)); display: grid; grid-template-rows: auto auto 1fr; gap: 8px; padding: 12px 14px 14px; overflow: hidden; box-sizing: border-box; }
+@media (max-width: 600px) and (min-height: 600px) { #mapHint { display: none; } #panel { top: max(68px, calc(env(safe-area-inset-top) + 58px)); bottom: auto; max-height: calc(100% - 82px); } }
+@media (max-height: 480px) { #panel { width: min(470px, calc(100% - 200px)); padding: 8px 10px 10px; gap: 6px; } #panel h2 { font-size: 28px !important; } }
+.sceneBar { position: absolute; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: min(900px, calc(100% - 24px)); }
+.sceneTop { position: absolute; left: max(14px, env(safe-area-inset-left)); top: max(12px, env(safe-area-inset-top)); display: flex; gap: 10px; }
+#mapRooms button { position: absolute; background: transparent; border: 0; cursor: pointer; padding: 0; }
+#mapRooms button:focus-visible { outline: 4px solid var(--yellow); outline-offset: -6px; border-radius: 10px; }
+#planTalk { position: absolute; left: 50%; bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px)); transform: translateX(-50%) rotate(-.5deg); width: min(720px, calc(100% - 24px)); display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: center; padding: 8px 14px 8px 8px; }
+#planTalk canvas { position: static; width: 84px; height: 84px; border: 2.5px solid var(--ink); border-radius: 10px 8px 12px 7px; }
+#planTalk b { display: block; font-weight: 400; font-size: 15px; color: #4a55c8; }
+#planText { font-size: 20px; line-height: 1.22; min-height: 50px; }
+#roleCards { position: absolute; right: max(14px, env(safe-area-inset-right)); top: max(12px, env(safe-area-inset-top)); display: grid; gap: 6px; }
+#roleCards button { font: inherit; font-size: 16px; display: flex; gap: 8px; align-items: center; padding: 3px 10px 3px 4px; background: var(--paper); border: 2.5px solid var(--ink); border-radius: 12px; box-shadow: 2px 3px 0 var(--ink); cursor: pointer; text-align: left; }
+#roleCards button canvas { position: static; width: 40px; height: 40px; }
+#roleCards button.mine { background: var(--yellow); }
+#roleCards button.taken { opacity: .55; }
+
+/* HUD */
+#hud { position: fixed; inset: 0; pointer-events: none; }
+#hud .top { position: absolute; top: max(10px, env(safe-area-inset-top)); left: max(10px, env(safe-area-inset-left)); right: max(10px, env(safe-area-inset-right)); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: start; gap: 10px; }
+.leftCol { display: grid; gap: 8px; justify-items: start; }
+#camo { padding: 4px 12px 7px; transform: rotate(-1.4deg); min-width: 150px; }
+#camo small { display: block; font-size: 13px; letter-spacing: .08em; }
+#camoVal { font-size: 40px; line-height: .95; display: block; transition: color .2s; }
+#camoZone { font-size: 15px; display: block; color: #4a55c8; }
+#sense { margin-top: 3px; display: flex; align-items: center; gap: 6px; font-size: 13px; }
+#sense i { flex: 1; height: 8px; border: 2px solid var(--ink); border-radius: 6px; background: #fff; overflow: hidden; position: relative; }
+#sense i::after { content: ""; position: absolute; inset: 0; width: var(--v, 100%); background: #b7a2ff; }
+#crewStrip { display: flex; gap: 5px; pointer-events: auto; }
+#crewStrip button { position: relative; width: 52px; height: 56px; padding: 0; border: 2.5px solid var(--ink); border-radius: 10px 8px 11px 7px; background: var(--paper); box-shadow: 2px 3px 0 var(--ink); cursor: pointer; }
+#crewStrip button canvas { width: 100%; height: 100%; display: block; border-radius: 8px; }
+#crewStrip button.cur { background: var(--yellow); transform: translateY(-3px); }
+#crewStrip button.other { background: #d6caff; }
+#crewStrip button kbd { position: absolute; left: 2px; top: 1px; font: inherit; font-size: 12px; }
+#crewStrip button em { position: absolute; right: -6px; top: -8px; font-style: normal; font-size: 13px; background: var(--red); color: #fff; border: 2px solid var(--ink); border-radius: 8px; padding: 0 4px; }
+.mid { justify-self: center; display: grid; justify-items: center; gap: 6px; }
+#timerTag { padding: 3px 14px 5px; font-size: 28px; transform: rotate(1deg); display: flex; gap: 8px; align-items: center; }
+#timerTag small { font-size: 13px; max-width: 76px; line-height: 1.05; }
+#timerTag.hurry { background: #ffd9cf; animation: shake .5s infinite; }
+@keyframes shake { 50% { transform: rotate(-1.5deg) scale(1.04); } }
+#alertTag { white-space: nowrap; padding: 2px 16px 4px; font-size: 24px; color: #fff; background: var(--red); transform: rotate(-1.5deg); }
+#alertTag.search { background: var(--yellow); color: var(--ink); }
+#alertTag.pulse { animation: pulse .5s infinite alternate; }
+@keyframes pulse { to { transform: rotate(-1.5deg) scale(1.08); } }
+@keyframes pulse2 { to { scale: 1.08; } }
+#eventTag { white-space: nowrap; padding: 2px 12px 4px; font-size: 17px; background: #d6caff; transform: rotate(1deg); }
+.right { justify-self: end; display: grid; justify-items: end; gap: 8px; }
+.btns { display: flex; gap: 8px; }
+#goals { padding: 5px 12px 8px; transform: rotate(1.2deg); display: grid; gap: 3px; min-width: 170px; }
+#goals small { font-size: 13px; letter-spacing: .06em; }
+#goalList { display: grid; gap: 1px; font-size: 16px; line-height: 1.15; }
+#goalList .done { text-decoration: line-through; color: #3f8a2c; }
+#peaRow { display: flex; gap: 3px; align-items: center; font-size: 13px; }
+.pea { width: 12px; height: 12px; border-radius: 50%; background: #8cc34a; border: 2px solid var(--ink); }
+.pea.used { background: transparent; border-style: dashed; }
+.toy { width: 14px; height: 12px; border-radius: 6px 6px 3px 3px; background: #c9d0d8; border: 2px solid var(--ink); }
+.toy.used { background: transparent; border-style: dashed; }
+.round { pointer-events: auto; width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--ink); background: var(--paper); box-shadow: 2px 3px 0 var(--ink); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.round svg { width: 22px; height: 22px; }
+#soundBtn.off .wave { display: none; }
+#soundBtn:not(.off) .mute { display: none; }
+#radio { position: absolute; left: 50%; top: calc(max(10px, env(safe-area-inset-top)) + 100px); transform: translateX(-50%) rotate(-.6deg); width: min(540px, calc(100% - 24px)); display: grid; grid-template-columns: 72px 1fr; gap: 10px; align-items: center; padding: 7px 14px 7px 7px; transition: opacity .2s, transform .2s; }
+#radio canvas { width: 72px; height: 72px; border: 2.5px solid var(--ink); border-radius: 10px 8px 12px 7px; }
+#radio b { display: block; font-weight: 400; font-size: 14px; color: #4a55c8; }
+#radioText { font-size: 18px; line-height: 1.2; }
+#radio.off { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+#coopTag { position: absolute; left: max(10px, env(safe-area-inset-left)); bottom: max(10px, env(safe-area-inset-bottom)); padding: 2px 10px 4px; font-size: 15px; }
+
+/* touch */
+.tbtn { position: fixed; pointer-events: auto; touch-action: none; border-radius: 50%; padding: 0; display: grid; place-items: center; text-align: center; line-height: 1; }
+#soak { right: max(14px, env(safe-area-inset-right)); bottom: max(14px, env(safe-area-inset-bottom)); width: 96px; height: 96px; font-size: 17px; }
+#peaBtn { right: max(120px, calc(env(safe-area-inset-right) + 120px)); bottom: max(18px, env(safe-area-inset-bottom)); width: 68px; height: 68px; font-size: 15px; background: #c9f08f; }
+#spBtn { right: max(116px, calc(env(safe-area-inset-right) + 116px)); bottom: max(98px, calc(env(safe-area-inset-bottom) + 98px)); width: 68px; height: 68px; font-size: 12px; background: #ffb19a; }
+#senseBtn { right: max(20px, env(safe-area-inset-right)); bottom: max(122px, calc(env(safe-area-inset-bottom) + 122px)); width: 68px; height: 68px; font-size: 15px; background: #d6caff; }
+#boxBtn { right: max(196px, calc(env(safe-area-inset-right) + 196px)); bottom: max(62px, calc(env(safe-area-inset-bottom) + 62px)); width: 66px; height: 66px; font-size: 12px; background: #fde9a8; }
+#joy { position: fixed; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; border: 3px dashed rgba(255, 248, 230, .8); background: rgba(20, 16, 18, .18); pointer-events: none; }
+#joy.rest { opacity: .45; animation: joyHint 1.6s ease-in-out infinite; }
+@keyframes joyHint { 50% { transform: scale(1.06); } }
+.tbtn.ready { animation: ready .7s ease-in-out infinite alternate; }
+@keyframes ready { to { box-shadow: 3px 4px 0 var(--ink), 0 0 0 6px rgba(255, 238, 120, .75); } }
+.tbtn.on { background: #a990ff; box-shadow: 1px 1px 0 var(--ink), 0 0 0 5px rgba(214, 202, 255, .8); transform: translateY(2px); }
+.tbtn.dim { opacity: .55; }
+#peaBtn::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 2px dashed rgba(255, 251, 230, .55); pointer-events: none; }
+#eventTag.warn { background: #ffd04a; animation: pulse2 .35s infinite alternate; }
+#eventTag.disco { background: linear-gradient(90deg, #ffb3d9, #b3e6ff, #fff3a3, #c9ffb8, #dccbff); }
+#eventTag.lamp { background: #fff2a8; }
+#coach { position: fixed; inset: 0; z-index: 40; background: rgba(24, 16, 14, .58); pointer-events: auto; touch-action: none; }
+#coach .card2 { position: fixed; width: min(440px, calc(100vw - 24px)); box-sizing: border-box; padding: 10px 14px 12px; display: grid; gap: 5px; transform: rotate(-.6deg); }
+#coach .card2 > b { font-weight: 400; font-size: 22px; color: #4a55c8; text-align: center; }
+#coach .row2 { display: grid; grid-template-columns: 92px 1fr; gap: 8px; align-items: center; font-size: 16px; line-height: 1.1; }
+#coach .key2 { border: 2.5px solid var(--ink); border-radius: 12px 9px 13px 8px; padding: 2px 4px 3px; text-align: center; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#coach .go { justify-self: center; margin-top: 4px; padding: 5px 16px 7px; font-size: 20px; background: var(--yellow); border: 3px solid var(--ink); border-radius: 14px 10px 16px 9px; box-shadow: 2px 3px 0 var(--ink); animation: pulse2 .6s infinite alternate; }
+@media (max-height: 420px) { #coach .card2 { gap: 2px; padding: 6px 12px 8px; width: min(470px, calc(100vw - 24px)); } #coach .card2 > b { font-size: 18px; } #coach .row2 { font-size: 14px; } #coach .key2 { font-size: 12px; padding: 1px 4px 2px; } #coach .go { font-size: 17px; padding: 3px 12px 5px; } }
+#coach .ring { position: fixed; border: 3px dashed #fffbe6; border-radius: 16px; pointer-events: none; }
+#coach .demo { position: fixed; width: 110px; height: 110px; margin: -55px 0 0 -55px; border-radius: 50%; border: 3px dashed #fffbe6; background: rgba(255, 251, 230, .12); }
+#coach .demo i { position: absolute; left: 50%; top: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--paper); border: 3px solid var(--ink); animation: stick 2.4s ease-in-out infinite; }
+@keyframes stick { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(34px, -10px); } 50% { transform: translate(0, -34px); } 75% { transform: translate(-30px, 8px); } }
+#knob { position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; border-radius: 50%; background: var(--paper); border: 3px solid var(--ink); transform: translate(-50%, -50%); }
+
+/* result */
+#result .card { width: min(520px, 100%); text-align: center; justify-items: center; }
+#resLabel { font-size: 16px; letter-spacing: .1em; color: #4a55c8; margin: 0; }
+#resTitle { margin: 0; font-weight: 400; font-size: clamp(38px, 8vw, 58px); line-height: .95; color: var(--red); text-shadow: 3px 3px 0 var(--ink); -webkit-text-stroke: 1.5px var(--ink); }
+#resStars { font-size: 46px; letter-spacing: 6px; color: #f5c542; -webkit-text-stroke: 2px var(--ink); line-height: 1; }
+#resNote { font-size: 19px; }
+#resStats { display: grid; grid-template-columns: 1fr auto; gap: 2px 18px; margin: 4px 0 0; font-size: 18px; text-align: left; width: min(320px, 100%); }
+#resStats dd { margin: 0; text-align: right; }
+#pause .card, #lobby .card { width: min(420px, 100%); text-align: center; justify-items: center; }
+#lobbyList { display: grid; gap: 4px; font-size: 18px; width: 100%; }
+#lobbyList div { display: flex; justify-content: space-between; gap: 10px; border-bottom: 2px dashed #d8c08f; padding: 2px 4px; }
+#toast { position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%) rotate(-1deg); padding: 10px 18px 12px; font-size: 22px; pointer-events: none; }
+
+@media (max-height: 480px) { .card { padding: 12px 18px 14px; gap: 8px; } .card p, .keys { font-size: 15px; } #camo { padding: 2px 10px 5px; min-width: 0; } #camo small { font-size: 12px; } #camoVal { font-size: 28px; } #camoZone { font-size: 13px; } #timerTag { font-size: 20px; padding: 2px 10px 3px; } #alertTag { font-size: 17px; padding: 1px 10px 3px; } .round { width: 38px; height: 38px; } #goals { min-width: 0; padding: 3px 8px 5px; } #goalList { font-size: 14px; } #goals small { display: none; } #crewStrip button { width: 40px; height: 44px; } #timerTag small { display: none; }
+  #soak { width: 82px; height: 82px; font-size: 15px; } #peaBtn, #spBtn, #senseBtn, #boxBtn { width: 58px; height: 58px; } #peaBtn { right: max(104px, calc(env(safe-area-inset-right) + 104px)); } #spBtn { right: max(100px, calc(env(safe-area-inset-right) + 100px)); bottom: max(82px, calc(env(safe-area-inset-bottom) + 82px)); } #senseBtn { bottom: max(104px, calc(env(safe-area-inset-bottom) + 104px)); } #boxBtn { right: max(170px, calc(env(safe-area-inset-right) + 170px)); bottom: max(50px, calc(env(safe-area-inset-bottom) + 50px)); }
+  #planTalk { bottom: max(64px, calc(env(safe-area-inset-bottom) + 64px)); grid-template-columns: 54px 1fr; } #planTalk canvas { width: 54px; height: 54px; } #planText { font-size: 16px; min-height: 0; } }
+@media (max-height: 500px) and (min-aspect-ratio: 11/10) {
+  #result .card { width: min(780px, 100%); grid-template-columns: 1fr 1fr; column-gap: 22px; align-items: start; }
+  #result .card > #resLabel, #result .card > #resTitle, #result .card > #resStars, #result .card > #resNote { grid-column: 1; }
+  #result .card > #resStats { grid-column: 2; grid-row: 1 / span 4; font-size: 15px; width: 100%; align-self: center; }
+  #result .card > .row { grid-column: 1 / -1; }
+  #resTitle { font-size: 34px; } #resStars { font-size: 34px; } #resNote { font-size: 16px; }
+  #planTalk { left: auto; right: max(10px, env(safe-area-inset-right)); bottom: max(62px, calc(env(safe-area-inset-bottom) + 62px)); transform: rotate(-.5deg); width: 34.5%; grid-template-columns: 44px 1fr; gap: 8px; padding: 6px 10px 6px 6px; }
+  #planTalk canvas { width: 44px; height: 44px; } #planText { font-size: 15px; }
+  #plan .sceneBar { left: auto; right: max(8px, env(safe-area-inset-right)); bottom: max(10px, env(safe-area-inset-bottom)); transform: none; width: 36%; gap: 6px; flex-wrap: nowrap; justify-content: flex-end; }
+  #plan .sceneBar .btn { font-size: 16px; padding: 4px 9px 6px; white-space: nowrap; }
+  #roleCards { grid-template-columns: 1fr 1fr; width: 36%; right: max(8px, env(safe-area-inset-right)); top: max(8px, env(safe-area-inset-top)); } #roleCards button { font-size: 13px; padding: 2px 6px 2px 3px; } #roleCards button canvas { width: 30px; height: 30px; }
+}
+@media (max-width: 600px) and (min-height: 600px) {
+  #plan .sceneBar { flex-wrap: nowrap; gap: 6px; } #plan .sceneBar .btn { font-size: 17px; padding: 5px 10px 7px; white-space: nowrap; }
+  #planTalk { bottom: max(66px, calc(env(safe-area-inset-bottom) + 66px)); grid-template-columns: 56px 1fr; } #planTalk canvas { width: 56px; height: 56px; } #planText { font-size: 17px; }
+}
+@media (pointer: coarse) { #radio { top: calc(max(10px, env(safe-area-inset-top)) + 150px); width: min(460px, calc(100% - 24px)); grid-template-columns: 54px 1fr; } #radio canvas { width: 54px; height: 54px; } #radioText { font-size: 16px; } }
+@media (pointer: coarse) and (max-width: 560px) { #radio { top: calc(max(10px, env(safe-area-inset-top)) + 236px); grid-template-columns: 44px 1fr; gap: 8px; padding: 5px 10px 5px 5px; } #radio canvas { width: 44px; height: 44px; } #radioText { font-size: 15px; } #radio b { font-size: 12px; } }
+@media (max-width: 560px) { #alertTag { position: absolute; top: 158px; left: 50%; transform: translateX(-50%) rotate(-1.5deg); } #alertTag.pulse { animation: pulse2 .5s infinite alternate; } #eventTag { position: absolute; top: 194px; left: 50%; transform: translateX(-50%) rotate(1deg); font-size: 15px; padding: 1px 10px 3px; } }
+@media (pointer: coarse) and (max-height: 480px) { #radio { top: auto; bottom: max(8px, env(safe-area-inset-bottom)); width: min(400px, calc(100% - 520px)); min-width: 290px; grid-template-columns: 44px 1fr; padding: 4px 10px 4px 4px; } #radio canvas { width: 44px; height: 44px; } #radioText { font-size: 14px; } #radio.off { transform: translateX(-50%) translateY(12px); } }
+@media (max-width: 560px) { #hud .top { gap: 6px; } #alertTag { font-size: 16px; padding: 2px 8px 3px; } #timerTag { font-size: 22px; padding: 2px 10px 4px; } #timerTag small { display: none; } #camo { padding: 3px 9px 6px; min-width: 0; } #camo small { font-size: 12px; } #camoVal { font-size: 30px; } #camoZone { font-size: 13px; } #goals { position: absolute; right: 0; top: 58px; width: min(50vw, 230px); min-width: 0; box-sizing: border-box; } #goalList { font-size: 14px; } #goals small { display: none; } #crewStrip button { width: 40px; height: 44px; } #crewRow small { display: none; } }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="loading">Собираем банду…</div>
+
+<div class="overlay" id="title" hidden>
+  <div class="card tag">
+    <h1 class="logo">Мышиное <span>дело</span></h1>
+    <p class="sub">пять комнат, одна банда, пять кило сыра</p>
+    <p>Хозяйка ушла в гости на вечер. В кладовке лежит «Голландский», пять килограммов. Бабуля собрала банду: четыре мыши, у каждой своё ремесло. Впитывай узоры ковров, отвлекай кота горохом, вскрывай шкатулки и держи крыс подальше от добычи.</p>
+    <div id="crewRow"></div>
+    <details><summary>Управление</summary>
+      <dl class="keys" id="keysList">
+        <dt><kbd>WASD</kbd></dt><dd>красться</dd>
+        <dt><kbd>Пробел</kbd></dt><dd>впитать узор под собой</dd>
+        <dt><kbd>Q</kbd> / клик</dt><dd>кинуть горошину</dd>
+        <dt><kbd>R</kbd></dt><dd>ремесло мыши (держать у замка, техники, груза)</dd>
+        <dt><kbd>E</kbd></dt><dd>коробок, машинка, освободить друга из банки</dd>
+        <dt><kbd>Tab</kbd> / <kbd>1–4</kbd></dt><dd>переключиться на другую мышь</dd>
+        <dt><kbd>Shift</kbd></dt><dd>держать: мышиное чутьё</dd>
+      </dl>
+    </details>
+    <div class="row"><button class="btn" id="playSolo" type="button">Играть</button><button class="btn ghost" id="playCoop" type="button" hidden>С друзьями</button></div>
+  </div>
+</div>
+
+<div class="scene" id="map" hidden>
+  <canvas id="mapCanvas"></canvas>
+  <div id="mapRooms"></div>
+  <div class="sceneTop"><button class="btn ghost" id="mapBack" type="button">← Меню</button></div>
+  <div class="sceneBar"><span class="tag" id="mapHint" style="padding:4px 14px 6px;font-size:19px">Выбери дело</span></div>
+</div>
+
+<div class="scene" id="plan" hidden>
+  <canvas id="planCanvas"></canvas>
+  <div class="tag" id="planTalk"><canvas id="planPic" width="168" height="168"></canvas><div><b id="planWho">Бабуля</b><div id="planText"></div></div></div>
+  <div id="roleCards" hidden></div>
+  <div class="sceneBar"><button class="btn ghost" id="planBack" type="button">← Карта</button><button class="btn ghost" id="planNext" type="button">Дальше</button><button class="btn" id="planGo" type="button">Начать дело</button></div>
+</div>
+
+<div class="overlay" id="result" hidden>
+  <div class="card tag">
+    <p id="resLabel">ДЕЛО №1 ЗАКРЫТО</p>
+    <h2 id="resTitle">Чистая работа</h2>
+    <div id="resStars">★★★</div>
+    <p id="resNote"></p>
+    <dl id="resStats"></dl>
+    <div class="row"><button class="btn" id="resNext" type="button">Следующее дело</button><button class="btn ghost" id="resAgain" type="button">Ещё раз</button><button class="btn ghost" id="resMap" type="button">Карта</button></div>
+  </div>
+</div>
+
+<div class="overlay" id="pause" hidden>
+  <div class="card tag"><h2 class="logo" style="font-size:44px">Пауза</h2><div class="row"><button class="btn" id="resume" type="button">Дальше</button><button class="btn ghost" id="quit" type="button">Бросить дело</button></div><button class="btn ghost" id="howBtn" type="button" hidden>Как играть</button></div>
+</div>
+
+<div class="overlay" id="lobby" hidden>
+  <div class="card tag">
+    <h2 class="logo" style="font-size:40px">Банда</h2>
+    <p id="lobbyStatus">Подключаемся…</p>
+    <div id="lobbyList"></div>
+    <div class="row"><button class="btn" id="lobbyInvite" type="button">Позвать друзей</button><button class="btn ghost" id="lobbyLeave" type="button">Выйти</button></div>
+  </div>
+</div>
+
+<div id="hud" hidden>
+  <div class="top">
+    <div class="leftCol">
+      <div class="tag" id="camo"><small>КАМУФЛЯЖ</small><span id="camoVal">0%</span><span id="camoZone">белая мышь</span><div id="sense"><span>чутьё</span><i id="senseBar"></i></div></div>
+      <div id="crewStrip"></div>
+    </div>
+    <div class="mid">
+      <div class="tag" id="timerTag"><small>хозяйка вернётся через</small><span id="timer">3:00</span></div>
+      <div class="tag" id="alertTag" hidden>ТРЕВОГА 7.0</div>
+      <div class="tag" id="eventTag" hidden></div>
+    </div>
+    <div class="right">
+      <div class="btns">
+        <button class="round" id="soundBtn" type="button" aria-label="Звук"><svg viewBox="0 0 24 24" fill="none" stroke="#141012" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="#fde262"/><path class="wave" d="M16 9c1.5 1.5 1.5 4.5 0 6M18.5 6.5c3 3 3 8 0 11"/><path class="mute" d="M16 9l5 6M21 9l-5 6"/></svg></button>
+        <button class="round" id="pauseBtn" type="button" aria-label="Пауза"><svg viewBox="0 0 24 24" fill="#141012"><rect x="6" y="5" width="4" height="14" rx="1.5"/><rect x="14" y="5" width="4" height="14" rx="1.5"/></svg></button>
+      </div>
+      <div class="tag" id="goals"><small>ДЕЛО</small><div id="goalList"></div><div id="peaRow"></div></div>
+    </div>
+  </div>
+  <div class="tag off" id="radio"><canvas id="radioPic" width="144" height="144"></canvas><div><b id="radioName">Бабуля</b><span id="radioText"></span></div></div>
+  <div class="tag" id="coopTag" hidden></div>
+</div>
+<div class="tag" id="toast" hidden></div>
+<button class="btn tbtn" id="soak" type="button" hidden>ВПИТАТЬ</button>
+<button class="btn tbtn" id="peaBtn" type="button" hidden>ГОРОХ</button>
+<button class="btn tbtn" id="spBtn" type="button" hidden>ОТМЫЧКА</button>
+<button class="btn tbtn" id="senseBtn" type="button" hidden>ЧУТЬЁ</button>
+<button class="btn tbtn" id="boxBtn" type="button" hidden>КОРОБОК</button>
+<div id="joy" hidden><div id="knob"></div></div>
+<div id="coach" hidden></div>
+
+<script src="js/ink.js"></script>
+<script src="js/chars.js"></script>
+<script src="js/cast.js"></script>
+<script src="js/roomkit.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/sim.js"></script>
+<script src="js/room-living.js"></script>
+<script src="js/room-kitchen.js"></script>
+<script src="js/room-nursery.js"></script>
+<script src="js/room-bath.js"></script>
+<script src="js/room-pantry.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/meta.js"></script>
+<script src="js/net.js"></script>
+<script src="js/view.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

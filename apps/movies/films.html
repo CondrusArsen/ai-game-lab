@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movies | Mini Movie Journal</title>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Mini Movie Journal</a>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="series.html">Series</a></li>
+      </ul>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch color theme">Theme</button>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Movie shelf</p>
+      <h1>Favorite movies</h1>
+      <p>Browse personal picks, compare ratings, and open each card for more context.</p>
+    </section>
+
+    <section class="toolbar" aria-label="Movie filters">
+      <label class="field">
+        <span>Search</span>
+        <input id="search-input" type="search" placeholder="Search by title..." autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Genre</span>
+        <select id="genre-filter">
+          <option value="all">All genres</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>Sort by</span>
+        <select id="sort-select">
+          <option value="rating-desc">My rating</option>
+          <option value="kp-desc">External rating</option>
+          <option value="year-desc">Newest first</option>
+          <option value="title-asc">Title A-Z</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="list-meta" aria-live="polite">
+      <p id="result-count"></p>
+    </section>
+
+    <section id="movie-list" class="movie-list" aria-label="Movie cards"></section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Arseniy Atrokhov. Built with HTML, CSS, and Vanilla JavaScript.</p>
+  </footer>
+
+  <script src="data/movies.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Game Lab · Arseni Atrokhov</title>
+<meta name="description" content="Playable browser games, game teardowns and projects by Arseni Atrokhov, AI-assisted game developer.">
+<meta property="og:title" content="AI Game Lab · Arseni Atrokhov">
+<meta property="og:image" content="https://condrusarsen.github.io/ai-game-lab/arcade/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #05090b; --card: #0b1417; --line: #1d3a33; --text: #e8fff5; --muted: #95b3a8; --green: #35ff9a; --magenta: #ff3dcf; --amber: #ffb92e; --cyan: #2de2ff; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --bg: #f4f8f6; --card: #fff; --line: #d3e2dc; --text: #0d1a16; --muted: #4f6a60; --green: #0a9c5a; --magenta: #c4189a; --amber: #a86a00; --cyan: #0a87a6; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, "Segoe UI", system-ui, sans-serif; line-height: 1.5; }
+  a { color: var(--green); }
+  header { padding: 40px 16px 24px; max-width: 1180px; margin: 0 auto; }
+  h1 { font-family: Orbitron, sans-serif; font-size: clamp(28px, 6vw, 46px); margin: 0; letter-spacing: .03em; }
+  h1 span { color: var(--magenta); }
+  .who { color: var(--cyan); font-weight: 600; margin: 6px 0 0; }
+  .lead { max-width: 760px; color: var(--muted); }
+  .stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
+  .stats div { border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 10px 14px; }
+  .stats b { font-family: Orbitron, sans-serif; color: var(--green); margin-right: 6px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  .cta a { padding: 11px 18px; border-radius: 11px; border: 1px solid var(--line); text-decoration: none; color: var(--text); font-weight: 600; }
+  .cta a.main { background: var(--green); color: #032014; border-color: var(--green); }
+  .bar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar-in { max-width: 1180px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .bar input { flex: 1 1 220px; height: 38px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); padding: 0 12px; font: inherit; }
+  .chip { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 999px; padding: 6px 12px; cursor: pointer; font: inherit; font-size: 14px; }
+  .chip[aria-pressed="true"] { border-color: var(--green); color: var(--green); }
+  main { max-width: 1180px; margin: 0 auto; padding: 8px 16px 60px; }
+  h2 { font-family: Orbitron, sans-serif; font-size: 18px; letter-spacing: .06em; margin: 34px 0 12px; }
+  h2 small { font-family: Inter, sans-serif; color: var(--muted); font-weight: 500; letter-spacing: 0; margin-left: 8px; font-size: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 14px; }
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+  .item img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; background: #000; }
+  .item .b { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+  .item h3 { margin: 0; font-size: 16px; }
+  .item p { margin: 0; font-size: 13.5px; color: var(--muted); }
+  .tags { font-size: 12px; font-family: "JetBrains Mono", monospace; color: var(--amber); }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 6px; font-size: 14px; }
+  .links a { text-decoration: none; border: 1px solid var(--line); border-radius: 8px; padding: 5px 10px; color: var(--text); }
+  .links a.main { background: var(--green); border-color: var(--green); color: #032014; font-weight: 600; }
+  .td { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
+  .td a { display: flex; gap: 10px; text-decoration: none; color: var(--text); background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+  .td img { width: 64px; height: 64px; object-fit: cover; border-radius: 8px; flex: none; background: #000; }
+  .td b { display: block; font-size: 14.5px; } .td span { font-size: 12.5px; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .td em { font-style: normal; font-size: 11.5px; color: var(--amber); font-family: "JetBrains Mono", monospace; }
+  footer { max-width: 1180px; margin: 0 auto; padding: 20px 16px 50px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI GAME <span>LAB</span></h1>
+  <p class="who">Arseni Atrokhov · AI-assisted game developer · Roblox (Luau) · HTML5</p>
+  <p class="lead">I take a game from teardown to a playable, tested build, directing AI coding agents and owning the design and the final quality. Everything below runs in the browser. Most games work on a phone. The Vault holds the rest of my prototypes: smaller, rougher, all playable.</p>
+  <div class="stats" id="stats"></div>
+  <div class="cta"><a class="main" href="../">Walk the 3D market ▶</a><a href="https://www.linkedin.com/in/arseni-atrokhov/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/CondrusArsen" target="_blank" rel="noopener">GitHub ↗</a></div>
+</header>
+<div class="bar"><div class="bar-in" id="bar"><input id="q" type="search" placeholder="Search games, teardowns, projects…"></div></div>
+<main id="main"></main>
+<footer>© 2026 Arseni Atrokhov. All rights reserved. The games are shown for portfolio review; the code is not open-source. Reference games belong to their owners; no art, audio or text from them is used.</footer>
+<script type="module">
+import { SECTIONS, GAMES, PROJECTS, TEARDOWNS, STATS, VAULT_SECTIONS, VAULT } from '../arcade/data.js';
+const REM = window.ARCADE_REMOTE, LOC = window.ARCADE_LOCAL;
+const R = p => /^https?:/.test(p) ? p : REM && LOC && !LOC.some(x => p.startsWith(x)) ? REM + p : '../' + p;
+const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+document.getElementById('stats').innerHTML = STATS.map(([n, l]) => `<div><b>${n}</b>${l}</div>`).join('');
+const groups = [
+  ...SECTIONS.map(s => ({ key: s, title: s, items: GAMES.filter(g => g.section === s), type: 'game' })),
+  ...VAULT_SECTIONS.map(s => ({ key: s, title: s, items: VAULT.filter(g => g.section === s), type: 'vault' })),
+  ...[...new Set(PROJECTS.map(p => p.zone))].map(z => ({ key: z, title: z === 'UI/UX' ? 'UI/UX · client work' : z, items: PROJECTS.filter(p => p.zone === z), type: 'project' })),
+  { key: 'Teardowns', title: 'Teardowns', items: TEARDOWNS, type: 'td' },
+];
+const filters = ['All', 'Games', ...SECTIONS, 'Vault', 'Teardowns', 'Roblox', 'UI/UX', 'Tools'];
+const bar = document.getElementById('bar');
+let active = 'All';
+filters.forEach(f => { const b = document.createElement('button'); b.className = 'chip'; b.textContent = f; b.setAttribute('aria-pressed', f === 'All'); b.onclick = () => { active = f; bar.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c === b)); apply(); }; bar.appendChild(b); });
+function card(g) {
+  return `<article class="item" data-s="${esc((g.title + ' ' + g.blurb + ' ' + (g.tags || []).join(' ')).toLowerCase())}">
+    <img loading="lazy" src="${R(g.cover)}" alt="${esc(g.title)}"><div class="b"><h3>${esc(g.title)}</h3><div class="tags">${esc([g.platforms, ...g.tags].join(' · '))}</div><p>${esc(g.blurb)}</p>
+    <div class="links"><a class="main" href="${R(g.play)}">▶ Play</a><a href="../?go=${g.id}">See in 3D</a>${g.teardown ? `<a href="${R(g.teardown)}">Teardown</a>` : ''}${g.earlier ? `<a href="${R(g.earlier.url)}">Earlier build</a>` : ''}</div></div></article>`;
+}
+function proj(p) {
+  return `<article class="item" data-s="${esc((p.title + ' ' + p.blurb).toLowerCase())}">${p.img ? `<img loading="lazy" src="../arcade/proj/${p.img}.jpg" alt="${esc(p.title)}">` : ''}<div class="b"><h3>${esc(p.title)}</h3><p>${esc(p.blurb)}</p><p>${esc(p.how)}</p>
+    <div class="links">${p.links.map(([l, u], i) => `<a class="${i ? '' : 'main'}" href="${u}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join('')}</div></div></article>`;
+}
+function td(t) {
+  return `<a href="${R(t.url)}" data-s="${esc((t.title + ' ' + t.sub + ' ' + t.cat).toLowerCase())}">${t.thumb ? `<img loading="lazy" src="${R(t.thumb)}" alt="">` : ''}<div><em>${esc(t.cat)}</em><b>${esc(t.title)}</b><span>${esc(t.sub)}</span></div></a>`;
+}
+document.getElementById('main').innerHTML = groups.map(g => `<section data-key="${esc(g.key)}" data-type="${g.type}"><h2>${esc(g.title.toUpperCase())}<small>${g.items.length}</small></h2>
+  <div class="${g.type === 'td' ? 'td' : 'grid'}">${g.items.map(g.type === 'game' || g.type === 'vault' ? card : g.type === 'project' ? proj : td).join('')}</div></section>`).join('');
+const q = document.getElementById('q');
+function apply() {
+  const s = q.value.trim().toLowerCase();
+  document.querySelectorAll('section').forEach(sec => {
+    const typeOk = active === 'All' || sec.dataset.key === active || (active === 'Games' && sec.dataset.type === 'game') || (active === 'Vault' && sec.dataset.type === 'vault');
+    let n = 0; sec.querySelectorAll('[data-s]').forEach(el => { const ok = typeOk && (!s || el.dataset.s.includes(s)); el.classList.toggle('hidden', !ok); n += ok; });
+    sec.classList.toggle('hidden', !n);
+  });
+}
+q.addEventListener('input', apply);
+</script>
+</body>
+</html>

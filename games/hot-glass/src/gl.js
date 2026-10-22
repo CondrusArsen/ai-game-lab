@@ -1,12 +1,5 @@
-// WebGL2 renderer: the painted studio as a texture, the glory-hole fire, and the glass piece itself,
-// ray-cast per pixel as a surface of revolution from a 1D profile texture (outer r, inner r, temperature, droop).
-
-import { N } from './glass.js';
-
-const VS = `#version 300 es
-in vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }`;
-
-const COMMON = `#version 300 es
+import{N as n}from"./glass.js";const v=`#version 300 es
+in vec2 aPos; void main(){ gl_Position = vec4(aPos, 0.0, 1.0); }`,x=`#version 300 es
 precision highp float;
 precision highp sampler2D;
 uniform vec2 uRes;      // drawing buffer size (px)
@@ -18,10 +11,7 @@ vec3 bgAt(vec2 css){ return texture(uBg, clamp(css * uPx / uRes, 0.001, 0.999)).
 float hash(vec2 p){ vec3 q = fract(vec3(p.xyx) * 0.1031); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }  // sin-free: stable on mobile GPUs
 float noise(vec2 p){ vec2 i = floor(p), f = fract(p); f = f*f*(3.0-2.0*f);
   return mix(mix(hash(i), hash(i+vec2(1,0)), f.x), mix(hash(i+vec2(0,1)), hash(i+vec2(1,1)), f.x), f.y); }
-`;
-
-// Background: studio + living fire in the glory hole + warm light thrown by hot glass.
-const FS_BG = COMMON + `
+`,T=x+`
 uniform vec4 uFurnace;   // css x, y, radius, roar 0..1
 uniform vec4 uHeat;      // css x, y of piece centre, radius, heat 0..1
 out vec4 o;
@@ -50,10 +40,7 @@ void main(){
   float hd = length(p - uHeat.xy) / (uHeat.z * 2.6);
   c += vec3(1.0, 0.5, 0.15) * uHeat.w * 0.35 * exp(-hd * hd * 2.0);
   o = vec4(c, 1.0);
-}`;
-
-// Glass: per-pixel surface of revolution
-const FS_GLASS = COMMON + `
+}`,R=x+`
 uniform sampler2D uProf;
 uniform vec4 uAxis;      // css x of neck, css y of axis, css length, angle (turning)
 uniform vec3 uTint;      // transmission colour of the cold glass
@@ -70,7 +57,7 @@ vec3 glow(float t){       // incandescence: dull cherry red -> orange -> orange-
   c = mix(c, yellow, smoothstep(0.88, 1.08, t));
   return c * pow(smoothstep(0.4, 1.0, t), 1.3) * 2.4;
 }
-vec4 prof(float z){ return texture(uProf, vec2(clamp(z, 0.0, 1.0) * (float(${N}) - 1.0) / float(${N}) + 0.5 / float(${N}), 0.5)); }
+vec4 prof(float z){ return texture(uProf, vec2(clamp(z, 0.0, 1.0) * (float(${n}) - 1.0) / float(${n}) + 0.5 / float(${n}), 0.5)); }
 
 void main(){
   vec2 p = cssPos();
@@ -140,131 +127,4 @@ void main(){
   }
   col = col / (1.0 + col * 0.38);             // soft shoulder keeps the molten core from clipping to white
   o = vec4(col, 1.0);
-}`;
-
-export class GlassRenderer {
-  constructor(canvas) {
-    this.cv = canvas;
-    const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, premultipliedAlpha: false, powerPreference: 'high-performance' });
-    if (!gl) throw new Error('WebGL2 недоступен');
-    this.gl = gl;
-    this.bgProg = this.program(FS_BG);
-    this.glassProg = this.program(FS_GLASS);
-    const buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
-    this.vao = gl.createVertexArray();
-    gl.bindVertexArray(this.vao);
-    gl.enableVertexAttribArray(0);
-    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-    this.bgTex = this.texture(gl.LINEAR);
-    this.profTex = this.texture(gl.LINEAR);
-    gl.bindTexture(gl.TEXTURE_2D, this.profTex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, N, 1, 0, gl.RGBA, gl.FLOAT, new Float32Array(N * 4));
-    this.prof = new Float32Array(N * 4);
-    this.quality = 1;
-  }
-
-  program(fs) {
-    const gl = this.gl;
-    const sh = (type, src) => {
-      const s = gl.createShader(type);
-      gl.shaderSource(s, src); gl.compileShader(s);
-      if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
-      return s;
-    };
-    const p = gl.createProgram();
-    gl.attachShader(p, sh(gl.VERTEX_SHADER, VS));
-    gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
-    gl.bindAttribLocation(p, 0, 'aPos');
-    gl.linkProgram(p);
-    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(p));
-    const u = {};
-    const n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
-    for (let i = 0; i < n; i++) { const info = gl.getActiveUniform(p, i); u[info.name] = gl.getUniformLocation(p, info.name); }
-    return { p, u };
-  }
-
-  texture(filter) {
-    const gl = this.gl;
-    const t = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, t);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filter);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    return t;
-  }
-
-  resize(cssW, cssH, dpr) {
-    this.px = dpr * this.quality;
-    this.cv.width = Math.max(2, Math.round(cssW * this.px));
-    this.cv.height = Math.max(2, Math.round(cssH * this.px));
-    this.cssW = cssW; this.cssH = cssH;
-  }
-
-  setBackground(canvas) {
-    const gl = this.gl;
-    gl.bindTexture(gl.TEXTURE_2D, this.bgTex);
-    // canvas rows top→bottom map to v 0→1, which is how bgAt() samples (css y grows downward)
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
-  }
-
-  // s: { gather, x0, axisY, scale, furnace:{x,y,r,roar}, sun:[r,g,b], tint:[r,g,b], crack, time }
-  draw(s) {
-    const gl = this.gl;
-    gl.viewport(0, 0, this.cv.width, this.cv.height);
-    gl.bindVertexArray(this.vao);
-    gl.disable(gl.SCISSOR_TEST);
-    // background
-    let P = this.bgProg;
-    gl.useProgram(P.p);
-    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.bgTex);
-    gl.uniform1i(P.u.uBg, 0);
-    gl.uniform2f(P.u.uRes, this.cv.width, this.cv.height);
-    gl.uniform1f(P.u.uPx, this.px);
-    gl.uniform1f(P.u.uTime, s.time % 600);   // wrapped: large values lose float precision in the noise
-    gl.uniform4f(P.u.uFurnace, s.furnace.x, s.furnace.y, s.furnace.r, s.furnace.roar);
-    const g = s.gather;
-    let heat = 0, maxR = 0;
-    if (g) { for (let i = 0; i < N; i++) { heat = Math.max(heat, g.T[i]); maxR = Math.max(maxR, g.r[i]); } }
-    const k = s.scale;
-    gl.uniform4f(P.u.uHeat, s.x0 + (g ? g.len : 0) * k * 0.55, s.axisY, Math.max(30, maxR * k), g ? Math.max(0, (heat - 0.45) / 0.6) : 0);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
-    if (!g) return;
-    // hidden (a burst piece): an empty profile, so only the bare pipe is drawn
-    // profile texture (css px)
-    const pr = this.prof;
-    let maxSag = 0;
-    for (let i = 0; i < N; i++) {
-      const v = s.hidden ? 0 : 1;
-      pr[i * 4] = g.r[i] * k * v; pr[i * 4 + 1] = Math.max(0, g.ri[i]) * k * v; pr[i * 4 + 2] = g.T[i]; pr[i * 4 + 3] = g.sy[i] * k * v;
-      maxSag = Math.max(maxSag, g.sy[i] * k);
-    }
-    gl.bindTexture(gl.TEXTURE_2D, this.profTex);
-    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, N, 1, gl.RGBA, gl.FLOAT, pr);
-    // only shade the pixels around the piece and the pipe
-    const pad = 6;
-    const left = 0, right = Math.min(this.cssW, s.x0 + g.len * k + pad);
-    const top = s.axisY - maxR * k - pad, bottom = s.axisY + maxR * k + maxSag + pad;
-    gl.enable(gl.SCISSOR_TEST);
-    gl.scissor(Math.floor(left * this.px), Math.floor((this.cssH - bottom) * this.px), Math.ceil((right - left) * this.px), Math.ceil((bottom - top) * this.px));
-    P = this.glassProg;
-    gl.useProgram(P.p);
-    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, this.bgTex);
-    gl.uniform1i(P.u.uBg, 0);
-    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, this.profTex);
-    gl.uniform1i(P.u.uProf, 1);
-    gl.uniform2f(P.u.uRes, this.cv.width, this.cv.height);
-    gl.uniform1f(P.u.uPx, this.px);
-    gl.uniform1f(P.u.uTime, s.time % 600);   // wrapped: large values lose float precision in the noise
-    gl.uniform4f(P.u.uAxis, s.x0, s.axisY, g.len * k, g.angle % (Math.PI * 100));
-    gl.uniform3f(P.u.uTint, s.tint[0], s.tint[1], s.tint[2]);
-    gl.uniform3f(P.u.uSun, s.sun[0], s.sun[1], s.sun[2]);
-    gl.uniform1f(P.u.uCrack, s.crack || 0);
-    gl.uniform1f(P.u.uPipeR, Math.max(3, 5.5 * k));
-    gl.uniform4f(P.u.uFurnace, s.furnace.x, s.furnace.y, s.furnace.r, 0);
-    gl.drawArrays(gl.TRIANGLES, 0, 3);
-    gl.disable(gl.SCISSOR_TEST);
-  }
-}
+}`;export class GlassRenderer{constructor(t){this.cv=t;const e=t.getContext("webgl2",{antialias:!1,alpha:!1,premultipliedAlpha:!1,powerPreference:"high-performance"});if(!e)throw new Error("WebGL2 недоступен");this.gl=e,this.bgProg=this.program(T),this.glassProg=this.program(R);const o=e.createBuffer();e.bindBuffer(e.ARRAY_BUFFER,o),e.bufferData(e.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),e.STATIC_DRAW),this.vao=e.createVertexArray(),e.bindVertexArray(this.vao),e.enableVertexAttribArray(0),e.vertexAttribPointer(0,2,e.FLOAT,!1,0,0),this.bgTex=this.texture(e.LINEAR),this.profTex=this.texture(e.LINEAR),e.bindTexture(e.TEXTURE_2D,this.profTex),e.texImage2D(e.TEXTURE_2D,0,e.RGBA16F,n,1,0,e.RGBA,e.FLOAT,new Float32Array(n*4)),this.prof=new Float32Array(n*4),this.quality=1}program(t){const e=this.gl,o=(i,s)=>{const c=e.createShader(i);if(e.shaderSource(c,s),e.compileShader(c),!e.getShaderParameter(c,e.COMPILE_STATUS))throw new Error(e.getShaderInfoLog(c));return c},r=e.createProgram();if(e.attachShader(r,o(e.VERTEX_SHADER,v)),e.attachShader(r,o(e.FRAGMENT_SHADER,t)),e.bindAttribLocation(r,0,"aPos"),e.linkProgram(r),!e.getProgramParameter(r,e.LINK_STATUS))throw new Error(e.getProgramInfoLog(r));const l={},h=e.getProgramParameter(r,e.ACTIVE_UNIFORMS);for(let i=0;i<h;i++){const s=e.getActiveUniform(r,i);l[s.name]=e.getUniformLocation(r,s.name)}return{p:r,u:l}}texture(t){const e=this.gl,o=e.createTexture();return e.bindTexture(e.TEXTURE_2D,o),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_MIN_FILTER,t),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_MAG_FILTER,t),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_WRAP_S,e.CLAMP_TO_EDGE),e.texParameteri(e.TEXTURE_2D,e.TEXTURE_WRAP_T,e.CLAMP_TO_EDGE),o}resize(t,e,o){this.px=o*this.quality,this.cv.width=Math.max(2,Math.round(t*this.px)),this.cv.height=Math.max(2,Math.round(e*this.px)),this.cssW=t,this.cssH=e}setBackground(t){const e=this.gl;e.bindTexture(e.TEXTURE_2D,this.bgTex),e.texImage2D(e.TEXTURE_2D,0,e.RGBA,e.RGBA,e.UNSIGNED_BYTE,t)}draw(t){const e=this.gl;e.viewport(0,0,this.cv.width,this.cv.height),e.bindVertexArray(this.vao),e.disable(e.SCISSOR_TEST);let o=this.bgProg;e.useProgram(o.p),e.activeTexture(e.TEXTURE0),e.bindTexture(e.TEXTURE_2D,this.bgTex),e.uniform1i(o.u.uBg,0),e.uniform2f(o.u.uRes,this.cv.width,this.cv.height),e.uniform1f(o.u.uPx,this.px),e.uniform1f(o.u.uTime,t.time%600),e.uniform4f(o.u.uFurnace,t.furnace.x,t.furnace.y,t.furnace.r,t.furnace.roar);const r=t.gather;let l=0,h=0;if(r)for(let a=0;a<n;a++)l=Math.max(l,r.T[a]),h=Math.max(h,r.r[a]);const i=t.scale;if(e.uniform4f(o.u.uHeat,t.x0+(r?r.len:0)*i*.55,t.axisY,Math.max(30,h*i),r?Math.max(0,(l-.45)/.6):0),e.drawArrays(e.TRIANGLES,0,3),!r)return;const s=this.prof;let c=0;for(let a=0;a<n;a++){const f=t.hidden?0:1;s[a*4]=r.r[a]*i*f,s[a*4+1]=Math.max(0,r.ri[a])*i*f,s[a*4+2]=r.T[a],s[a*4+3]=r.sy[a]*i*f,c=Math.max(c,r.sy[a]*i)}e.bindTexture(e.TEXTURE_2D,this.profTex),e.texSubImage2D(e.TEXTURE_2D,0,0,0,n,1,e.RGBA,e.FLOAT,s);const u=6,m=0,g=Math.min(this.cssW,t.x0+r.len*i+u),d=t.axisY-h*i-u,p=t.axisY+h*i+c+u;e.enable(e.SCISSOR_TEST),e.scissor(Math.floor(m*this.px),Math.floor((this.cssH-p)*this.px),Math.ceil((g-m)*this.px),Math.ceil((p-d)*this.px)),o=this.glassProg,e.useProgram(o.p),e.activeTexture(e.TEXTURE0),e.bindTexture(e.TEXTURE_2D,this.bgTex),e.uniform1i(o.u.uBg,0),e.activeTexture(e.TEXTURE1),e.bindTexture(e.TEXTURE_2D,this.profTex),e.uniform1i(o.u.uProf,1),e.uniform2f(o.u.uRes,this.cv.width,this.cv.height),e.uniform1f(o.u.uPx,this.px),e.uniform1f(o.u.uTime,t.time%600),e.uniform4f(o.u.uAxis,t.x0,t.axisY,r.len*i,r.angle%(Math.PI*100)),e.uniform3f(o.u.uTint,t.tint[0],t.tint[1],t.tint[2]),e.uniform3f(o.u.uSun,t.sun[0],t.sun[1],t.sun[2]),e.uniform1f(o.u.uCrack,t.crack||0),e.uniform1f(o.u.uPipeR,Math.max(3,5.5*i)),e.uniform4f(o.u.uFurnace,t.furnace.x,t.furnace.y,t.furnace.r,0),e.drawArrays(e.TRIANGLES,0,3),e.disable(e.SCISSOR_TEST)}}

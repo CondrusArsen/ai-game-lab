@@ -2,524 +2,90 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Game Lab · Arseni Atrokhov</title>
-<meta name="description" content="Playable web games and prototypes by Arseni Atrokhov, built with AI coding agents, plus 54 game teardowns.">
-<meta name="color-scheme" content="light dark">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Game Market · Arseni Atrokhov</title>
+<meta name="description" content="Walk a 3D night market of playable browser games, game teardowns and projects by Arseni Atrokhov, AI-assisted game developer.">
+<meta property="og:title" content="AI Game Market · Arseni Atrokhov">
+<meta property="og:description" content="My GitHub is a game you can walk in: playable games, 50+ teardowns and the projects behind them.">
+<meta property="og:image" content="https://condrusarsen.github.io/ai-game-lab/arcade/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040a0a'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%2335ff9a' font-family='monospace'%3E%E2%96%B6%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f6f5f1; --surface:#ffffff; --surface-2:#efede7; --text:#16151a; --muted:#5d5a66;
-  --line:#dcd9d0; --accent:#e4572e; --accent-ink:#ffffff; --chip:#ece9e1; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#111014; --surface:#1b1a20; --surface-2:#232229; --text:#f1eff5; --muted:#a8a4b3;
-    --line:#2f2d36; --accent:#ff7a50; --accent-ink:#1a0d07; --chip:#2a2830; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#111014; --surface:#1b1a20; --surface-2:#232229; --text:#f1eff5; --muted:#a8a4b3;
-  --line:#2f2d36; --accent:#ff7a50; --accent-ink:#1a0d07; --chip:#2a2830; --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.35);
-}
-*{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-a{color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
-header.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0;gap:12px}
-.brand{font:700 15px/1 "Space Grotesk",Inter,sans-serif;letter-spacing:.02em;text-decoration:none}
-.brand span{color:var(--accent)}
-nav.links{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
-nav.links a{text-decoration:none;color:var(--muted)}
-nav.links a:hover{color:var(--text)}
-.hero{padding:40px 0 28px}
-.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 12px}
-h1{font:700 clamp(32px,6vw,56px)/1.05 "Space Grotesk",Inter,sans-serif;margin:0 0 18px;letter-spacing:-.02em;max-width:18ch}
-.lede{font-size:clamp(17px,2.2vw,19px);color:var(--muted);max-width:62ch;margin:0 0 24px}
-.cta{display:flex;gap:10px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);background:var(--surface)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
-.btn:hover{filter:brightness(1.05)}
-section{padding:36px 0}
-h2{font:700 clamp(24px,3.5vw,32px)/1.15 "Space Grotesk",Inter,sans-serif;margin:0 0 8px;letter-spacing:-.01em}
-.sub{color:var(--muted);margin:0 0 24px;max-width:70ch}
-.featured{display:grid;grid-template-columns:1.4fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:22px}
-.featured img{width:100%;height:100%;object-fit:cover;display:block;min-height:220px}
-.featured .body{padding:24px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
-.shot{aspect-ratio:390/500;overflow:hidden;background:var(--surface-2)}
-.shot img{width:100%;display:block}
-.card .body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
-.card h3,.featured h3{font:700 20px/1.2 "Space Grotesk",Inter,sans-serif;margin:0}
-.pitch{margin:0;font-size:15px}
-.meta{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
-.chip{font-size:12px;font-weight:500;padding:3px 9px;border-radius:999px;background:var(--chip);color:var(--muted)}
-.ref{font-size:13px;color:var(--muted);margin:0}
-.actions{display:flex;gap:8px;margin-top:auto;padding-top:6px;flex-wrap:wrap}
-.actions a{font-size:14px;padding:8px 14px}
-.actions .disabled{font-size:13px;color:var(--muted);padding:8px 4px}
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;counter-reset:s}
-.steps li{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;counter-increment:s}
-.steps li::before{content:counter(s,decimal-leading-zero);font:700 13px/1 "Space Grotesk",Inter,sans-serif;color:var(--accent);display:block;margin-bottom:10px}
-.steps h3{font:700 17px/1.25 "Space Grotesk",Inter,sans-serif;margin:0 0 8px}
-.steps p{margin:0 0 8px;font-size:14px;color:var(--muted)}
-.steps .me{color:var(--text)}
-.steps .me b{color:var(--accent);font-weight:600}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
-.panel h3{font:700 17px/1.25 "Space Grotesk",Inter,sans-serif;margin:0 0 10px}
-.panel ul{margin:0;padding-left:18px;font-size:15px}
-.panel li{margin:4px 0}
-.tlist{display:grid;gap:12px}
-.trow{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;flex-wrap:wrap}
-.trow p{margin:2px 0 0;color:var(--muted);font-size:14px}
-footer{border-top:1px solid var(--line);margin-top:24px;padding:28px 0 40px;color:var(--muted);font-size:14px}
-footer a{color:var(--text)}
-.tgroup{font:700 18px/1.25 "Space Grotesk",Inter,sans-serif;margin:26px 0 12px}
-.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.tcard{display:flex;flex-direction:column;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-decoration:none}
-.tcard:hover{border-color:var(--accent)}
-.tcard span{font-size:13px;color:var(--muted);line-height:1.45}
-.tfilter{width:100%;max-width:360px;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;margin:0 0 14px}
-@media (max-width:760px){
-  .featured{grid-template-columns:1fr}
-  .split{grid-template-columns:1fr}
-  nav.links{display:none}
-  .hero{padding-top:20px}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="arcade/style.css">
+<script>
+  // No WebGL, reduced motion or ?list → the plain list page.
+  (function () {
+    var p = new URLSearchParams(location.search);
+    if (p.has('list')) { location.replace('list/'); return; }
+    var ok = false; try { var c = document.createElement('canvas'); ok = !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) {}
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && !p.has('go') && !p.has('film');
+    if (!ok || reduce) location.replace('list/' + (reduce ? '?reduced=1' : ''));
+  })();
+</script>
+<script type="importmap">{ "imports": { "three": "./arcade/vendor/three.module.min.js", "three/addons/": "./arcade/vendor/addons/" } }</script>
 </head>
 <body>
-<div class="wrap">
-  <header class="top">
-    <a class="brand" href="./">Arseni Atrokhov <span>/</span> AI Game Lab</a>
-    <nav class="links">
-      <a href="#games">Games</a>
-      <a href="#originals">Originals</a>
-      <a href="#pipeline">Pipeline</a>
-      <a href="#teardowns">Teardowns</a>
-      <a href="https://github.com/CondrusArsen/ai-game-lab">Source</a>
-    </nav>
-  </header>
+<canvas id="scene" tabindex="0" aria-label="3D market of games, teardowns and projects"></canvas>
 
-  <div class="hero">
-    <p class="eyebrow">AI-assisted game developer</p>
-    <h1>From a gameplay video to a playable prototype.</h1>
-    <p class="lede">I study games from public footage, write structured teardowns and design specs, then build playable web games with AI coding agents. I make the design calls, review what the agents produce, and playtest and QA every build. Below: 22 playable games and prototypes and 54 teardowns. Most games run in a phone browser.</p>
-    <div class="cta">
-      <a class="btn primary" href="#games">Play the prototypes</a>
-      <a class="btn" href="#pipeline">How I work</a>
-      <a class="btn" href="https://www.linkedin.com/in/arseni-atrokhov/">LinkedIn</a>
+<section id="intro">
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="intro-box">
+    <div class="intro-kicker">// welcome to</div>
+    <h1>AI GAME <span>MARKET</span></h1>
+    <p class="intro-who">Arseni Atrokhov · AI-assisted game developer</p>
+    <p class="intro-what">Walk a night market where every stall is a game I built with AI. Play them right here, browse the teardowns they started from, and see how I work.</p>
+    <p id="intro-count" class="intro-count">&nbsp;</p>
+    <div class="intro-btns">
+      <button id="enter" class="main" disabled>Loading the market…</button>
+      <a href="list/" class="ghost">Open as a list</a>
     </div>
+    <ul class="intro-keys">
+      <li><kbd>WASD</kbd> / tap the floor · walk</li>
+      <li><kbd>drag</kbd> · look around</li>
+      <li><kbd>E</kbd> / ▶ · play</li>
+      <li><kbd>M</kbd> · map &amp; search</li>
+    </ul>
   </div>
+</section>
 
-  <section id="games">
-    <h2>Adaptations</h2>
-    <p class="sub">Each one starts from a teardown of a reference game. The rules I keep, change or design new are written down in a design spec. No art, audio or text from the reference games is used.</p>
+<header id="hud">
+  <div class="hud-id"><b>ARSENI ATROKHOV</b><span>AI Game Market</span></div>
+  <nav class="hud-btns">
+    <button id="btn-map" title="Map and search (M)">⌖ <span>Map</span></button>
+    <a href="list/" title="All projects as a list">☰ <span>List</span></a>
+    <button id="btn-about" title="About me and contact">✉ <span>Contact</span></button>
+    <button id="btn-help" title="Show the tour again">?</button>
+  </nav>
+</header>
 
-    <article class="featured">
-      <img src="media/deep-contract.jpg" alt="Deep Contract: a mining platform above a cross-section of a drilled shaft" loading="lazy">
-      <div class="body">
-        <h3>Deep Contract</h3>
-        <p class="pitch">Mine and grow your crew by day, defend the platform at night, and decide when to evacuate with the rewards.</p>
-        <div class="meta"><span class="chip">Mining management</span><span class="chip">Tower defence</span><span class="chip">Roguelite</span></div>
-        <p class="ref">Reference analysed: <i>Drill Core</i> (PC)</p>
-        <div class="actions">
-          <a class="btn primary" href="https://condrusarsen.github.io/deep-contract/">Play</a>
-          <a class="btn" href="teardowns/drill-core.html">Teardown</a>
-          <a class="btn" href="https://github.com/CondrusArsen/deep-contract">Source</a>
-        </div>
-      </div>
-    </article>
+<div id="card" class="card" role="dialog" aria-live="polite"></div>
+<div id="tutor" class="tutor" role="status"></div>
+<div id="joy" class="joy" hidden><i></i></div>
+<div id="toast" class="toast"></div>
+<div id="fade"></div>
+<div id="film-cap" class="film-cap"></div>
 
-    <div class="grid">
-      <article class="card">
-        <div class="shot"><img src="media/sugar-siege.png" alt="Sugar Siege: a jelly worm on a sky track" loading="lazy"></div>
-        <div class="body">
-          <h3>Sugar Siege</h3>
-          <p class="pitch">Grow a jelly worm on a sky runway, carry TNT to a candy castle gate, then rebuild the city behind it.</p>
-          <div class="meta"><span class="chip">Runner</span><span class="chip">City builder</span><span class="chip">3D</span></div>
-          <p class="ref">Reference analysed: <i>Gummy Worm Go!</i></p>
-          <div class="actions"><a class="btn primary" href="games/sugar-siege/">Play</a><a class="btn" href="teardowns/sugar-siege-reference.html">Teardown</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/mishmash-run.png" alt="Mishmash Run: hybrid creatures running through gates" loading="lazy"></div>
-        <div class="body">
-          <h3>Mishmash Run</h3>
-          <p class="pitch">Steer hybrid creatures through gates, fuse twins on a 5×3 board, then fight. Bosses, challenge mode and a collection index.</p>
-          <div class="meta"><span class="chip">Crowd runner</span><span class="chip">Merge</span><span class="chip">Auto-battler</span></div>
-          <p class="ref">Reference analysed: <i>Brainrot Run: Merge Battle</i></p>
-          <div class="actions"><a class="btn primary" href="games/mishmash-run/">Play</a><a class="btn" href="teardowns/mishmash-run-reference.html">Teardown</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/digit-dash.png" alt="Digit Dash: a number runner on a track" loading="lazy"></div>
-        <div class="body">
-          <h3>Digit Dash</h3>
-          <p class="pitch">Swallow smaller numbers, avoid bigger ones, ram the wall staircase for cash and buy upgrades. 40 authored layouts plus endless remixes.</p>
-          <div class="meta"><span class="chip">Runner</span><span class="chip">Numbers</span><span class="chip">3D</span></div>
-          <p class="ref">Reference analysed: <i>Number Master: Run and merge</i></p>
-          <div class="actions"><a class="btn primary" href="games/digit-dash/">Play</a><a class="btn" href="teardowns/digit-dash-reference.html">Teardown</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/brambleforge.png" alt="Brambleforge: spinning forest guardians on a merge board" loading="lazy"></div>
-        <div class="body">
-          <h3>Brambleforge</h3>
-          <p class="pitch">Merge auto-battler with spinning forest guardians, a 13-step tutorial and a camp meta-game between fights.</p>
-          <div class="meta"><span class="chip">Merge</span><span class="chip">Auto-battler</span></div>
-          <p class="ref">Reference analysed: <i>Spinner Merge</i></p>
-          <div class="actions"><a class="btn primary" href="games/brambleforge/">Play</a><a class="btn" href="teardowns/brambleforge-reference.html">Teardown</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/shogun-lane.jpg" alt="Shogun Lane: a samurai on a single lane with a tile queue" loading="lazy"></div>
-        <div class="body">
-          <h3>Shogun Lane</h3>
-          <p class="pitch">Single-lane, turn-based samurai roguelite for phones: queue attack tiles, read enemy intent, move bodies so committed strikes land on empty cells.</p>
-          <div class="meta"><span class="chip">Roguelite</span><span class="chip">Turn-based</span><span class="chip">Pixel art</span></div>
-          <p class="ref">Reference analysed: <i>Shogun Showdown</i> (PC)</p>
-          <div class="actions"><a class="btn primary" href="games/shogun-lane/">Play</a><a class="btn" href="teardowns/shogun-showdown.html">Teardown</a></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="originals">
-    <h2>Original games</h2>
-    <p class="sub">New concepts: research, a set of concepts, one picked and built. Art is generated or drawn in code; no third-party asset packs.</p>
-    <div class="grid">
-      <article class="card">
-        <div class="shot"><img src="media/anomaly.jpg" alt="I Am the Anomaly: an ink blot in a dollhouse" loading="lazy"></div>
-        <div class="body">
-          <h3>I Am the Anomaly</h3>
-          <p class="pitch">You are the ghost story: a living ink blot haunting a dollhouse. Prank the plush night inspectors, hide in the dark and scare them out of the house.</p>
-          <div class="meta"><span class="chip">Stealth prank</span><span class="chip">3D</span><span class="chip">RU / EN</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/anomaly/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/impossible.jpg" alt="Impossible Delivery: a felt courier on an impossible tower" loading="lazy"></div>
-        <div class="body">
-          <h3>Impossible Delivery</h3>
-          <p class="pitch">Turn an impossible tower until the walkways line up: if it looks connected, it is connected. Deliver hot pizza to a giant above the clouds.</p>
-          <div class="meta"><span class="chip">Optical illusion puzzle</span><span class="chip">3D</span><span class="chip">RU / EN</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/impossible/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/late.jpg" alt="Late Again!: a felt family kitchen" loading="lazy"></div>
-        <div class="body">
-          <h3>Late Again!</h3>
-          <p class="pitch">One morning, five takes, one school bus. Play the family morning as each of them in turn while your earlier takes repeat beside you as echoes.</p>
-          <div class="meta"><span class="chip">Time-loop puzzle</span><span class="chip">3D</span><span class="chip">RU / EN</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/late/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/nederus.jpg" alt="I Don&#x27;t Fight: a bar brawl scene" loading="lazy"></div>
-        <div class="body">
-          <h3>I Don&#x27;t Fight</h3>
-          <p class="pitch">A bar brawl where you never throw a punch: slow time, swap the speeds of flying things and let the thugs knock themselves out.</p>
-          <div class="meta"><span class="chip">Physics brawler</span><span class="chip">RU / EN</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/nederus/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/nochka.jpg" alt="Nochka: Shadow Road, a felt village on a floating island" loading="lazy"></div>
-        <div class="body">
-          <h3>Nochka: Shadow Road</h3>
-          <p class="pitch">You hold the sun. Drag it across the sky so every shadow swings, and keep a little piece of night alive on her walk home.</p>
-          <div class="meta"><span class="chip">Light and shadow puzzle</span><span class="chip">3D</span><span class="chip">RU / EN</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/nochka/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/blot.jpg" alt="Blot: title menu in a dark house" loading="lazy"></div>
-        <div class="body">
-          <h3>Blot</h3>
-          <p class="pitch">A living ink blot in an empty artist&#x27;s house: chain different scares on the night inspectors and stay out of the flashlight beams.</p>
-          <div class="meta"><span class="chip">Stealth scare puzzle</span><span class="chip">2D</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/blot/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/pizza-in-perspective.jpg" alt="Pizza in Perspective: a hand-drawn order note" loading="lazy"></div>
-        <div class="body">
-          <h3>Pizza in Perspective</h3>
-          <p class="pitch">Turn an Escher-style tower until two roofs line up on screen, then walk the pizza across a bridge that exists only from where you look.</p>
-          <div class="meta"><span class="chip">Perspective puzzle</span><span class="chip">Hand-drawn</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/pizza-in-perspective/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/dead-air.jpg" alt="Dead Air: chapter menu" loading="lazy"></div>
-        <div class="body">
-          <h3>Dead Air: Night Shift</h3>
-          <p class="pitch">Two cassettes, one microphone, eight rooms to the last broadcast. A two-character platformer for one player with a helper, or two players on one keyboard.</p>
-          <div class="meta"><span class="chip">Co-op platformer</span><span class="chip">Desktop</span><span class="chip">RU / EN</span></div>
-          <p class="ref">Original concept</p>
-          <div class="actions"><a class="btn primary" href="games/dead-air/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/hot-glass.png" alt="Hot Glass: a glowing glass bubble on a blowpipe next to a furnace" loading="lazy"></div>
-        <div class="body">
-          <h3>Hot Glass</h3>
-          <p class="pitch">A glassblower's working day: blow, spin and reheat living glass to match five customer orders before it cools or bursts.</p>
-          <div class="meta"><span class="chip">Original concept</span><span class="chip">Physics toy</span><span class="chip">UI in Russian</span></div>
-          <p class="ref">Original game: research, 10 concepts, one picked and built</p>
-          <div class="actions"><a class="btn primary" href="games/hot-glass/">Play</a></div>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="shot"><img src="media/silk-until-dawn.png" alt="Silk Until Dawn: a spider web strung under a porch lantern with a trapped moth" loading="lazy"></div>
-        <div class="body">
-          <h3>Silk Until Dawn</h3>
-          <p class="pitch">One night as a garden spider: string silk between supports, catch moths drawn to the lantern, eat your fill before dawn.</p>
-          <div class="meta"><span class="chip">Original concept</span><span class="chip">String physics</span><span class="chip">UI in Russian</span></div>
-          <p class="ref">Original game: research, 10 concepts, one picked and built</p>
-          <div class="actions"><a class="btn primary" href="games/silk-until-dawn/">Play</a></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="arcade">
-    <h2>Arcade and puzzle</h2>
-    <p class="sub">Short-session games built for a mobile web games platform. Two of them reuse a core with a new theme and new content.</p>
-    <div class="grid">
-      <article class="card">
-        <div class="shot"><img src="media/flip-and-slice.jpg" alt="Flip &amp; Slice: a knife flipping over a cake stack" loading="lazy"></div>
-        <div class="body">
-          <h3>Flip &amp; Slice</h3>
-          <p class="pitch">One-thumb knife toy: every tap flips the blade forward. Slice cakes, fruit and toys, stop before the red studs. 36 courses, then endless remixes.</p>
-          <div class="meta"><span class="chip">Arcade</span><span class="chip">One thumb</span><span class="chip">3D</span></div>
-          <p class="ref">Built for a mobile web games platform</p>
-          <div class="actions"><a class="btn primary" href="games/flip-and-slice/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/neon-slice.jpg" alt="Neon Slice: a neon knife over a night market" loading="lazy"></div>
-        <div class="body">
-          <h3>Neon Slice</h3>
-          <p class="pitch">The Flip &amp; Slice core rebuilt as a neon night market: slice street food, hop the hot grills, land on the prize tower. New districts and content.</p>
-          <div class="meta"><span class="chip">Arcade</span><span class="chip">Re-theme</span><span class="chip">3D</span></div>
-          <p class="ref">Built for a mobile web games platform</p>
-          <div class="actions"><a class="btn primary" href="games/neon-slice/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/serpent-clash.jpg" alt="Serpent Clash: a serpent on an ice field" loading="lazy"></div>
-        <div class="body">
-          <h3>Serpent Clash</h3>
-          <p class="pitch">Steer a small serpent through safe food and risky body bites, grow into a dragon, then face the boss when the 80-second hunt ends.</p>
-          <div class="meta"><span class="chip">Arcade</span><span class="chip">.io-style</span><span class="chip">Bosses</span></div>
-          <p class="ref">Built for a mobile web games platform</p>
-          <div class="actions"><a class="btn primary" href="games/serpent-clash/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/deepbite.jpg" alt="Deepbite: a glowing eel in the abyss" loading="lazy"></div>
-        <div class="body">
-          <h3>Deepbite</h3>
-          <p class="pitch">The Serpent Clash core moved to the deep sea: bite weaker eels, dodge stronger jaws, and beat the leviathan of each of twelve depths.</p>
-          <div class="meta"><span class="chip">Arcade</span><span class="chip">Re-theme</span><span class="chip">Bosses</span></div>
-          <p class="ref">Built for a mobile web games platform</p>
-          <div class="actions"><a class="btn primary" href="games/deepbite/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/cut-and-waddle.jpg" alt="Cut &amp; Waddle: a penguin chick hanging on a rope" loading="lazy"></div>
-        <div class="body">
-          <h3>Cut &amp; Waddle</h3>
-          <p class="pitch">Cut the right rope and get every penguin chick out of the frozen harbour. 60 classic rooms, 30 rescue-everyone rooms and a VS race.</p>
-          <div class="meta"><span class="chip">Physics puzzle</span><span class="chip">Rope cutting</span></div>
-          <p class="ref">Built for a mobile web games platform</p>
-          <div class="actions"><a class="btn primary" href="games/cut-and-waddle/">Play</a></div>
-        </div>
-      </article>
-      <article class="card">
-        <div class="shot"><img src="media/lab.jpg" alt="Life Lab: a felt courier next to a house" loading="lazy"></div>
-        <div class="body">
-          <h3>Life Lab</h3>
-          <p class="pitch">Character-animation sandbox: tap the ground and the felt courier walks there.</p>
-          <div class="meta"><span class="chip">Experiment</span><span class="chip">3D</span></div>
-          <p class="ref">Tech experiment</p>
-          <div class="actions"><a class="btn primary" href="games/lab/">Play</a></div>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="pipeline">
-    <h2>Pipeline</h2>
-    <p class="sub">Each prototype goes through the same five steps. AI agents do much of the analysis drafting and the coding. I set the direction, make the design decisions and check the result at every step.</p>
-    <ol class="steps">
-      <li>
-        <h3>Gameplay video</h3>
-        <p>Public recordings of the reference game, store pages and reviews are collected; key frames are extracted as evidence.</p>
-        <p class="me"><b>My part:</b> choose the reference game and the recordings worth studying, and decide what question the analysis must answer.</p>
-      </li>
-      <li>
-        <h3>Teardown report</h3>
-        <p>An agent drafts a structured HTML teardown: core loop, rules, economy, first-session flow, each claim tagged as observed, inferred or unknown and linked to a frame.</p>
-        <p class="me"><b>My part:</b> check claims against the footage, flag guesses, and judge what makes the game work and what to fix in a remake.</p>
-      </li>
-      <li>
-        <h3>Design spec</h3>
-        <p>A DESIGN document maps every rule of the adaptation to the teardown: kept as observed, adapted, or newly designed. Acceptance cases are written up front.</p>
-        <p class="me"><b>My part:</b> theme and art direction, onboarding, economy and pacing choices, scope, and what not to copy.</p>
-      </li>
-      <li>
-        <h3>Prototype</h3>
-        <p>Coding agents (Codex, Claude) implement the game in TypeScript / JavaScript with Canvas, WebGL or three.js and ship a single self-contained HTML file. Assets are sourced under CC0, CC BY or OFL licences.</p>
-        <p class="me"><b>My part:</b> break work into tasks, review builds, reject what doesn't feel right and iterate on feel and readability.</p>
-      </li>
-      <li>
-        <h3>Playtest &amp; QA</h3>
-        <p>Rule tests, headless balance bots, end-to-end runs on the release file with touch input, long-session runs and layout checks across screen sizes.</p>
-        <p class="me"><b>My part:</b> play the builds on phone and desktop, write bug reports and checklists, and decide when a build is ready.</p>
-      </li>
-    </ol>
-  </section>
-
-  <section>
-    <div class="split">
-      <div class="panel">
-        <h3>What I decide</h3>
-        <ul>
-          <li>Which reference game to study and why</li>
-          <li>The design of the adaptation: theme, loop changes, onboarding, economy</li>
-          <li>Scope and priorities for each iteration</li>
-          <li>Whether a build feels right and is ready to show</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3>What the agents generate</h3>
-        <ul>
-          <li>First drafts of teardown reports from footage and public sources</li>
-          <li>Game code, build scripts and automated tests</li>
-          <li>Asset sourcing with licence evidence and credits screens</li>
-          <li>Test harnesses: balance bots, end-to-end and session runs</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section id="teardowns">
-    <h2>Teardowns</h2>
-    <p class="sub">Long-form HTML reports with embedded evidence frames: core loop, rules, economy, first session, UI and what to borrow. Large files, best read on desktop.</p>
-    <h3 class="tgroup">Reference games behind the adaptations</h3>
-    <div class="tlist">
-      <div class="trow">
-        <div><b>Drill Core</b> (Hungry Couch Games / tinyBuild)<p>Mining management and tower defence roguelite. Basis for Deep Contract.</p></div>
-        <a class="btn" href="teardowns/drill-core.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Shogun Showdown</b> (Roboatino)<p>Single-lane, turn-based tactical roguelite. Basis for Shogun Lane.</p></div>
-        <a class="btn" href="teardowns/shogun-showdown.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Gummy Worm Go!</b><p>3D jelly-worm runner with a city-building meta. Basis for Sugar Siege.</p></div>
-        <a class="btn" href="teardowns/sugar-siege-reference.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Brainrot Run: Merge Battle</b><p>Crowd runner feeding a merge auto-battle. Basis for Mishmash Run.</p></div>
-        <a class="btn" href="teardowns/mishmash-run-reference.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Number Master: Run and merge</b><p>Number runner with a wall-staircase payout. Basis for Digit Dash.</p></div>
-        <a class="btn" href="teardowns/digit-dash-reference.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Blob Merge 3D</b><p>Physics merge drop puzzle.</p></div>
-        <a class="btn" href="teardowns/sticky-blob-descent-reference.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Spinner Merge</b><p>Spinning-top merge auto-battler. Basis for Brambleforge.</p></div>
-        <a class="btn" href="teardowns/brambleforge-reference.html">Read teardown</a>
-      </div>
-    </div>
-    <h3 class="tgroup">Roblox</h3>
-    <div class="tlist">
-      <div class="trow">
-        <div><b>+1 Speed Keyboard Escape</b> (SecretVerse Studio)<p>Incremental obby where every step adds +1 speed: loop, multipliers, economy, monetisation and retention.</p></div>
-        <a class="btn" href="teardowns/roblox/speed-keyboard-escape.html">Read teardown</a>
-      </div>
-      <div class="trow">
-        <div><b>Survive Zombie Arena</b> (Nectarforge Studios)<p>Co-op wave survival for up to 25 players: loop, weapons, economy, monetisation and live-ops.</p></div>
-        <a class="btn" href="teardowns/roblox/survive-zombie-arena.html">Read teardown</a>
-      </div>
-    </div>
-    <h3 class="tgroup">Browser games (45)</h3>
-    <p class="sub">Indie web games played and analysed with my teardown pipeline. 0.3–7 MB each.</p>
-    <input class="tfilter" type="search" placeholder="Filter by name or genre" aria-label="Filter browser game teardowns" oninput="for(const a of document.querySelectorAll('.tcard'))a.hidden=!a.textContent.toLowerCase().includes(this.value.toLowerCase())">
-    <div class="tgrid">
-      <a class="tcard" href="teardowns/web/90to90.html"><b>90to90</b><span>A habit contract turns one honest daily check-in into a visible shield layer—then converts that earned identity into power inside a compact wave-survival arena.</span></a>
-      <a class="tcard" href="teardowns/web/afterhours.html"><b>AFTERHOURS</b><span>Browser game teardown: loop, rules, progression, UI and what to borrow.</span></a>
-      <a class="tcard" href="teardowns/web/apex-run-highway-race.html"><b>Apex Run: Highway Race</b><span>Browser game teardown: loop, rules, progression, UI and what to borrow.</span></a>
-      <a class="tcard" href="teardowns/web/ashfall-sector.html"><b>Ashfall Sector</b><span>A compact browser RTS with a second identity: the same economy, fog-of-war and counter system can be operated by humans or exposed to AI agents, while public match records turn each battle into inspectable evaluation data.</span></a>
-      <a class="tcard" href="teardowns/web/atom-by-atom.html"><b>Atom By Atom</b><span>Browser game teardown: loop, rules, progression, UI and what to borrow.</span></a>
-      <a class="tcard" href="teardowns/web/beat-the-couch.html"><b>Beat the Couch</b><span>Browser game teardown: loop, rules, progression, UI and what to borrow.</span></a>
-      <a class="tcard" href="teardowns/web/blister-online.html"><b>Blister Online</b><span>A persistent browser survival RPG where low-poly wilderness, hostile absurdism, skill grinding, summon collecting, construction, towns, factories, quests, factions, and completion tracking compete to become the next reason to keep walking.</span></a>
-      <a class="tcard" href="teardowns/web/block-burner.html"><b>Block Burner</b><span>A browser-first competitive stacker with unusually legible tactical pressure—and a first-session teaching gap around matching, attacks and powerup causality.</span></a>
-      <a class="tcard" href="teardowns/web/breakaway.html"><b>BREAKAWAY</b><span>A cycling incremental that turns familiar idle numbers into a moving road: manual pedalling bootstraps automation, training cycles reset short-term gains for multipliers, and the rider visibly advances through terrain.</span></a>
-      <a class="tcard" href="teardowns/web/car-soccer.html"><b>Car Soccer</b><span>A browser-native car-ball physics toy that wins through immediate freeplay, then branches into ranked bot challenges, car handling presets, training maps, deep settings, and a creator-funded arena-ad marketplace.</span></a>
-      <a class="tcard" href="teardowns/web/cenit.html"><b>Cenit</b><span>A playable patch of Río de la Plata sky where time itself is the camera control, patience is the difficulty curve, and every saved view can become a field-note collectible.</span></a>
-      <a class="tcard" href="teardowns/web/claude-of-tanks.html"><b>Claude of Tanks</b><span>Modern armored vehicles, national fleets and large outdoor battlefields create a legible fantasy before the player learns any rules.</span></a>
-      <a class="tcard" href="teardowns/web/cook-the-dungeon.html"><b>Cook the Dungeon</b><span>A first-person roguelike deckbuilder whose unique economy links exact lethal damage to monster ingredients, cooking, limited portions, and later combat choices.</span></a>
-      <a class="tcard" href="teardowns/web/coro-solto-treta-suprema.html"><b>CORO SOLTO: Treta Suprema</b><span>A zero-install Counter-Strike-shaped arena FPS that replaces military seriousness with Brazilian faction satire, a huge character roster, loud local flavor, and unusually explicit creator infrastructure.</span></a>
-      <a class="tcard" href="teardowns/web/divinestead.html"><b>Divinestead</b><span>A chill, day-based incremental strategy game that turns an Age-of-Mythology-style settlement into a readable chain of adjacent buildings, passive income, job assignments, automatic expeditions, offerings, and permanent boon choices.</span></a>
-      <a class="tcard" href="teardowns/web/endless-barkery.html"><b>Endless Barkery</b><span>A one-minute polyomino score attack in which spatial efficiency is complicated by valuable regions, penalty cells, rotation, and a limited piece swap.</span></a>
-      <a class="tcard" href="teardowns/web/enprise-gg.html"><b>Enprise.gg</b><span>A chess-puzzle roguelike where every capture steals a movement rule, every move changes the next move-set, and losing becomes a legible lesson rather than a dead end.</span></a>
-      <a class="tcard" href="teardowns/web/eurasia-hauler-crossroads-trucking.html"><b>Eurasia Hauler: Crossroads Trucking</b><span>A map-first logistics tycoon where profitability depends on chaining loaded and empty legs, truck class, fuel, tolls, deadlines, wear, depots, financing, and simulated time.</span></a>
-      <a class="tcard" href="teardowns/web/expandagram.html"><b>Expandagram</b><span>A one-minute word hunt built around ordered-letter constraints—remarkably teachable, instantly replayable, and one dictionary dispute away from losing trust.</span></a>
-      <a class="tcard" href="teardowns/web/falcon-hunt.html"><b>Falcon Hunt</b><span>A forty-second side-scrolling hunt that turns real falconry knowledge into an approachable score chase: catch species-appropriate quarry, avoid predators and human infrastructure, preserve lives, and return to the glove.</span></a>
-      <a class="tcard" href="teardowns/web/for-the-fame.html"><b>For The Fame</b><span>A preparation-first autobattler: the player constructs a 3×3 item machine, then reads the automated fight as a test of placement, timing, and synergy.</span></a>
-      <a class="tcard" href="teardowns/web/grid.html"><b>GRID</b><span>A terminal-native multiplayer hacking fantasy whose systemic promise is unusually legible—and whose first-run credential gate currently stands between the player and every meaningful payoff.</span></a>
-      <a class="tcard" href="teardowns/web/grid-town.html"><b>Grid Town</b><span>A real-time power-grid strategy simulation where generation timing, spatial reach, operating economics, town growth, reliability, and pollution all compete on the same map.</span></a>
-      <a class="tcard" href="teardowns/web/h-o-l-e.html"><b>H.O.L.E.</b><span>A persistent multiplayer voxel excavation world where a simple dig–sell–upgrade loop gains meaning because tunnels, graves, objects, profiles, and the planetary total remain after each shift.</span></a>
-      <a class="tcard" href="teardowns/web/induction.html"><b>Induction</b><span>An elegant Black Box deduction system wrapped in a tactile Victorian notebook—rich enough for long-term mastery, but currently asking a first-time player to learn the entire instrument before hearing a clean note.</span></a>
-      <a class="tcard" href="teardowns/web/mecha-royale.html"><b>Mecha Royale</b><span>A browser battle royale where the durable body is a configurable mech, the vulnerable second life is its pilot, and the social promise is several friends operating one war machine.</span></a>
-      <a class="tcard" href="teardowns/web/mini-moto.html"><b>Mini Moto</b><span>A miniature motocross management sandbox whose best trick is changing the player’s role without changing the world: watch eight autonomous riders, tune their behavior, shape the circuit, follow a favorite, then seize the handlebars.</span></a>
-      <a class="tcard" href="teardowns/web/mini-racer.html"><b>Mini Racer</b><span>A Reddit-native, top-down time-attack racer that turns a few seconds of driving into a precise competitive conversation: beat the medal, beat your ghost, move up the board, challenge another player, retry.</span></a>
-      <a class="tcard" href="teardowns/web/museum-of-cc0.html"><b>Museum of CC0</b><span>A walkable web gallery that converts public-domain art into spatial browsing: enter a central hall, choose an artist doorway, approach a work, read its interpretation, and continue to the museum source.</span></a>
-      <a class="tcard" href="teardowns/web/neon-mayhem.html"><b>Neon Mayhem</b><span>A compact 1980s crime-sandbox fantasy whose strongest trick is not scale alone, but the way one readable city supports driving, police heat, jobs, races, aviation, failure, recovery and persistent progress without leaving the browser.</span></a>
-      <a class="tcard" href="teardowns/web/no-name-squish-game.html"><b>No Name Squish Game</b><span>A cozy third-person village adventure where tiny errands, eccentric neighbors and a suspicious former resident turn domestic play into a linked mystery.</span></a>
-      <a class="tcard" href="teardowns/web/noomo.html"><b>Noomo</b><span>A minimalist reverse-prediction word game: give a language model a prompt, then infer the ten continuations it produced from lengths, prefixes, and your own model of language.</span></a>
-      <a class="tcard" href="teardowns/web/overworld.html"><b>Overworld</b><span>A traditional roguelike compressed into a touch-first, portrait browser game: readable one-tap turns, tiny stories, environmental rules, and a large discovery meta.</span></a>
-      <a class="tcard" href="teardowns/web/paperroute.html"><b>PaperRoute</b><span>An auto-forward newspaper-delivery score run that combines left/right targeting, sprint/brake timing, route reading, streaks, hazards, lives, subscriber retention, and a seven-day campaign.</span></a>
-      <a class="tcard" href="teardowns/web/quip.html"><b>Quip</b><span>A high-energy promise of skill duels and real stakes whose observed browser funnel stops at a coming-soon gate—while token acquisition routes are already live.</span></a>
-      <a class="tcard" href="teardowns/web/read-the-terms.html"><b>Read the Terms</b><span>A hostile Terms of Service document disguised as a Windows XP installer: scrolling is policed, comprehension is tested, and the boring legal text becomes the obstacle course.</span></a>
-      <a class="tcard" href="teardowns/web/ribat.html"><b>Ribat</b><span>A reconstruction-grade analysis of a pre-alpha browser MMO that compresses character building, equipment mastery, territorial politics, and material risk into a click-driven isometric world.</span></a>
-      <a class="tcard" href="teardowns/web/ringbreaker.html"><b>Ringbreaker</b><span>A compact survival-action game built around one charged dash: use impact physics and loose balls to break concentric rings before they collapse inward.</span></a>
-      <a class="tcard" href="teardowns/web/ringhold.html"><b>Ringhold</b><span>Ownership, army size, route connectivity, strongholds and incoming forces coexist on a single map. The player rarely needs a separate management screen during combat.</span></a>
-      <a class="tcard" href="teardowns/web/robot-wants-kitty-html5-remaster.html"><b>Robot Wants Kitty — HTML5 Remaster</b><span>An authorised HTML5 reconstruction of the compact 2010 Flash metroidvania: the robot begins deliberately obsolete, and every power-up rewrites which parts of one dense hazard map are traversable.</span></a>
-      <a class="tcard" href="teardowns/web/save-the-toys.html"><b>Save The Toys</b><span>A portrait-first rescue puzzler where drag-matching three identical toys turns a descending shelf into a deadline—and every short run feeds a toy-castle construction meta.</span></a>
-      <a class="tcard" href="teardowns/web/the-endless-museum.html"><b>The Endless Museum</b><span>A navigable 3D interpretation of Wikipedia in which an article becomes a room, its outgoing links become labelled doorways, selected facts become exhibits, and the encyclopaedia&#x27;s graph becomes both a free-exploration space and a route challenge.</span></a>
-      <a class="tcard" href="teardowns/web/the-urinal-game.html"><b>The Urinal Game</b><span>A 36-scenario social-choice quiz where one click selects a urinal, immediate poll bars reveal what other players chose, a punchline interprets the decision, and the full pattern resolves into a shareable behavioural archetype.</span></a>
-      <a class="tcard" href="teardowns/web/what-a-wish.html"><b>What A Wish</b><span>An active incremental game where stamina-limited bubble popping earns Faith, Faith expands a constellation of upgrades, and a parallel wish list tries to turn optimisation into human-scale generosity.</span></a>
-      <a class="tcard" href="teardowns/web/wind-and-tanks.html"><b>Wind &amp; Tanks</b><span>A browser artillery sandbox with an excellent “read the wind, commit the shot, watch the terrain change” core—and a beta reliability failure that prevents the recorded CPU match from reaching its promised payoff.</span></a>
-    </div>
-  </section>
-  <footer>
-    <p>Arseni Atrokhov · game designer and developer (Roblox, web games) · <a href="https://www.linkedin.com/in/arseni-atrokhov/">LinkedIn</a> · <a href="https://github.com/CondrusArsen">GitHub</a></p>
-    <p>Built July–October 2026. Reference games belong to their owners; they were analysed, not copied. Third-party assets in each game are credited in its in-game Credits screen.</p>
-  </footer>
+<div id="modal" class="modal" hidden>
+  <div class="m-win">
+    <div class="m-bar"><b id="m-title"></b><a id="m-open" target="_blank" rel="noopener">Open in new tab ↗</a><button id="m-close" aria-label="Close">✕</button></div>
+    <div id="m-body"></div>
+  </div>
 </div>
+
+<div id="map" class="map" hidden>
+  <div class="map-win">
+    <div class="map-bar"><b>Market map</b><input id="map-search" type="search" placeholder="Find a game or teardown…" autocomplete="off"><button id="map-close" aria-label="Close">✕</button></div>
+    <div class="map-body"><canvas id="map-canvas"></canvas><div id="map-list" class="map-list"></div></div>
+    <p class="map-hint">Tap a dot or a name to jump there.</p>
+  </div>
+</div>
+
+<noscript><p style="color:#fff;padding:24px">This page needs JavaScript. <a href="list/" style="color:#35ff9a">Open the list of games and teardowns</a>.</p></noscript>
+<script type="module" src="arcade/main.js"></script>
+<!-- Visit counter: create condrusarsen.goatcounter.com, then uncomment.
+<script data-goatcounter="https://condrusarsen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0b0814">
+<title>Dot Doesn't Nap</title>
+<script type="module">
+  // the platform: have the SDK in hand before the game's first statement, so the first boot stage is reported too
+  if (window.parent !== window) window.__bp = import("/sdk/hostsdk.js").then((m) => m.hostsdk).catch(() => null);
+</script>
+<style>
+@font-face { font-family: "Gochi Hand"; font-weight: 400; font-display: swap; src: url(fonts/GochiHand.ttf) format("truetype"); }
+@font-face { font-family: "Caveat"; font-weight: 600; font-display: swap; src: url(fonts/Caveat-SemiBold.ttf) format("truetype"); }
+@font-face { font-family: "Patrick Hand"; font-weight: 400; font-display: swap; src: url(fonts/PatrickHand.ttf) format("truetype"); }
+:root { color-scheme: dark; --night: #0b0814; --crayon: #f3b42e; --paper: #fbf6ea; --hand: "Gochi Hand", "Patrick Hand", "Comic Sans MS", "Chalkboard SE", "Segoe Print", cursive; }
+html, body { height: 100%; margin: 0; background: var(--night); color: var(--paper); overflow: hidden; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+body { font-family: var(--hand); }
+canvas { position: fixed; inset: 0; display: block; outline: none; touch-action: none; }
+#boot { position: fixed; inset: 0; display: grid; place-items: center; background: var(--night); z-index: 50; text-align: center; transition: opacity .6s; }
+#boot b { display: block; font-size: clamp(48px, 11vw, 120px); line-height: .9; color: var(--crayon); transform: rotate(-2deg); text-shadow: 4px 4px 0 #000; font-weight: normal; }
+#boot span { display: block; margin-top: 1em; font-size: clamp(18px, 2.6vw, 26px); opacity: .85; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<div id="boot"><div><b>DOT<br>DOESN'T NAP</b><span>Dot is putting her wellies on…</span></div></div>
+<script type="module" src="game.js"></script>
+
+</body>
+</html>
