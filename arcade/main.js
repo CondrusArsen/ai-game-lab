@@ -511,7 +511,7 @@ function buildWorld() {
     units.forEach((u, i) => bookShelf(lav, d + Math.floor(i / 2) * 4.2, i % 2 ? -1 : 1, u, DISTRICT.library.color));
     d += Math.ceil(units.length / 2) * 4.2 + 0.8;
   }
-  finishAvenue(lav, d - PLAZA + 2, DISTRICT.library.color, '600+ GAMES ANALYSED', `${TEARDOWNS.length} are on these shelves · the rest stay in private libraries`);
+  finishAvenue(lav, d - PLAZA + 2, DISTRICT.library.color, `${TEARDOWNS.length} PUBLIC GAME TEARDOWNS`, 'Reference research, rules and design evidence on these shelves');
 
   // WORKSHOP avenue: Roblox, UI/UX, Tools
   const wav = AV.workshop; d = PLAZA + 2.5;
@@ -944,7 +944,7 @@ function action(ex, a) {
 const ABOUT_HTML = `<p class="lead">AI-assisted game developer and designer: Roblox (Luau) and HTML5. I take a game from teardown to a playable, tested build, directing AI coding agents and owning the design and the final quality.</p>
 <div class="stats">${STATS.map(([n, l]) => `<div><b>${n}</b><span>${l}</span></div>`).join('')}</div>
 <p>${CREDIT} The market itself is my own project: I designed it, AI agents wrote the code, I tested it on desktop and phones.</p>
-<p>The ${TEARDOWNS.length} teardowns here are a public sample: I have analysed 600+ games, and most of those analyses stay private.</p>
+<p>The catalogue contains ${GAMES.length + VAULT.length} browser games and prototypes and ${TEARDOWNS.length} public teardowns. Roblox projects and locally run tools are documented separately in the Workshop.</p>
 <p>Looking for remote roles: AI game designer / prototyper, Roblox developer, HTML5 game developer.</p>
 <div class="m-btns"><a class="main" href="${LINKS.linkedin}" target="_blank" rel="noopener">Message me on LinkedIn ↗</a><a href="${LINKS.github}" target="_blank" rel="noopener">GitHub ↗</a><button data-cv>CV</button><a href="list/">All projects as a list</a></div>`;
 const PIPELINE_HTML = `<p class="lead">Gameplay video → teardown → design spec → playable build → playtest and QA. AI agents draft the analysis and write most of the code. I direct the work and own the decisions.</p>
@@ -979,11 +979,13 @@ function openInfo(title, html) {
   mBody.querySelectorAll('[data-frame]').forEach(a => a.onclick = e => { e.preventDefault(); openFrame(a.dataset.title, a.dataset.frame); });
   showModal();
 }
-// CV: both pages as images (readable on a phone) plus the PDFs to download.
+// Current one-page CV previews and published PDFs.
 function openCV(lang) {
-  const other = lang === 'en' ? 'ru' : 'en', pdf = l => `cv/Arseni_Atrokhov_CV_${l.toUpperCase()}.pdf`;
-  openInfo(lang === 'en' ? 'CV · Arseni Atrokhov' : 'Резюме · Арсений Атрохов', `<div class="m-btns" style="margin:0 0 14px"><a class="main" href="${url(pdf(lang))}" download>⬇ Download PDF</a><button data-cv="${other}">${other === 'ru' ? 'Русская версия' : 'English version'}</button></div>
-    <div class="cv-pages">${[1, 2].map(n => `<img src="${url(`cv/cv-${lang}-${n}.jpg`)}" alt="CV page ${n}">`).join('')}</div>`);
+  const other = lang === 'en' ? 'ru' : 'en';
+  const files = {en: 'Arseni_Atrokhov_Game_Prototyper_EN', ru: 'Atrokhov_Arseniy_Roblox_RU'};
+  const pdf = `https://github.com/CondrusArsen/CondrusArsen/blob/main/cv/${files[lang]}.pdf`;
+  openInfo(lang === 'en' ? 'CV · Arseni Atrokhov' : 'Резюме · Арсений Атрохов', `<div class="m-btns" style="margin:0 0 14px"><a class="main" href="${pdf}" target="_blank" rel="noopener">Open current PDF ↗</a><button data-cv="${other}">${other === 'ru' ? 'Русская версия' : 'English version'}</button><a href="https://github.com/CondrusArsen/CondrusArsen#cv-and-contact" target="_blank" rel="noopener">All CV versions ↗</a></div>
+    <div class="cv-pages"><img src="${url(`cv/${files[lang]}-preview.png`)}" alt="${lang === 'en' ? 'Current game prototyper CV, one page' : 'Актуальное резюме Roblox-разработчика, одна страница'}"></div>`);
 }
 // Project panel: a gallery of screens and clips you can flip through, plus the story and links.
 function openProject(it, start = 0) {

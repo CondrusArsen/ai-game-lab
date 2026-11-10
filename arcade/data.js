@@ -1908,5 +1908,5 @@ export const VAULT=[
   "platforms": "Phone · Desktop"
  }
 ];
-export const STATS=[["600+","games analysed"],["100+","games & prototypes built with AI"],["40+","titles shipped as a co-developer"]];
+export const STATS=[[String(GAMES.length + VAULT.length),"browser games & prototypes"],[String(TEARDOWNS.length),"public game teardowns"],[String(PROJECTS.filter(p => p.zone === "Roblox").length),"Roblox project cases"]];
 export const LINKS={linkedin:"https://www.linkedin.com/in/arseni-atrokhov/",github:"https://github.com/CondrusArsen",repo:"https://github.com/CondrusArsen/ai-game-lab"};
