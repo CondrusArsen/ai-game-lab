@@ -477,6 +477,52 @@ export const GAMES=[
  }
 ];
 export const PROJECTS=[
+{
+  "id": "soap-cutting",
+  "zone": "Roblox",
+  "title": "SoapCutting / +1 Knife Size Every Cut",
+  "blurb": "My own published Roblox pet project: knife throw, soap mining, foam-wave escape and raft progression. A new cutting and onboarding redesign is in progress.",
+  "how": "Initiated and built with AI coding tools. My work: game loop, progression, UI, implementation direction, scripts and playtesting. The published build and the new redesign are separate stages.",
+  "links": [
+    [
+      "Play on Roblox",
+      "https://www.roblox.com/games/102709455340707"
+    ],
+    [
+      "Development case",
+      "https://github.com/CondrusArsen/CondrusArsen/tree/main/projects/soap-cutting"
+    ]
+  ],
+  "gallery": []
+},
+{
+  "id": "zombie-lake",
+  "zone": "Roblox",
+  "title": "Fish & Survive: Zombie Lake",
+  "blurb": "Ongoing collaborative Roblox survival game: fishing by day, zombie defence at night, classes and progression; separate lobby and match places.",
+  "how": "I worked across client/server scripts with AI tools, redesigned UI, populated the map, directed model creation and refined mechanics developed with my collaborator. Project systems include reserved servers, retrying teleports and shared persistence. Source remains private.",
+  "links": [
+    [
+      "View on Roblox",
+      "https://www.roblox.com/games/134519178428493"
+    ]
+  ],
+  "gallery": []
+},
+{
+  "id": "ai-agent-demo",
+  "zone": "Tools",
+  "title": "AI Agent Demo",
+  "blurb": "Locally run Telegram agent demo: catalogue validation, tool calling, knowledge-base search and order capture.",
+  "how": "AI-assisted development under my direction. Uses a demo CSV catalogue and JSON CRM; instructions and mocked logic tests are in the repository. Runs on my computer while the process is active.",
+  "links": [
+    [
+      "Code and setup",
+      "https://github.com/CondrusArsen/ai-agent-demo"
+    ]
+  ],
+  "gallery": []
+},
  {
   "id": "arcane",
   "zone": "Roblox",
