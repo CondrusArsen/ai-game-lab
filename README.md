@@ -16,6 +16,14 @@ Most of these games were made from July to October 2026 in a small studio that b
 
 Everything runs in the browser. Most games work on a phone.
 
+## Current Roblox projects and CV
+
+- **[SoapCutting / +1 Knife Size Every Cut](https://www.roblox.com/games/102709455340707)** — my own published pet project; [development case](https://github.com/CondrusArsen/CondrusArsen/tree/main/projects/soap-cutting). A new cutting and onboarding redesign is in progress.
+- **[Fish & Survive: Zombie Lake](https://www.roblox.com/games/134519178428493)** — ongoing collaborative development: client/server scripts, UI, map and model work, lobby/match teleports and shared persistence. My collaborator and I develop mechanics together.
+- **[CV and developer profile](https://github.com/CondrusArsen)** — Roblox/game prototyping, junior game design and local AI-tool projects.
+
+The full market is the main portfolio: 83 browser games and prototypes and 69 teardowns, with individual and collaborative work across different genres. Deep Contract is one example, alongside 12-Second Heist, Breaking Storm Live and the rest of the catalogue.
+
 ## Games
 
 
