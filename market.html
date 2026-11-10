@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Game Market · Arseni Atrokhov</title>
+<meta name="description" content="Walk a 3D night market of playable browser games, game teardowns and projects by Arseni Atrokhov, AI-assisted game developer.">
+<meta property="og:title" content="AI Game Market · Arseni Atrokhov">
+<meta property="og:description" content="My GitHub is a game you can walk in: 80+ playable games, 69 teardowns and the projects behind them.">
+<meta property="og:image" content="https://condrusarsen.github.io/ai-game-lab/arcade/og.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040a0a'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%2335ff9a' font-family='monospace'%3E%E2%96%B6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="arcade/style.css">
+<script>
+  // No WebGL, reduced motion or ?list → the plain list page.
+  (function () {
+    var p = new URLSearchParams(location.search);
+    if (p.has('list')) { location.replace('list/'); return; }
+    var ok = false; try { var c = document.createElement('canvas'); ok = !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) {}
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches && !p.has('go') && !p.has('film');
+    if (!ok || reduce) location.replace('list/' + (reduce ? '?reduced=1' : ''));
+  })();
+</script>
+<script type="importmap">{ "imports": { "three": "./arcade/vendor/three.module.min.js", "three/addons/": "./arcade/vendor/addons/" } }</script>
+</head>
+<body>
+<canvas id="scene" tabindex="0" aria-label="3D market of games, teardowns and projects"></canvas>
+
+<section id="intro">
+  <canvas id="rain" aria-hidden="true"></canvas>
+  <div class="intro-box">
+    <div class="intro-kicker">// welcome to</div>
+    <h1>AI GAME <span>MARKET</span></h1>
+    <p class="intro-who">Arseni Atrokhov · AI-assisted game developer</p>
+    <p class="intro-what">Walk a night market of games I made with AI agents, solo or in a small team. Play them right here, read the teardowns behind them, and see how I work.</p>
+    <p id="intro-count" class="intro-count">&nbsp;</p>
+    <div class="intro-btns">
+      <button id="enter" class="main" disabled>Loading the market…</button>
+      <a href="./" class="ghost">Watch the showreel</a>
+      <a href="list/" class="ghost">Open as a list</a>
+    </div>
+    <ul class="intro-keys">
+      <li><kbd>WASD</kbd> / tap the floor · walk</li>
+      <li><kbd>drag</kbd> · look around</li>
+      <li><kbd>E</kbd> / ▶ · play</li>
+      <li><kbd>M</kbd> · map &amp; search</li>
+    </ul>
+  </div>
+</section>
+
+<header id="hud">
+  <div class="hud-id"><b>ARSENI ATROKHOV</b><span>AI Game Market</span></div>
+  <nav class="hud-btns">
+    <a href="./" title="Visual portfolio showreel">▶ <span>Showreel</span></a>
+    <button id="btn-map" title="Map and search (M)">⌖ <span>Map</span></button>
+    <a href="list/" title="All projects as a list">☰ <span>List</span></a>
+    <button id="btn-cv" title="My CV">▤ <span>CV</span></button>
+    <button id="btn-about" title="About me and contact">✉ <span>Contact</span></button>
+    <button id="btn-help" title="Show the tour again">?</button>
+  </nav>
+</header>
+
+<div id="card" class="card" role="dialog" aria-live="polite"></div>
+<div id="tutor" class="tutor" role="status"></div>
+<div id="joy" class="joy" hidden><i></i></div>
+<div id="toast" class="toast"></div>
+<div id="fade"></div>
+<div id="film-cap" class="film-cap"></div>
+
+<div id="modal" class="modal" hidden>
+  <div class="m-win">
+    <div class="m-bar"><b id="m-title"></b><a id="m-open" target="_blank" rel="noopener">Open in new tab ↗</a><button id="m-close" aria-label="Close">✕</button></div>
+    <div id="m-body"></div>
+  </div>
+</div>
+
+<div id="map" class="map" hidden>
+  <div class="map-win">
+    <div class="map-bar"><b>Market map</b><input id="map-search" type="search" placeholder="Find a game or teardown…" autocomplete="off"><button id="map-close" aria-label="Close">✕</button></div>
+    <div class="map-body"><canvas id="map-canvas"></canvas><div id="map-list" class="map-list"></div></div>
+    <p class="map-hint">Tap a dot or a name to jump there.</p>
+  </div>
+</div>
+
+<noscript><p style="color:#fff;padding:24px">This page needs JavaScript. <a href="list/" style="color:#35ff9a">Open the list of games and teardowns</a>.</p></noscript>
+<script type="module" src="arcade/main.js"></script>
+<!-- Visit counter: create condrusarsen.goatcounter.com, then uncomment.
+<script data-goatcounter="https://condrusarsen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script> -->
+</body>
+</html>
