@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1110">
+  <title>Arseni Atrokhov · Play the portfolio</title>
+  <meta name="description" content="A 35-second tour of playable games, Roblox projects and AI tools. Real footage, individual contributions, code and playable builds by Arseni Atrokhov.">
+  <meta property="og:title" content="Arseni Atrokhov · Play the portfolio">
+  <meta property="og:description" content="See the work in motion. Explore Roblox, playable prototypes and AI tools, with clear individual contributions.">
+  <meta property="og:image" content="https://condrusarsen.github.io/ai-game-lab/showreel/overview.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://condrusarsen.github.io/ai-game-lab/showreel.html">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1110'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%238cf6b4' font-family='monospace'%3E%E2%96%B6%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="showreel/style.css">
+  <script>
+    // Preserve existing links that explicitly request the original 3D experience.
+    const legacy = new URLSearchParams(location.search);
+    if (legacy.has('list')) location.replace('list/' + location.search + location.hash);
+    else if (['go', 'film'].some(key => legacy.has(key))) location.replace('market.html' + location.search + location.hash);
+  </script>
+  <script src="showreel/app.js" defer></script>
+</head>
+<body>
+  <a href="#work" class="skip" data-i18n="skip">Skip to work</a>
+  <div class="site-shell">
+    <header class="mast">
+      <a class="signature" href="./" aria-label="Arseni Atrokhov, home">Arseni Atrokhov<span>Developer · Designer · AI tools</span></a>
+      <nav class="routes" aria-label="Portfolio focus" id="routes">
+        <button data-route="all" aria-pressed="true" data-i18n="all">Overview</button>
+        <button data-route="games" aria-pressed="false" data-i18n="games">Game prototypes</button>
+        <button data-route="roblox" aria-pressed="false">Roblox</button>
+        <button data-route="tools" aria-pressed="false" data-i18n="tools">AI tools</button>
+      </nav>
+      <div class="header-actions"><button class="language" id="language" aria-label="Switch language">RU</button><a class="text-link" href="#contact" data-i18n="cvContact">CV & contact ↗</a></div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="intro">
+          <p class="eyebrow"><span class="status-dot"></span><span data-i18n="eyebrow">See the work in motion</span></p>
+          <h1 id="hero-title">Ideas you<br>can <em>play.</em></h1>
+          <p class="intro-copy" id="hero-summary">Playable prototypes, Roblox worlds and useful AI tools. I shape the rules, direct implementation with AI, and test the result.</p>
+          <div class="hero-actions"><button class="primary" id="watch-tour" data-i18n="watchTour">▶ Watch the 35-second tour</button><a class="secondary" href="market.html" data-i18n="exploreMarket">Explore the 3D market ↗</a></div>
+          <p class="intro-note" data-i18n="introNote">Real project footage · solo & collaborative work</p>
+        </div>
+
+        <div class="showcase" id="showcase">
+          <div class="film" id="film">
+            <video id="player" muted playsinline loop preload="metadata" poster="showreel/overview.jpg" aria-label="Portfolio showreel">
+              <source src="showreel/overview.mp4" type="video/mp4">
+            </video>
+            <div class="film-top"><span id="media-kind">SHOWREEL / 35 SEC</span><button id="play-toggle" aria-label="Play video">▶ <span data-i18n="play">Play</span></button></div>
+            <div class="film-caption"><span id="current-category">HTML5 · AI-assisted prototype</span><h2 id="current-title">Block Express</h2><p id="current-hook">Build the railway before the train catches you.</p></div>
+            <div class="film-error" id="film-error" hidden><p data-i18n="videoError">Video could not load. You can still open the project.</p><button class="primary" id="retry-video" data-i18n="retry">Try again</button></div>
+          </div>
+          <div id="tool-demo" class="tool-demo" hidden>
+            <div class="demo-heading"><span class="eyebrow" data-i18n="demoLabel">Interactive browser example</span><span class="demo-status" data-i18n="demoLocal">Sample data · no Telegram connection</span></div>
+            <h2 id="demo-title">From a request to a structured order.</h2>
+            <div class="request-bubble" id="demo-request">“Two cases of Schweppes for Friday.”</div>
+            <ol class="pipeline" id="pipeline"><li class="active" data-pipe="0" data-i18n="clarify">Clarify</li><li data-pipe="1" data-i18n="validate">Validate</li><li data-pipe="2" data-i18n="prepare">Prepare</li></ol>
+            <div id="order-fields"><label for="sku" data-i18n="productLabel">Which product?</label><div class="demo-fields"><select id="sku"><option value="S033">Schweppes · 0.33 L</option><option value="S100">Schweppes · 1 L</option></select><label class="quantity-label"><span data-i18n="cases">Cases</span><input id="quantity" type="number" value="2" min="1" max="20" inputmode="numeric"></label></div></div>
+            <div id="demo-output" class="demo-output" aria-live="polite"></div>
+            <button class="primary" id="demo-next" data-i18n="checkStock">Check stock →</button>
+            <p class="demo-disclosure" id="demo-disclosure">A small illustration of the workflow. The Telegram bot runs locally; its code and setup are linked below.</p>
+          </div>
+          <div class="chapter-track" id="chapters" aria-label="Showreel chapters"></div>
+          <div class="credit-line"><span class="status-dot"></span><p id="current-credit">My contribution: design, specification, implementation direction and playtests.</p></div>
+          <div class="project-actions"><a id="open-project" class="primary" href="games/block-express/" target="_blank" rel="noopener" data-i18n="openGame">Play in browser ↗</a><button id="project-details" class="detail-link" data-i18n="details">My contribution & screenshots ↗</button></div>
+        </div>
+      </section>
+
+      <section class="work" id="work" aria-labelledby="work-heading">
+        <div class="section-heading"><div><p class="eyebrow" data-i18n="selectedLabel">Selected work</p><h2 id="work-heading" data-i18n="chooseWork">Choose a project. See it in action.</h2></div><span id="selection-hint" data-i18n="selectionHint">Select a card to preview above</span></div>
+        <div class="project-grid" id="projects"></div>
+      </section>
+
+      <section class="deeper" aria-labelledby="deeper-heading"><div><p class="eyebrow" data-i18n="beyondLabel">Beyond the highlights</p><h2 id="deeper-heading" data-i18n="deeperTitle">A whole market to explore.</h2><p data-i18n="deeperCopy">Browse playable builds, design research, UI work and the projects behind them.</p><div class="deep-links"><a class="secondary" href="market.html" data-i18n="marketLink">Enter the 3D market ↗</a><a class="text-link" href="list/" data-i18n="catalogueLink">Full accessible catalogue ↗</a></div></div><a class="market-preview" href="market.html" aria-label="Explore the 3D portfolio"><img src="arcade/og.jpg" alt="AI Game Market, interactive 3D portfolio" loading="lazy" width="1200" height="630"><span data-i18n="marketPreview">Walk through the portfolio ↗</span></a></section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-heading"><div><p class="eyebrow" data-i18n="contactLabel">Let's make something playable</p><h2 id="contact-heading" data-i18n="contactTitle">Have a role in mind?</h2><p data-i18n="availability">Gomel, Belarus · remote · full time</p><div class="contact-links"><a href="https://www.linkedin.com/in/arseni-atrokhov/" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://t.me/qintin" target="_blank" rel="noopener">Telegram ↗</a><a href="https://github.com/CondrusArsen" target="_blank" rel="noopener">GitHub ↗</a></div></div><div class="cv-list"><span class="eyebrow" data-i18n="cvLabel">Choose a CV · PDF</span><a href="https://github.com/CondrusArsen/CondrusArsen/blob/main/cv/Arseni_Atrokhov_Game_Prototyper_EN.pdf" target="_blank" rel="noopener">Game prototyper <span>EN ↗</span></a><a href="https://github.com/CondrusArsen/CondrusArsen/blob/main/cv/Atrokhov_Arseniy_Roblox_RU.pdf" target="_blank" rel="noopener">Roblox / Luau <span>RU ↗</span></a><a href="https://github.com/CondrusArsen/CondrusArsen/blob/main/cv/Atrokhov_Arseniy_Game_Design_RU.pdf" target="_blank" rel="noopener">Game design <span>RU ↗</span></a><a href="https://github.com/CondrusArsen/CondrusArsen/blob/main/cv/Atrokhov_Arseniy_AI_Tools_RU.pdf" target="_blank" rel="noopener">AI tools & automation <span>RU ↗</span></a></div></section>
+    </main>
+    <footer><span>Arseni Atrokhov · AI-assisted development</span><a href="list/" data-i18n="catalogueLink">Full accessible catalogue ↗</a></footer>
+  </div>
+
+  <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="dialog-header"><span class="eyebrow" id="detail-category"></span><button id="close-details" aria-label="Close">×</button></div><div class="detail-layout"><div class="detail-visual"><img id="detail-image" alt=""><div id="gallery-nav" class="gallery-nav"></div><p id="image-caption"></p></div><div class="detail-copy"><h2 id="detail-title"></h2><p id="detail-description"></p><h3 data-i18n="contributionLabel">My contribution</h3><p id="detail-credit"></p><p class="provenance" id="detail-provenance"></p><a class="primary" id="detail-source" target="_blank" rel="noopener" data-i18n="sourceLink">Code / development case ↗</a></div></div></dialog>
+  <noscript><div class="no-script">Videos and project selection need JavaScript. <a href="list/">Open the full catalogue</a> · <a href="market.html">3D market</a></div></noscript>
+</body>
+</html>
